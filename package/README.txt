@@ -76,8 +76,8 @@ Deathmatch instead.
       so the objectives are yours. Arming or disarming a charge now scores (+200) and counts on the end-of-round screen,
       as do the charge going off, the objective falling and Home Run's flag (new).
     - Home Run: a bot that dies sits out the rest of the round, as you do.
-These modes are new and haven't been played with bots yet. The bots start each mode with the routes they learned on
-that map in Team Deathmatch.
+These modes are new. Sector Control, Combat Mission and Hot Spot have had a few rounds with bots; Home Run hasn't been
+played yet. The bots start each mode with the routes they learned on that map in Team Deathmatch.
 
 
 HARDCORE MODE
@@ -133,8 +133,10 @@ KNOWN ISSUES
 - End-of-round screens are mostly empty.
 - Downed bots can't be revived. Multiplayer has reviving switched off for everyone.
 - Bots still get stuck sometimes, and they can bunch up in tight spots.
-- Only offline Team Deathmatch on the maps above has been played with bots. You can try MP_13, MP_16, MP_18 or MP_19 by adding
-  them to [launch] Map, but the bots start with no routes there and learn as people walk around.
+- Most of the play so far has been Team Deathmatch on the four maps above. The zip also has routes from a round or two on
+  Hara Dunes, Al Fara Cliffside, Tungawan Jungle and Chitral Compound; on Shogore Valley and Darra Gun Market the bots start
+  with no routes and learn as people walk around. Add any of them to [launch] Map to try them (MP_13, MP_16, MP_19, MP_21,
+  MP_18, MP_20).
 - In Combat Mission, Hot Spot and Home Run the bots don't play the objectives (see GAME MODES).
 
 
