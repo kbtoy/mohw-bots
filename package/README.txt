@@ -76,8 +76,8 @@ Deathmatch instead.
       so the objectives are yours. Arming or disarming a charge now scores (+200) and counts on the end-of-round screen,
       as do the charge going off, the objective falling and Home Run's flag (new).
     - Home Run: a bot that dies sits out the rest of the round, as you do.
-These modes are new. Sector Control, Combat Mission and Hot Spot have had a few rounds with bots; Home Run hasn't been
-played yet. The bots start each mode with the routes they learned on that map in Team Deathmatch.
+These modes are new. Combat Mission and Hot Spot have had a few rounds with bots; bots going for Sector Control's flags
+and Home Run haven't been played yet. The bots start each mode with the routes they learned on that map in Team Deathmatch.
 
 
 HARDCORE MODE
