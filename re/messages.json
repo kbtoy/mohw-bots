@@ -1,0 +1,4700 @@
+{
+ "0x00000080": {
+  "name": "NetworkSpawnHereMessage",
+  "category": "0x2f4e37f1",
+  "vtable": "0x278aae4",
+  "ctor": "0x2577880"
+ },
+ "0x00000090": {
+  "name": "NetworkMovePlayerMessage",
+  "category": "0x6d09be92",
+  "vtable": "0x278acdc",
+  "ctor": "0x25791b0"
+ },
+ "0x000000d0": {
+  "name": "SpikeInternalMessagePartMessage",
+  "category": "0x3d91e6c4",
+  "vtable": "0x27661dc",
+  "ctor": "0x62d660"
+ },
+ "0x00004000": {
+  "name": "SpikeInternalMessagePartMessage",
+  "category": "0x000000d0",
+  "vtable": "0x27661dc",
+  "ctor": "0x63d910"
+ },
+ "0x001f2125": {
+  "name": "NetworkUsedAllBreachMethodsMessage",
+  "category": "0xc67d277b",
+  "vtable": "0x278b8dc",
+  "ctor": "0x258b260"
+ },
+ "0x010d17f1": {
+  "name": "StatPlayerRecordClosingMessage",
+  "category": "0x7c89b9b7",
+  "vtable": "0x280708c",
+  "ctor": "0x266f110"
+ },
+ "0x011e64f3": {
+  "name": "ServerGameplayRequestForwardSpawnDistanceMessage",
+  "category": "0x50a2f3ea",
+  "vtable": "0x27b6894",
+  "ctor": "0x25a06e0"
+ },
+ "0x01230896": {
+  "name": "NetworkSpawnCustomizationMessage",
+  "category": "0xc67d277b",
+  "vtable": "0x278ab2c",
+  "ctor": "0x2577b30"
+ },
+ "0x019b59e5": {
+  "name": "UINetworkAllowSkipVideoMessage",
+  "category": "0x89062f07",
+  "vtable": "0x278b380",
+  "ctor": "0x2580f20"
+ },
+ "0x0234d2d0": {
+  "name": "ServerVehicleDestroyedMessage",
+  "category": "0x3e46cdf8",
+  "vtable": "0x27b69cc",
+  "ctor": "0x25a1270"
+ },
+ "0x0286c84a": {
+  "name": "VeniceNetworkRequestEorStatsMessage",
+  "category": "0x802ae469",
+  "vtable": "0x280d178",
+  "ctor": "0x267de20"
+ },
+ "0x0291cc16": {
+  "name": "ClientLevelSpawnDebugEntitiesMessage",
+  "category": "0xdaa58eaa",
+  "vtable": "0x27931d0",
+  "ctor": "0x25994c0"
+ },
+ "0x02965a46": {
+  "name": "VeniceClientMetricsResumeSPGameMessage",
+  "category": "0xebc23f79",
+  "vtable": "0x280c0e4",
+  "ctor": "0x2673d10"
+ },
+ "0x02e978c2": {
+  "name": "ClientWeaponDispersionUpdatedMessage",
+  "category": "0x2862813e",
+  "vtable": "0x2793350",
+  "ctor": "0x259a280"
+ },
+ "0x03405bda": {
+  "name": "ServerWeaponLaserDesignatorMessage",
+  "category": "0x07038862",
+  "vtable": "0x27b6a34",
+  "ctor": "0x25a1680"
+ },
+ "0x0376e37b": {
+  "name": "ServerCollisionExplosionSpawnMessage",
+  "category": "0xdb60e01e",
+  "vtable": "0x27b678c",
+  "ctor": "0x259fc60"
+ },
+ "0x0382ae48": {
+  "name": "VeniceNetworkMissionAwardsStatusMessage",
+  "category": "0x802ae469",
+  "vtable": "0x280d6fc",
+  "ctor": "0x268cdb0"
+ },
+ "0x0419d30d": {
+  "name": "VeniceServerMetricsManDownImmobilizedMessage",
+  "category": "0x426030a5",
+  "vtable": "0x2806ffc",
+  "ctor": "0x266eb00"
+ },
+ "0x042bb1da": {
+  "name": "UIPreEndOfRoundReadyMessage",
+  "category": "0x005973b9",
+  "vtable": "0x280cb8c",
+  "ctor": "0x2679280"
+ },
+ "0x049b7987": {
+  "name": "VoiceSetMuteStatusMessage",
+  "category": "0x0d7638b3",
+  "vtable": "0x280cc8c",
+  "ctor": "0x2679da0"
+ },
+ "0x04a3d55e": {
+  "name": "ServerGameplayRequestAirspaceControlStateMessage",
+  "category": "0x50a2f3ea",
+  "vtable": "0x27b687c",
+  "ctor": "0x25a0610"
+ },
+ "0x04f1c6b0": {
+  "name": "ServerPlayerChangedSoldierMessage",
+  "category": "0xf3c93dd3",
+  "vtable": "0x27b665c",
+  "ctor": "0x259f0f0"
+ },
+ "0x055bd621": {
+  "name": "UIAutoLeavePlatoonMessage",
+  "category": "0x005973b9",
+  "vtable": "0x280cf34",
+  "ctor": "0x267b590"
+ },
+ "0x0599f06b": {
+  "name": "UIDamageGivenToEnemyMessage",
+  "category": "0x005973b9",
+  "vtable": "0x27f5c00",
+  "ctor": "0x2638610"
+ },
+ "0x06002940": {
+  "name": "UIFireteamBankUpdateMessage",
+  "category": "0x005973b9",
+  "vtable": "0x280cbb8",
+  "ctor": "0x2679470"
+ },
+ "0x06c32888": {
+  "name": "NetworkLevelLoadedAckMessage",
+  "category": "0xc67d277b",
+  "vtable": "0x278aa30",
+  "ctor": "0x2576d80"
+ },
+ "0x07147573": {
+  "name": "ServerVehicleExitMessage",
+  "category": "0x3e46cdf8",
+  "vtable": "0x27b6a1c",
+  "ctor": "0x25a1590"
+ },
+ "0x07a8486f": {
+  "name": "UIVehicleHitDirectionUpdatedMessage",
+  "category": "0x005973b9",
+  "vtable": "0x27f5d28",
+  "ctor": "0x2639060"
+ },
+ "0x07becf86": {
+  "name": "UIPlayerVehicleListRefreshMessage",
+  "category": "0x005973b9",
+  "vtable": "0x280cb54",
+  "ctor": "0x26790b0"
+ },
+ "0x0813c4ed": {
+  "name": "ServerBlazeServerIdObtainedMessage",
+  "category": "0xc6e40ba0",
+  "vtable": "0x27b659c",
+  "ctor": "0x259ea90"
+ },
+ "0x08235972": {
+  "name": "VeniceNetworkMetricsAchievementMessage",
+  "category": "0x802ae469",
+  "vtable": "0x280d304",
+  "ctor": "0x267ee40"
+ },
+ "0x08751de5": {
+  "name": "UISetTrainingMissionSummaryBestTimeMessage",
+  "category": "0x005973b9",
+  "vtable": "0x27f5d00",
+  "ctor": "0x2638ef0"
+ },
+ "0x0885bad6": {
+  "name": "SubLevelClientBundleLoadedMessage",
+  "category": "0x67772b37",
+  "vtable": "0x278a830",
+  "ctor": "0x2573c00"
+ },
+ "0x08b3d0a7": {
+  "name": "VeniceNetworkFakePointMessage",
+  "category": "0x802ae469",
+  "vtable": "0x278ac4c",
+  "ctor": "0x2578910"
+ },
+ "0x092608fe": {
+  "name": "UIMPCTFFlagEventMessage",
+  "category": "0x005973b9",
+  "vtable": "0x280cc4c",
+  "ctor": "0x2679b40"
+ },
+ "0x0953b8f2": {
+  "name": "ClientCharacterLocalPlayerSetMessage",
+  "category": "0xd265af25",
+  "vtable": "0x2793138",
+  "ctor": "0x2598ec0"
+ },
+ "0x0956b071": {
+  "name": "UIStartSoundMessage",
+  "category": "0x005973b9",
+  "vtable": "0x27f5c98",
+  "ctor": "0x2638b00"
+ },
+ "0x095a85a9": {
+  "name": "UIDialogScreenPushedMessage",
+  "category": "0x005973b9",
+  "vtable": "0x27e1bf0",
+  "ctor": "0x25f6410"
+ },
+ "0x09ac7b22": {
+  "name": "PunkBusterMessageMessage",
+  "category": "0x018959c2",
+  "vtable": "0x280c174",
+  "ctor": "0x26744d0"
+ },
+ "0x09b7ea47": {
+  "name": "ServerPlayerEnteredLevelMessage",
+  "category": "0xf3c93dd3",
+  "vtable": "0x27b662c",
+  "ctor": "0x259ef10"
+ },
+ "0x09d851f4": {
+  "name": "ServerGameplayTeamLostLeadMessage",
+  "category": "0x50a2f3ea",
+  "vtable": "0x280cadc",
+  "ctor": "0x2678c80"
+ },
+ "0x0a4bf576": {
+  "name": "ProfileOptionsSettingsPreSaveMessage",
+  "category": "0x43fba85e",
+  "vtable": "0x278a938",
+  "ctor": "0x2574630"
+ },
+ "0x0a6d2448": {
+  "name": "StatDisableMessage",
+  "category": "0x7c89b9b7",
+  "vtable": "0x27b654c",
+  "ctor": "0x259e8a0"
+ },
+ "0x0a84d9a8": {
+  "name": "UINetworkHudTextMessage",
+  "category": "0x89062f07",
+  "vtable": "0x278b228",
+  "ctor": "0x257fb50"
+ },
+ "0x0b37b24b": {
+  "name": "UIComponentOnItemChangedMessage",
+  "category": "0xba05f436",
+  "vtable": "0x27f5da0",
+  "ctor": "0x2639510"
+ },
+ "0x0b407017": {
+  "name": "ServerStaticModelGroupDestroyedPartMessage",
+  "category": "0xe3c41b37",
+  "vtable": "0x27b67ec",
+  "ctor": "0x25a0090"
+ },
+ "0x0ba92d53": {
+  "name": "UINetworkStealBodyMessage",
+  "category": "0x89062f07",
+  "vtable": "0x278b948",
+  "ctor": "0x258b540"
+ },
+ "0x0bd63b4e": {
+  "name": "VeniceNetworkPlayerNotAllowedToFireSupportActionMessage",
+  "category": "0x802ae469",
+  "vtable": "0x280d394",
+  "ctor": "0x267f670"
+ },
+ "0x0bef230e": {
+  "name": "ServerSoldierDamagedMessage",
+  "category": "0xdc84f4ea",
+  "vtable": "0x27b6974",
+  "ctor": "0x25a0ef0"
+ },
+ "0x0c02be11": {
+  "name": "ServerGameManagerAddQueuedPlayerMessage",
+  "category": "0x07a2b9fd",
+  "vtable": "0x280705c",
+  "ctor": "0x266ef30"
+ },
+ "0x0d246688": {
+  "name": "NetworkPlayerSelectedWeaponMessage",
+  "category": "0xc67d277b",
+  "vtable": "0x27da01c",
+  "ctor": "0x25e5fa0"
+ },
+ "0x0e585ca4": {
+  "name": "ServerGameplayPlayerBaseDestroyedMessage",
+  "category": "0x50a2f3ea",
+  "vtable": "0x280cad4",
+  "ctor": "0x2678c30"
+ },
+ "0x0e930eff": {
+  "name": "CharacterToComponentsCustomizeSoldierMessage",
+  "category": "0x6982747b",
+  "vtable": "0x27d06f8",
+  "ctor": "0x25c97d0"
+ },
+ "0x0eba4e73": {
+  "name": "UIHideChyronMessage",
+  "category": "0x005973b9",
+  "vtable": "0x27f5e08",
+  "ctor": "0x26398d0"
+ },
+ "0x0f05426f": {
+  "name": "ClientSetServerPasswordMessage",
+  "category": "0xa23a0e7c",
+  "vtable": "0x27930e8",
+  "ctor": "0x2598b90"
+ },
+ "0x0f064f41": {
+  "name": "VeniceNetworkRequestAllWeaponKillsMessage",
+  "category": "0x802ae469",
+  "vtable": "0x280d0d0",
+  "ctor": "0x267d520"
+ },
+ "0x0f61ad95": {
+  "name": "ServerPlayerLeftLevelMessage",
+  "category": "0xf3c93dd3",
+  "vtable": "0x27b663c",
+  "ctor": "0x259efb0"
+ },
+ "0x0f72b7a1": {
+  "name": "ProfileOptionsApplyMessage",
+  "category": "0x43fba85e",
+  "vtable": "0x278a928",
+  "ctor": "0x25745a0"
+ },
+ "0x0fb2514f": {
+  "name": "UIControllerDisconnectedMessage",
+  "category": "0x005973b9",
+  "vtable": "0x27f5bd8",
+  "ctor": "0x26384b0"
+ },
+ "0x100b6e01": {
+  "name": "AIWaypointTaskStoppedMessage",
+  "category": "0x0059722d",
+  "vtable": "0x27b695c",
+  "ctor": "0x25a0e10"
+ },
+ "0x105d8d13": {
+  "name": "ClientPlayerSupportActionsUpdatedMessage",
+  "category": "0x24fe118f",
+  "vtable": "0x280ca24",
+  "ctor": "0x2678510"
+ },
+ "0x11166249": {
+  "name": "AIWaypointTaskStartedMessage",
+  "category": "0x0059722d",
+  "vtable": "0x27b6954",
+  "ctor": "0x25a0dd0"
+ },
+ "0x1118838a": {
+  "name": "ServerGameManagerRefreshGameAttributesMessage",
+  "category": "0x07a2b9fd",
+  "vtable": "0x2807074",
+  "ctor": "0x266f020"
+ },
+ "0x11b4e622": {
+  "name": "ClientMetricsUIActionMessage",
+  "category": "0xd65bfe6b",
+  "vtable": "0x279338c",
+  "ctor": "0x259b300"
+ },
+ "0x11ff6efc": {
+  "name": "ServerInternalLoadLevelMessage",
+  "category": "0xc6e40ba0",
+  "vtable": "0x27b6584",
+  "ctor": "0x259ea00"
+ },
+ "0x1203c555": {
+  "name": "ProfileOptionsSettingsSavedMessage",
+  "category": "0x43fba85e",
+  "vtable": "0x278a940",
+  "ctor": "0x2574670"
+ },
+ "0x125faed4": {
+  "name": "ClientGameplayControllableLowHealthMessage",
+  "category": "0x508f1eb6",
+  "vtable": "0x2793190",
+  "ctor": "0x2599200"
+ },
+ "0x12b66608": {
+  "name": "UIActivateSPCountdownBarMessage",
+  "category": "0x005973b9",
+  "vtable": "0x27f5d08",
+  "ctor": "0x2638f40"
+ },
+ "0x12fa3bab": {
+  "name": "ServerSoldierWeaponReplacedMessage",
+  "category": "0xdc84f4ea",
+  "vtable": "0x27b69ac",
+  "ctor": "0x25a1120"
+ },
+ "0x136dfa45": {
+  "name": "UIHudTicketBleedMessage",
+  "category": "0x005973b9",
+  "vtable": "0x280cb4c",
+  "ctor": "0x2679070"
+ },
+ "0x13bc35c0": {
+  "name": "UIAssetChangedMessage",
+  "category": "0x005973b9",
+  "vtable": "0x27f5d70",
+  "ctor": "0x26392e0"
+ },
+ "0x1400fe52": {
+  "name": "NetworkReplayRequestMessage",
+  "category": "0xc67d277b",
+  "vtable": "0x278afb8",
+  "ctor": "0x257beb0"
+ },
+ "0x14956eb9": {
+  "name": "ServerComponentEntryOnPlayerEntersMessage",
+  "category": "0x9e26a3cf",
+  "vtable": "0x27b674c",
+  "ctor": "0x259fa00"
+ },
+ "0x149a8072": {
+  "name": "UITransitionEffectStopMessage",
+  "category": "0x005973b9",
+  "vtable": "0x27f5d48",
+  "ctor": "0x2639180"
+ },
+ "0x14d26578": {
+  "name": "ClientPlayerAirspaceChangedMessage",
+  "category": "0x24fe118f",
+  "vtable": "0x27932e8",
+  "ctor": "0x2599eb0"
+ },
+ "0x14e55a67": {
+  "name": "ClientStateEnteredFrontendMessage",
+  "category": "0xdabbbbab",
+  "vtable": "0x27931f0",
+  "ctor": "0x25995a0"
+ },
+ "0x1502e03f": {
+  "name": "PerformanceShaderMessage",
+  "category": "0x697443dd",
+  "vtable": "0x277bfbc",
+  "ctor": "0x256c5f0"
+ },
+ "0x1554de7c": {
+  "name": "ServerVehicleSwitchTeamMessage",
+  "category": "0x3e46cdf8",
+  "vtable": "0x27b69d4",
+  "ctor": "0x25a12c0"
+ },
+ "0x1613690c": {
+  "name": "ServerPlayerExitEntryMessage",
+  "category": "0xf3c93dd3",
+  "vtable": "0x27b66ac",
+  "ctor": "0x259f420"
+ },
+ "0x16babb47": {
+  "name": "ServerRoundOverMessage",
+  "category": "0xd93dd7c2",
+  "vtable": "0x27b68ac",
+  "ctor": "0x25a07b0"
+ },
+ "0x16fe9927": {
+  "name": "ServerInputDeactivateInputRestrictionMessage",
+  "category": "0xd8b89dd6",
+  "vtable": "0x27b67cc",
+  "ctor": "0x259ff00"
+ },
+ "0x17085ef6": {
+  "name": "VeniceNetworkSpotExplosionPackMessage",
+  "category": "0x802ae469",
+  "vtable": "0x278b804",
+  "ctor": "0x258ad50"
+ },
+ "0x1708637d": {
+  "name": "ServerConnectionExitMessage",
+  "category": "0xea20d836",
+  "vtable": "0x27b66c4",
+  "ctor": "0x259f500"
+ },
+ "0x173287fe": {
+  "name": "ServerClubMemberDeletedMessage",
+  "category": "0x6b6551d8",
+  "vtable": "0x27b66e4",
+  "ctor": "0x259f630"
+ },
+ "0x17b65e50": {
+  "name": "VeniceNetworkOnGiveAmmoMessage",
+  "category": "0x802ae469",
+  "vtable": "0x280d638",
+  "ctor": "0x26886c0"
+ },
+ "0x17f9bde8": {
+  "name": "ClientLevelSpawnEntitiesEndMessage",
+  "category": "0xdaa58eaa",
+  "vtable": "0x27931d8",
+  "ctor": "0x2599500"
+ },
+ "0x18700002": {
+  "name": "UIBuddyCamScanningMessage",
+  "category": "0x005973b9",
+  "vtable": "0x27f5dd8",
+  "ctor": "0x2639710"
+ },
+ "0x1896a9fa": {
+  "name": "ServerAdminBanPlayerMessage",
+  "category": "0xd82cf64f",
+  "vtable": "0x27b65cc",
+  "ctor": "0x259ebd0"
+ },
+ "0x18a7ce12": {
+  "name": "UIFetchBrowsingPlatoonMessage",
+  "category": "0x005973b9",
+  "vtable": "0x280cc1c",
+  "ctor": "0x2679890"
+ },
+ "0x194e7ce7": {
+  "name": "UINetworkHudTextFromClientMessage",
+  "category": "0x89062f07",
+  "vtable": "0x278b900",
+  "ctor": "0x258b340"
+ },
+ "0x1b2493de": {
+  "name": "NetworkJuiceSessionMessage",
+  "category": "0xc67d277b",
+  "vtable": "0x278acb8",
+  "ctor": "0x2578ef0"
+ },
+ "0x1b5801dd": {
+  "name": "ServerCollisionGrenadeThrowMessage",
+  "category": "0xdb60e01e",
+  "vtable": "0x27b6764",
+  "ctor": "0x259fac0"
+ },
+ "0x1bb0318d": {
+  "name": "ServerPlayerTeamKillKickMessage",
+  "category": "0xf3c93dd3",
+  "vtable": "0x280c9ec",
+  "ctor": "0x26782e0"
+ },
+ "0x1c3f2aeb": {
+  "name": "ClientPlayerLocalSetMessage",
+  "category": "0x24fe118f",
+  "vtable": "0x27932d0",
+  "ctor": "0x2599dc0"
+ },
+ "0x1c6c0b87": {
+  "name": "ServerGameplayPlayerMenuCancelMessage",
+  "category": "0x50a2f3ea",
+  "vtable": "0x27b6814",
+  "ctor": "0x25a0260"
+ },
+ "0x1d1b5f3d": {
+  "name": "UIEndOfRoundReadyMessage",
+  "category": "0x005973b9",
+  "vtable": "0x280cb84",
+  "ctor": "0x2679240"
+ },
+ "0x1d2e30ab": {
+  "name": "ServerVehicleForcedRetreatMessage",
+  "category": "0x3e46cdf8",
+  "vtable": "0x27b6a04",
+  "ctor": "0x25a14b0"
+ },
+ "0x1d55e825": {
+  "name": "UIUIReadyMessage",
+  "category": "0x005973b9",
+  "vtable": "0x27f5cb0",
+  "ctor": "0x2638bf0"
+ },
+ "0x1de34ab6": {
+  "name": "ServerGameplayRadarEquipmentTriggeredMessage",
+  "category": "0x50a2f3ea",
+  "vtable": "0x280ca2c",
+  "ctor": "0x2678560"
+ },
+ "0x1e406434": {
+  "name": "ClientStateEnteredUnloadMessage",
+  "category": "0xdabbbbab",
+  "vtable": "0x2793208",
+  "ctor": "0x2599660"
+ },
+ "0x1e501f3a": {
+  "name": "NetworkPlayerDeploymentMessage",
+  "category": "0xc67d277b",
+  "vtable": "0x27d9dd4",
+  "ctor": "0x25df410"
+ },
+ "0x1e86c1d6": {
+  "name": "ClientStartedMessage",
+  "category": "0xa23a0e7c",
+  "vtable": "0x2793060",
+  "ctor": "0x25986f0"
+ },
+ "0x1ff4e40b": {
+  "name": "ClientStateResponseLoadingIngameBundlesMessage",
+  "category": "0xdabbbbab",
+  "vtable": "0x2793240",
+  "ctor": "0x2599860"
+ },
+ "0x2007aa8c": {
+  "name": "NetworkSpawnAutoSelectMessage",
+  "category": "0xc67d277b",
+  "vtable": "0x278ab98",
+  "ctor": "0x2577fb0"
+ },
+ "0x204fb832": {
+  "name": "UILeavePlaygroupMessage",
+  "category": "0x005973b9",
+  "vtable": "0x280cf4c",
+  "ctor": "0x267b6c0"
+ },
+ "0x2153f65e": {
+  "name": "ServerStaticModelDestroyedAllCollapsablePartsMessage",
+  "category": "0xe3c41b37",
+  "vtable": "0x27b67e4",
+  "ctor": "0x25a0010"
+ },
+ "0x219d24f8": {
+  "name": "ClientPlayerChangedPlayerViewMessage",
+  "category": "0x24fe118f",
+  "vtable": "0x27932c8",
+  "ctor": "0x2599d70"
+ },
+ "0x2237ebe2": {
+  "name": "UIUserDisconnectedMessage",
+  "category": "0x005973b9",
+  "vtable": "0x27f5bc8",
+  "ctor": "0x2638430"
+ },
+ "0x22555f58": {
+  "name": "VoiceChangedMicEnabledMessage",
+  "category": "0x0d7638b3",
+  "vtable": "0x280cc94",
+  "ctor": "0x2679df0"
+ },
+ "0x230d971f": {
+  "name": "UISetServerLeaderboardUrlMessage",
+  "category": "0x005973b9",
+  "vtable": "0x27f5e30",
+  "ctor": "0x2639a90"
+ },
+ "0x235f3de1": {
+  "name": "ClientStateRequestLoadingLevelMessage",
+  "category": "0xdabbbbab",
+  "vtable": "0x2793228",
+  "ctor": "0x2599760"
+ },
+ "0x236c395a": {
+  "name": "ServerLevelLoadedMessage",
+  "category": "0xc6e40ba0",
+  "vtable": "0x27b656c",
+  "ctor": "0x259e970"
+ },
+ "0x246c131f": {
+  "name": "UINetworkActivateCheckpointMessage",
+  "category": "0x89062f07",
+  "vtable": "0x278b6bc",
+  "ctor": "0x2583a60"
+ },
+ "0x249bcd98": {
+  "name": "NetworkSetActiveWeaponSlotMessage",
+  "category": "0xc67d277b",
+  "vtable": "0x27e29d4",
+  "ctor": "0x25ff560"
+ },
+ "0x24c22719": {
+  "name": "ClientStateEnteredLoadingLevelMessage",
+  "category": "0xdabbbbab",
+  "vtable": "0x2793200",
+  "ctor": "0x2599620"
+ },
+ "0x25241b3c": {
+  "name": "ServerLevelSpawnEntitiesBeginMessage",
+  "category": "0xd88635f6",
+  "vtable": "0x27b68c4",
+  "ctor": "0x25a0890"
+ },
+ "0x25ae4914": {
+  "name": "UISetLocalPlatoonPatchMessage",
+  "category": "0x005973b9",
+  "vtable": "0x280cc0c",
+  "ctor": "0x2679810"
+ },
+ "0x25b72903": {
+  "name": "ServerPlayerReviveMessage",
+  "category": "0xf3c93dd3",
+  "vtable": "0x27b6644",
+  "ctor": "0x259f000"
+ },
+ "0x25c3e17e": {
+  "name": "ClientPlayerAnnounceLowOnHealthMessage",
+  "category": "0x24fe118f",
+  "vtable": "0x27932f0",
+  "ctor": "0x2599f00"
+ },
+ "0x25e68c3a": {
+  "name": "NetworkScreenFadeMessage",
+  "category": "0xc67d277b",
+  "vtable": "0x278aac0",
+  "ctor": "0x2577530"
+ },
+ "0x26100bc2": {
+  "name": "ClientWeaponPlayerWeaponChangeMessage",
+  "category": "0x2862813e",
+  "vtable": "0x2793320",
+  "ctor": "0x259a0c0"
+ },
+ "0x26298765": {
+  "name": "UINetworkStopVideoMessage",
+  "category": "0x89062f07",
+  "vtable": "0x278b338",
+  "ctor": "0x2580bc0"
+ },
+ "0x262c8f61": {
+  "name": "UIStartPlatoonMatchmakingMessage",
+  "category": "0x005973b9",
+  "vtable": "0x280cf44",
+  "ctor": "0x267b680"
+ },
+ "0x263aac46": {
+  "name": "ServerGameManagerRestartLevelRequestMessage",
+  "category": "0x07a2b9fd",
+  "vtable": "0x280702c",
+  "ctor": "0x266ed50"
+ },
+ "0x2672b521": {
+  "name": "UINetworkPlayerMissionObjectiveTextMessage",
+  "category": "0x89062f07",
+  "vtable": "0x278b3ec",
+  "ctor": "0x2581460"
+ },
+ "0x26e8543b": {
+  "name": "ClientSoldierOnLandMessage",
+  "category": "0x366fb6b6",
+  "vtable": "0x2793308",
+  "ctor": "0x2599fe0"
+ },
+ "0x2776cbea": {
+  "name": "LevelConsoleSetActiveHealthStateMessage",
+  "category": "0xb74c3f84",
+  "vtable": "0x278aa78",
+  "ctor": "0x2577210"
+ },
+ "0x287dc530": {
+  "name": "ClientPersistenceUnlockGainedMessage",
+  "category": "0x83e5db8b",
+  "vtable": "0x280cec4",
+  "ctor": "0x267af70"
+ },
+ "0x28a1c6be": {
+  "name": "UINetworkPlayerCollectibleTextMessage",
+  "category": "0x89062f07",
+  "vtable": "0x278b434",
+  "ctor": "0x2581930"
+ },
+ "0x28f221cc": {
+  "name": "VeniceNetworkDefibKillMessage",
+  "category": "0x802ae469",
+  "vtable": "0x280d5a8",
+  "ctor": "0x2688340"
+ },
+ "0x2acd1d02": {
+  "name": "UINetworkPlayerTextMessage",
+  "category": "0x89062f07",
+  "vtable": "0x278b23c",
+  "ctor": "0x257fcf0"
+ },
+ "0x2aefc38a": {
+  "name": "ClientGameplaySpottedEnemyMessage",
+  "category": "0x508f1eb6",
+  "vtable": "0x2793198",
+  "ctor": "0x2599250"
+ },
+ "0x2b64946e": {
+  "name": "UILoadingScreenTimerUpdateMessage",
+  "category": "0x005973b9",
+  "vtable": "0x27f5e18",
+  "ctor": "0x2639950"
+ },
+ "0x2b9c1dda": {
+  "name": "ClientWeaponPlayerWeaponReloadEndMessage",
+  "category": "0x2862813e",
+  "vtable": "0x2793338",
+  "ctor": "0x259a1a0"
+ },
+ "0x2bd320a3": {
+  "name": "ServerVehicleDisabledMessage",
+  "category": "0x3e46cdf8",
+  "vtable": "0x27b6a0c",
+  "ctor": "0x25a14f0"
+ },
+ "0x2c07630d": {
+  "name": "ClientControllableSpawnDoneMessage",
+  "category": "0xaa595c9d",
+  "vtable": "0x2793120",
+  "ctor": "0x2598dd0"
+ },
+ "0x2c29e97f": {
+  "name": "VeniceNetworkRequestCoopPlayerInformationMessage",
+  "category": "0x802ae469",
+  "vtable": "0x280d1c0",
+  "ctor": "0x267e0c0"
+ },
+ "0x2c51d169": {
+  "name": "ServerSoldierSuppressionSuppressMessage",
+  "category": "0x599254b3",
+  "vtable": "0x280caf4",
+  "ctor": "0x2678d60"
+ },
+ "0x2da40600": {
+  "name": "UIHudMessageMessage",
+  "category": "0x005973b9",
+  "vtable": "0x27f5be8",
+  "ctor": "0x2638520"
+ },
+ "0x2db198d3": {
+  "name": "ServerGameModeResetMessage",
+  "category": "0x5083020d",
+  "vtable": "0x27b686c",
+  "ctor": "0x25a05a0"
+ },
+ "0x2db3b944": {
+  "name": "UINetworkRoundWarningMessage",
+  "category": "0x89062f07",
+  "vtable": "0x278b578",
+  "ctor": "0x2582c90"
+ },
+ "0x2e6d10b1": {
+  "name": "NetworkDisconnectedMessage",
+  "category": "0xc67d277b",
+  "vtable": "0x278a920",
+  "ctor": "0x2574540"
+ },
+ "0x2e73f49a": {
+  "name": "ServerGameManagerValidateContentResponseMessage",
+  "category": "0x07a2b9fd",
+  "vtable": "0x2807054",
+  "ctor": "0x266eed0"
+ },
+ "0x2f2a6a13": {
+  "name": "ServerGameplayInformForwardSpawnDistanceMessage",
+  "category": "0x50a2f3ea",
+  "vtable": "0x27b689c",
+  "ctor": "0x25a0730"
+ },
+ "0x2f4c53a2": {
+  "name": "StatPlayerRecordCreatedMessage",
+  "category": "0x7c89b9b7",
+  "vtable": "0x2807084",
+  "ctor": "0x266f0c0"
+ },
+ "0x2f4e37f1": {
+  "name": "NetworkSpawnHereMessage",
+  "category": "0xc67d277b",
+  "vtable": "0x278aae4",
+  "ctor": "0x2577780"
+ },
+ "0x2fe550a6": {
+  "name": "NetworkInputPolicyMessage",
+  "category": "0xc67d277b",
+  "vtable": "0x278ac28",
+  "ctor": "0x25787a0"
+ },
+ "0x3051e83c": {
+  "name": "ServerPlayerCreateMessage",
+  "category": "0xf3c93dd3",
+  "vtable": "0x27b6604",
+  "ctor": "0x259eda0"
+ },
+ "0x310da64c": {
+  "name": "ServerStaticModelDamagedPartByPlayerMessage",
+  "category": "0xe3c41b37",
+  "vtable": "0x27b67fc",
+  "ctor": "0x25a0160"
+ },
+ "0x31401d78": {
+  "name": "ClientGameplayPlayerBaseDestroyedMessage",
+  "category": "0x508f1eb6",
+  "vtable": "0x280caec",
+  "ctor": "0x2678d20"
+ },
+ "0x318446f3": {
+  "name": "ClientGameplayRQ11PingActivatedMessage",
+  "category": "0x508f1eb6",
+  "vtable": "0x27931a8",
+  "ctor": "0x25992f0"
+ },
+ "0x31951065": {
+  "name": "ServerGameManagerAddGameBanRequestMessage",
+  "category": "0x07a2b9fd",
+  "vtable": "0x280703c",
+  "ctor": "0x266edd0"
+ },
+ "0x31c67b70": {
+  "name": "UICycleRadioChannelMessage",
+  "category": "0x005973b9",
+  "vtable": "0x27f5bf8",
+  "ctor": "0x26385d0"
+ },
+ "0x322b6783": {
+  "name": "ServerPlayerChangeChatChannelMessage",
+  "category": "0xf3c93dd3",
+  "vtable": "0x27b6674",
+  "ctor": "0x259f1e0"
+ },
+ "0x32302a01": {
+  "name": "NetworkPlayerGivenSupportActionMessage",
+  "category": "0xc67d277b",
+  "vtable": "0x278af28",
+  "ctor": "0x257b7e0"
+ },
+ "0x3266914f": {
+  "name": "UINetworkCombatToggleCommandMessage",
+  "category": "0x89062f07",
+  "vtable": "0x278b62c",
+  "ctor": "0x25834d0"
+ },
+ "0x327c7921": {
+  "name": "ClientAbortCutsceneMessage",
+  "category": "0xa23a0e7c",
+  "vtable": "0x27930c0",
+  "ctor": "0x2598a50"
+ },
+ "0x32e46611": {
+  "name": "ServerScriptTickMessage",
+  "category": "0xfe14b1ef",
+  "vtable": "0x27b65bc",
+  "ctor": "0x259eb60"
+ },
+ "0x33e0c65e": {
+  "name": "SubLevelClientOnStreamedInMessage",
+  "category": "0x67772b37",
+  "vtable": "0x278a7e8",
+  "ctor": "0x25738a0"
+ },
+ "0x34800b23": {
+  "name": "NetworkPerformanceProfileMessage",
+  "category": "0xc67d277b",
+  "vtable": "0x278aa0c",
+  "ctor": "0x2576af0"
+ },
+ "0x354c5f0d": {
+  "name": "VeniceServerMetricsKitPickedupMessage",
+  "category": "0x426030a5",
+  "vtable": "0x2806fc4",
+  "ctor": "0x266e8d0"
+ },
+ "0x355dcdde": {
+  "name": "ServerWeaponPlayerResupplyMessage",
+  "category": "0x07038862",
+  "vtable": "0x27b6a7c",
+  "ctor": "0x25a1950"
+ },
+ "0x360f4ee6": {
+  "name": "AISetAIAccuracyModifierMessage",
+  "category": "0x0059722d",
+  "vtable": "0x27b693c",
+  "ctor": "0x25a0cc0"
+ },
+ "0x3697b451": {
+  "name": "ServerComponentEntryOnPlayerExitsMessage",
+  "category": "0x9e26a3cf",
+  "vtable": "0x27b6754",
+  "ctor": "0x259fa40"
+ },
+ "0x370e1a14": {
+  "name": "UINetworkEnableHudMessage",
+  "category": "0x89062f07",
+  "vtable": "0x278b1e0",
+  "ctor": "0x257f7d0"
+ },
+ "0x37c6b829": {
+  "name": "StatClubRecordCreatedMessage",
+  "category": "0x7c89b9b7",
+  "vtable": "0x280709c",
+  "ctor": "0x266f1b0"
+ },
+ "0x37dcb72a": {
+  "name": "VeniceNetworkSendTelemetryTokenMessage",
+  "category": "0x802ae469",
+  "vtable": "0x280d22c",
+  "ctor": "0x267e510"
+ },
+ "0x37fb0709": {
+  "name": "ClientCollisionGrenadeCollisionMessage",
+  "category": "0xc76f63c2",
+  "vtable": "0x2793170",
+  "ctor": "0x25990d0"
+ },
+ "0x3816c103": {
+  "name": "ServerComponentEntryComponentProcessedInputMessage",
+  "category": "0x9e26a3cf",
+  "vtable": "0x27b675c",
+  "ctor": "0x259fa80"
+ },
+ "0x382fbbe6": {
+  "name": "ServerGameManagerResetServerMessage",
+  "category": "0x07a2b9fd",
+  "vtable": "0x280707c",
+  "ctor": "0x266f050"
+ },
+ "0x383307f5": {
+  "name": "ServerWeaponArtilleryFiredMessage",
+  "category": "0x07038862",
+  "vtable": "0x27b6a3c",
+  "ctor": "0x25a16d0"
+ },
+ "0x3845ea0b": {
+  "name": "ServerMapSequencerLevelLoadedMessage",
+  "category": "0x8b014e31",
+  "vtable": "0x280cee4",
+  "ctor": "0x267b180"
+ },
+ "0x387c1e27": {
+  "name": "ServerGameplayDeserterMessage",
+  "category": "0x50a2f3ea",
+  "vtable": "0x27b681c",
+  "ctor": "0x25a02b0"
+ },
+ "0x387e3581": {
+  "name": "NetworkDifficultyChangedMessage",
+  "category": "0xc67d277b",
+  "vtable": "0x278ae20",
+  "ctor": "0x257a580"
+ },
+ "0x3909c623": {
+  "name": "ExplosionToSoldierComponentsHitMessage",
+  "category": "0xfc221f9d",
+  "vtable": "0x27e29cc",
+  "ctor": "0x25ff4c0"
+ },
+ "0x39349e50": {
+  "name": "ServerMapSequencerControlledMessage",
+  "category": "0x8b014e31",
+  "vtable": "0x280cedc",
+  "ctor": "0x267b140"
+ },
+ "0x3955b9cb": {
+  "name": "VeniceNetworkJoinSquadByOnlineIdMessage",
+  "category": "0x802ae469",
+  "vtable": "0x280cff8",
+  "ctor": "0x267ca40"
+ },
+ "0x397f2b31": {
+  "name": "ClientGameplayDeathSceneOverMessage",
+  "category": "0x508f1eb6",
+  "vtable": "0x27931c0",
+  "ctor": "0x2599420"
+ },
+ "0x39a3f777": {
+  "name": "BlueprintBundleClientOnStreamedInMessage",
+  "category": "0x623ad17e",
+  "vtable": "0x27e670c",
+  "ctor": "0x261a9d0"
+ },
+ "0x3a67c494": {
+  "name": "UnlockComponentEnabledMessage",
+  "category": "0x6fd9357a",
+  "vtable": "0x27d9b04",
+  "ctor": "0x25dcaa0"
+ },
+ "0x3ad97d0a": {
+  "name": "ServerStartedMessage",
+  "category": "0xc6e40ba0",
+  "vtable": "0x27b655c",
+  "ctor": "0x259e910"
+ },
+ "0x3aff49d1": {
+  "name": "NetworkRequestLoadLevelMessage",
+  "category": "0xc67d277b",
+  "vtable": "0x278b9fc",
+  "ctor": "0x258c490"
+ },
+ "0x3b21896d": {
+  "name": "ServerGameplayGiveSupportActionMessage",
+  "category": "0x50a2f3ea",
+  "vtable": "0x27ea314",
+  "ctor": "0x26271f0"
+ },
+ "0x3bb8db07": {
+  "name": "ServerPlayerSquadLeaderStatusChangedMessage",
+  "category": "0xf3c93dd3",
+  "vtable": "0x280c9c4",
+  "ctor": "0x26780f0"
+ },
+ "0x3c1ee145": {
+  "name": "ServerEntityPickupOnUnspawnMessage",
+  "category": "0xe70ad9fb",
+  "vtable": "0x27b672c",
+  "ctor": "0x259f8d0"
+ },
+ "0x3c35270b": {
+  "name": "ServerGameplayLittleBirdSpawnMessage",
+  "category": "0x50a2f3ea",
+  "vtable": "0x27ea02c",
+  "ctor": "0x2625970"
+ },
+ "0x3c617f37": {
+  "name": "NetworkClientCameraControlMessage",
+  "category": "0xc67d277b",
+  "vtable": "0x278ad24",
+  "ctor": "0x25795a0"
+ },
+ "0x3c6d329f": {
+  "name": "SubLevelDestroyedMessage",
+  "category": "0x67772b37",
+  "vtable": "0x278a878",
+  "ctor": "0x2573e80"
+ },
+ "0x3c8730ad": {
+  "name": "VeniceClientMetricsEnterCriticalHealthMessage",
+  "category": "0xebc23f79",
+  "vtable": "0x280c0c4",
+  "ctor": "0x2673bd0"
+ },
+ "0x3cc2425e": {
+  "name": "PlayerSubviewStopSpawnTimerCpuntdownMessage",
+  "category": "0x6e0f9e3f",
+  "vtable": "0x27b66f4",
+  "ctor": "0x259f6c0"
+ },
+ "0x3d31fb7c": {
+  "name": "VeniceNetworkDogTagMessage",
+  "category": "0x802ae469",
+  "vtable": "0x280d560",
+  "ctor": "0x2688190"
+ },
+ "0x3d4994b2": {
+  "name": "ServerGameplayCheckpointTriggeredMessage",
+  "category": "0x50a2f3ea",
+  "vtable": "0x27b6874",
+  "ctor": "0x25a05e0"
+ },
+ "0x3d81541f": {
+  "name": "UINetworkHudWarningMessage",
+  "category": "0x89062f07",
+  "vtable": "0x278b704",
+  "ctor": "0x2583de0"
+ },
+ "0x3d91e6c4": {
+  "name": "SpikeInternalMessagePartMessage",
+  "category": "0x39d77a26",
+  "vtable": "0x27661dc",
+  "ctor": "0x628ab0"
+ },
+ "0x3e2d2c69": {
+  "name": "ClientEntityDummyToGetTheClientEntityMessageCategoryMessage",
+  "category": "0x3fba50a7",
+  "vtable": "0x2793158",
+  "ctor": "0x2598ff0"
+ },
+ "0x3e6ab63c": {
+  "name": "ClientMetricsPauseGameMessage",
+  "category": "0xd65bfe6b",
+  "vtable": "0x2793100",
+  "ctor": "0x2598ca0"
+ },
+ "0x3ef8bd73": {
+  "name": "StatEventEntityTriggerMessage",
+  "category": "0x7c89b9b7",
+  "vtable": "0x28070bc",
+  "ctor": "0x266f300"
+ },
+ "0x3f58f57b": {
+  "name": "VeniceServerMetricsRestartRoundMessage",
+  "category": "0x426030a5",
+  "vtable": "0x2806fec",
+  "ctor": "0x266ea60"
+ },
+ "0x3f7df649": {
+  "name": "UIComponentSetSettingMessage",
+  "category": "0xba05f436",
+  "vtable": "0x27f5d90",
+  "ctor": "0x2639450"
+ },
+ "0x40015380": {
+  "name": "UIPlayerSpawnTypeChangedMessage",
+  "category": "0x005973b9",
+  "vtable": "0x27f5db0",
+  "ctor": "0x2639590"
+ },
+ "0x4068662d": {
+  "name": "UINetworkEndOfRoundBonusMessage",
+  "category": "0x2f076840",
+  "vtable": "0x278b50c",
+  "ctor": "0x25825e0"
+ },
+ "0x4184bb30": {
+  "name": "SoldierToComponentsDropDisposableWeaponMessage",
+  "category": "0x2e844b68",
+  "vtable": "0x27d0688",
+  "ctor": "0x25c9120"
+ },
+ "0x41d60f66": {
+  "name": "NetworkPlayerViewHitMessage",
+  "category": "0xd97040d9",
+  "vtable": "0x278b144",
+  "ctor": "0x257d3b0"
+ },
+ "0x42630776": {
+  "name": "ClientVehicleToComponentsHealthChangedMessage",
+  "category": "0x258e3aa3",
+  "vtable": "0x27e1df8",
+  "ctor": "0x25f7a80"
+ },
+ "0x42983801": {
+  "name": "ServerRoundSubRoundOverMessage",
+  "category": "0xd93dd7c2",
+  "vtable": "0x27b68b4",
+  "ctor": "0x25a0810"
+ },
+ "0x42c102d3": {
+  "name": "ClientCameraToComponentsInitMessage",
+  "category": "0x12215402",
+  "vtable": "0x27e1e08",
+  "ctor": "0x25f7af0"
+ },
+ "0x42e4d94f": {
+  "name": "ServerGameplayTeamPointsScoredMessage",
+  "category": "0x50a2f3ea",
+  "vtable": "0x27ea30c",
+  "ctor": "0x26271b0"
+ },
+ "0x43249c4e": {
+  "name": "VeniceNetworkFriendZoneMessage",
+  "category": "0x802ae469",
+  "vtable": "0x280d274",
+  "ctor": "0x267e880"
+ },
+ "0x4370e929": {
+  "name": "ServerPlayerManuallySelectedSpawnPointMessage",
+  "category": "0xf3c93dd3",
+  "vtable": "0x27b667c",
+  "ctor": "0x259f230"
+ },
+ "0x43777fdf": {
+  "name": "ClientContinueSingleplayerMessage",
+  "category": "0xa23a0e7c",
+  "vtable": "0x2793068",
+  "ctor": "0x2598730"
+ },
+ "0x43853f22": {
+  "name": "NetworkTimeSyncMessage",
+  "category": "0xc67d277b",
+  "vtable": "0x278aa54",
+  "ctor": "0x2577040"
+ },
+ "0x43ef07d9": {
+  "name": "PlayerSubviewStartSpawnTimerCountdownMessage",
+  "category": "0x6e0f9e3f",
+  "vtable": "0x27b66ec",
+  "ctor": "0x259f680"
+ },
+ "0x44098dbc": {
+  "name": "ServerGameplayCapturePointResetMessage",
+  "category": "0x50a2f3ea",
+  "vtable": "0x280cabc",
+  "ctor": "0x2678b40"
+ },
+ "0x445c955d": {
+  "name": "NetworkBulletMultiKillMessage",
+  "category": "0xc67d277b",
+  "vtable": "0x278b894",
+  "ctor": "0x258b0a0"
+ },
+ "0x44f988c2": {
+  "name": "ServerCollisionProjectileImpactMessage",
+  "category": "0xdb60e01e",
+  "vtable": "0x27b677c",
+  "ctor": "0x259fbb0"
+ },
+ "0x44f988fb": {
+  "name": "ServerGameplayMedkitMessage",
+  "category": "0x50a2f3ea",
+  "vtable": "0x27b682c",
+  "ctor": "0x25a0350"
+ },
+ "0x458f8b20": {
+  "name": "EventSyncReachedClientMessage",
+  "category": "0xf65c75ae",
+  "vtable": "0x27ea0d4",
+  "ctor": "0x26261b0"
+ },
+ "0x45e0cab5": {
+  "name": "UIJoinServerMessage",
+  "category": "0x005973b9",
+  "vtable": "0x280cf54",
+  "ctor": "0x267b700"
+ },
+ "0x46070069": {
+  "name": "VeniceNetworkFakeAwardResponseMessage",
+  "category": "0x802ae469",
+  "vtable": "0x280d370",
+  "ctor": "0x267f3c0"
+ },
+ "0x4641dce4": {
+  "name": "ServerPlayerEnterEntryMessage",
+  "category": "0xf3c93dd3",
+  "vtable": "0x27b66a4",
+  "ctor": "0x259f3d0"
+ },
+ "0x46e163b4": {
+  "name": "DamageArbitrationClientDamageMessage",
+  "category": "0x26bb582d",
+  "vtable": "0x27b6904",
+  "ctor": "0x25a0a30"
+ },
+ "0x47f6c6f0": {
+  "name": "BulletToSoldierComponentsHitMessage",
+  "category": "0xddcb0cce",
+  "vtable": "0x27e29c4",
+  "ctor": "0x25ff470"
+ },
+ "0x484ee869": {
+  "name": "ServerPlayerLicensesAvailableMessage",
+  "category": "0xf3c93dd3",
+  "vtable": "0x280ca04",
+  "ctor": "0x26783d0"
+ },
+ "0x48551ad0": {
+  "name": "VeniceNetworkSetPingMessage",
+  "category": "0x802ae469",
+  "vtable": "0x280d328",
+  "ctor": "0x267efb0"
+ },
+ "0x485ae09f": {
+  "name": "UIReadyForUnloadMessage",
+  "category": "0x005973b9",
+  "vtable": "0x27f5d80",
+  "ctor": "0x26393d0"
+ },
+ "0x487aa214": {
+  "name": "WaypointArrivalTriggerUnregisterMessage",
+  "category": "0x6d9fb82d",
+  "vtable": "0x280ca8c",
+  "ctor": "0x2678970"
+ },
+ "0x49214eb4": {
+  "name": "VeniceNetworkPlayerSupportActionWeaponFireInfoMessage",
+  "category": "0x802ae469",
+  "vtable": "0x280d5f0",
+  "ctor": "0x26884f0"
+ },
+ "0x49264485": {
+  "name": "UIResumeGameMessage",
+  "category": "0x005973b9",
+  "vtable": "0x27f5e60",
+  "ctor": "0x2639c30"
+ },
+ "0x499ccc1a": {
+  "name": "UIHudShowVoteResultsMessage",
+  "category": "0x005973b9",
+  "vtable": "0x27f5c40",
+  "ctor": "0x2638820"
+ },
+ "0x49a82414": {
+  "name": "VeniceNetworkSetSquadPrivacyMessage",
+  "category": "0x802ae469",
+  "vtable": "0x280d064",
+  "ctor": "0x267ce90"
+ },
+ "0x49a82562": {
+  "name": "ServerSoundVoiceOverFinishedMessage",
+  "category": "0xd92dcf03",
+  "vtable": "0x27b67d4",
+  "ctor": "0x259ff40"
+ },
+ "0x49b16a09": {
+  "name": "ServerGameplayCapturePointCapturedMessage",
+  "category": "0x50a2f3ea",
+  "vtable": "0x280caac",
+  "ctor": "0x2678aa0"
+ },
+ "0x49f692ab": {
+  "name": "NetworkPreroundSetSoldierKitMessage",
+  "category": "0xc67d277b",
+  "vtable": "0x278b18c",
+  "ctor": "0x257d860"
+ },
+ "0x4a211906": {
+  "name": "VeniceNetworkPlayerSupportActionVehicleDiveMessage",
+  "category": "0x802ae469",
+  "vtable": "0x278ac70",
+  "ctor": "0x2578ae0"
+ },
+ "0x4acd6185": {
+  "name": "UIMouseKeyBindingMessage",
+  "category": "0x005973b9",
+  "vtable": "0x27f5e38",
+  "ctor": "0x2639af0"
+ },
+ "0x4ad98145": {
+  "name": "AIBotSpawnedMessage",
+  "category": "0x0059722d",
+  "vtable": "0x27b6914",
+  "ctor": "0x25a0b20"
+ },
+ "0x4b392b8b": {
+  "name": "ServerSupportActionRadarJammingSignalMessage",
+  "category": "0xc2424cf1",
+  "vtable": "0x280ca3c",
+  "ctor": "0x2678650"
+ },
+ "0x4b4ece80": {
+  "name": "UIRequestPreEndOfRoundMessage",
+  "category": "0x005973b9",
+  "vtable": "0x280cb74",
+  "ctor": "0x26791c0"
+ },
+ "0x4b794943": {
+  "name": "VeniceNetworkAwardGainedMessage",
+  "category": "0x802ae469",
+  "vtable": "0x280d088",
+  "ctor": "0x267cff0"
+ },
+ "0x4b85894e": {
+  "name": "UISendFriendPlaygroupInviteMessage",
+  "category": "0x005973b9",
+  "vtable": "0x280cf0c",
+  "ctor": "0x267b3c0"
+ },
+ "0x4bb8de5c": {
+  "name": "ServerRoundResetMessage",
+  "category": "0xd93dd7c2",
+  "vtable": "0x27b68a4",
+  "ctor": "0x25a0780"
+ },
+ "0x4c032b92": {
+  "name": "VeniceNetworkJoinSquadMessage",
+  "category": "0x802ae469",
+  "vtable": "0x280cfd4",
+  "ctor": "0x267c880"
+ },
+ "0x4c885c74": {
+  "name": "UIEnterFrontendMessage",
+  "category": "0x005973b9",
+  "vtable": "0x280cb6c",
+  "ctor": "0x2679180"
+ },
+ "0x4d0125bc": {
+  "name": "StatGainAwardMessage",
+  "category": "0x7c89b9b7",
+  "vtable": "0x28070b4",
+  "ctor": "0x266f2b0"
+ },
+ "0x4d10f000": {
+  "name": "NetworkLoadLevelMessage",
+  "category": "0xc67d277b",
+  "vtable": "0x278b9d8",
+  "ctor": "0x258c3a0"
+ },
+ "0x4dcb6e4e": {
+  "name": "VeniceServerMetricsCreateLogMessage",
+  "category": "0x426030a5",
+  "vtable": "0x2806fbc",
+  "ctor": "0x266e870"
+ },
+ "0x4dde89bf": {
+  "name": "SpikeInternalUnreliableNopMessage",
+  "category": "0x39d77a26",
+  "vtable": "0x2766b8c",
+  "ctor": "0x25497f0"
+ },
+ "0x4e0014cc": {
+  "name": "UINetworkPlayerRankUpMessage",
+  "category": "0x89062f07",
+  "vtable": "0x278b47c",
+  "ctor": "0x2581d90"
+ },
+ "0x4e1a78e9": {
+  "name": "UIEnterExitMenuMessage",
+  "category": "0x005973b9",
+  "vtable": "0x27f5c88",
+  "ctor": "0x2638a60"
+ },
+ "0x4e9ad677": {
+  "name": "ServerEntityBangerEntityOnUnspawnMessage",
+  "category": "0xe70ad9fb",
+  "vtable": "0x27b6714",
+  "ctor": "0x259f7e0"
+ },
+ "0x4ee8ebfe": {
+  "name": "VeniceServerMetricsTicketCounterMessage",
+  "category": "0x426030a5",
+  "vtable": "0x2806fd4",
+  "ctor": "0x266e970"
+ },
+ "0x4f4ec4c5": {
+  "name": "ServerMissionObjectiveCompletedMessage",
+  "category": "0x083527cc",
+  "vtable": "0x27b68ec",
+  "ctor": "0x25a0980"
+ },
+ "0x501607b4": {
+  "name": "UIFlowDialogNodeReachedMessage",
+  "category": "0x005973b9",
+  "vtable": "0x27e2adc",
+  "ctor": "0x260aa80"
+ },
+ "0x512fbfad": {
+  "name": "NetworkPlaygroupChangeMessage",
+  "category": "0xc67d277b",
+  "vtable": "0x278b84c",
+  "ctor": "0x258f410"
+ },
+ "0x518bf48d": {
+  "name": "ClientLeftRemoteServerMessage",
+  "category": "0xa23a0e7c",
+  "vtable": "0x27930d8",
+  "ctor": "0x2598b10"
+ },
+ "0x519e30e5": {
+  "name": "ServerPeerInitializedMessage",
+  "category": "0x6b6b3a22",
+  "vtable": "0x27b68f4",
+  "ctor": "0x25a09c0"
+ },
+ "0x51be99ca": {
+  "name": "VeniceNetworkFakeAwardMessage",
+  "category": "0x802ae469",
+  "vtable": "0x280d34c",
+  "ctor": "0x267f210"
+ },
+ "0x51c0036f": {
+  "name": "UIUpdateColorCompMessage",
+  "category": "0x005973b9",
+  "vtable": "0x27f5ca8",
+  "ctor": "0x2638bb0"
+ },
+ "0x5255a818": {
+  "name": "ClientCameraShowKillerMessage",
+  "category": "0x56ba8785",
+  "vtable": "0x2793188",
+  "ctor": "0x25991c0"
+ },
+ "0x525660e0": {
+  "name": "NetworkReplayResponseMessage",
+  "category": "0xc67d277b",
+  "vtable": "0x278afdc",
+  "ctor": "0x257c0f0"
+ },
+ "0x528b739e": {
+  "name": "UIMPSportFlagStateMessage",
+  "category": "0x005973b9",
+  "vtable": "0x280cc3c",
+  "ctor": "0x2679a30"
+ },
+ "0x52c126c7": {
+  "name": "EntityToComponentsResetMessage",
+  "category": "0x7b911719",
+  "vtable": "0x27d9b2c",
+  "ctor": "0x25dcb60"
+ },
+ "0x52d00be9": {
+  "name": "ServerPlayerLevelLoadedMessage",
+  "category": "0xf3c93dd3",
+  "vtable": "0x27b6624",
+  "ctor": "0x259eec0"
+ },
+ "0x52ebfab9": {
+  "name": "UITeamWonMessage",
+  "category": "0x005973b9",
+  "vtable": "0x280cb64",
+  "ctor": "0x2679130"
+ },
+ "0x53902aeb": {
+  "name": "UIDoorBreachTimerRewardMessage",
+  "category": "0x005973b9",
+  "vtable": "0x27f5e10",
+  "ctor": "0x2639910"
+ },
+ "0x5508e2eb": {
+  "name": "ServerWeaponPlayerReloadMessage",
+  "category": "0x07038862",
+  "vtable": "0x27b6a74",
+  "ctor": "0x25a1900"
+ },
+ "0x55382a5e": {
+  "name": "ClientPlayerAmmoPickupMessage",
+  "category": "0x24fe118f",
+  "vtable": "0x27932a8",
+  "ctor": "0x2599c50"
+ },
+ "0x55a613d1": {
+  "name": "UISpawnAllowedMessage",
+  "category": "0x005973b9",
+  "vtable": "0x27f5d30",
+  "ctor": "0x26390b0"
+ },
+ "0x55c10988": {
+  "name": "ServerPlayerMeleeInteruptedMessage",
+  "category": "0xf3c93dd3",
+  "vtable": "0x280c9f4",
+  "ctor": "0x2678330"
+ },
+ "0x562997c1": {
+  "name": "ServerSoldierUnspawnDoneMessage",
+  "category": "0xdc84f4ea",
+  "vtable": "0x27b69a4",
+  "ctor": "0x25a10d0"
+ },
+ "0x56e23f11": {
+  "name": "ServerPlayerSpawnOnPlayerMessage",
+  "category": "0xf3c93dd3",
+  "vtable": "0x280c9cc",
+  "ctor": "0x2678140"
+ },
+ "0x56e9161f": {
+  "name": "HUDCustomizationSelectAttachmentSlotMessage",
+  "category": "0x528a6ea1",
+  "vtable": "0x280cfbc",
+  "ctor": "0x267ba90"
+ },
+ "0x577a9231": {
+  "name": "UIHudDistortHudMessage",
+  "category": "0x005973b9",
+  "vtable": "0x27f5c28",
+  "ctor": "0x2638750"
+ },
+ "0x57e9379e": {
+  "name": "UISoldierChangeMessage",
+  "category": "0x005973b9",
+  "vtable": "0x27f5d78",
+  "ctor": "0x2639380"
+ },
+ "0x587aca24": {
+  "name": "NetworkCameraFreeCameraMessage",
+  "category": "0x767b8242",
+  "vtable": "0x278ad48",
+  "ctor": "0x2579640"
+ },
+ "0x58a11fdd": {
+  "name": "HUDCustomizationUnFocusMessage",
+  "category": "0x528a6ea1",
+  "vtable": "0x280cfac",
+  "ctor": "0x267ba10"
+ },
+ "0x59534aec": {
+  "name": "ServerWeaponMortarStrikeMessage",
+  "category": "0x07038862",
+  "vtable": "0x27b6a2c",
+  "ctor": "0x25a1630"
+ },
+ "0x5a2535d0": {
+  "name": "UIUserSkippedLoginMessage",
+  "category": "0x005973b9",
+  "vtable": "0x27f5bb8",
+  "ctor": "0x26383b0"
+ },
+ "0x5aacb251": {
+  "name": "PerformanceClientNetworkMessage",
+  "category": "0x697443dd",
+  "vtable": "0x278a958",
+  "ctor": "0x2574750"
+ },
+ "0x5b6b5140": {
+  "name": "ClientLevelDescriptionLoadedMessage",
+  "category": "0xa23a0e7c",
+  "vtable": "0x27930a8",
+  "ctor": "0x2598970"
+ },
+ "0x5ced24ea": {
+  "name": "SessionPlayerAuthenticatedMessage",
+  "category": "0xa378479b",
+  "vtable": "0x278a980",
+  "ctor": "0x25748b0"
+ },
+ "0x5d0a0fbd": {
+  "name": "ServerGameplayFightHarderMessage",
+  "category": "0x50a2f3ea",
+  "vtable": "0x27b6834",
+  "ctor": "0x25a03a0"
+ },
+ "0x5d80abd1": {
+  "name": "ServerGameplayTeamReinforceMessage",
+  "category": "0x50a2f3ea",
+  "vtable": "0x280cacc",
+  "ctor": "0x2678be0"
+ },
+ "0x5de3417c": {
+  "name": "UIPlayerScoreUpdatedMessage",
+  "category": "0x005973b9",
+  "vtable": "0x27f5e28",
+  "ctor": "0x2639a50"
+ },
+ "0x5decda09": {
+  "name": "ServerPlayerForceRespawnMessage",
+  "category": "0xf3c93dd3",
+  "vtable": "0x27b6694",
+  "ctor": "0x259f330"
+ },
+ "0x5dfe9890": {
+  "name": "UIShowChyronMessage",
+  "category": "0x005973b9",
+  "vtable": "0x27f5e00",
+  "ctor": "0x2639860"
+ },
+ "0x5e1d1691": {
+  "name": "ClientPlayerBuddyInfoUpdatedMessage",
+  "category": "0x24fe118f",
+  "vtable": "0x280ca54",
+  "ctor": "0x2678750"
+ },
+ "0x5e346eac": {
+  "name": "VeniceClientMetricsRestartSPCheckpointMessage",
+  "category": "0xebc23f79",
+  "vtable": "0x280c0ec",
+  "ctor": "0x2673d70"
+ },
+ "0x5f669172": {
+  "name": "ClientPlayerWeaponPickupMessage",
+  "category": "0x24fe118f",
+  "vtable": "0x27932b0",
+  "ctor": "0x2599c90"
+ },
+ "0x5fc3d08e": {
+  "name": "ServerGameplayUpdateAirspaceMessage",
+  "category": "0x50a2f3ea",
+  "vtable": "0x27b688c",
+  "ctor": "0x25a0690"
+ },
+ "0x601d3ed1": {
+  "name": "UIHudShowCaptureProgressMessage",
+  "category": "0x005973b9",
+  "vtable": "0x280cb1c",
+  "ctor": "0x2678eb0"
+ },
+ "0x60291090": {
+  "name": "ServerMetricsObjectiveSuccessMessage",
+  "category": "0x12068db7",
+  "vtable": "0x27b65f4",
+  "ctor": "0x259ed10"
+ },
+ "0x6042cde2": {
+  "name": "UIHasSuppressedEnemyMessage",
+  "category": "0x005973b9",
+  "vtable": "0x27f5c08",
+  "ctor": "0x2638660"
+ },
+ "0x6065a85f": {
+  "name": "ServerWeaponPlayerPrimaryOutOfAmmoMessage",
+  "category": "0x07038862",
+  "vtable": "0x27b6a44",
+  "ctor": "0x25a1720"
+ },
+ "0x6079154a": {
+  "name": "ClientSpawnSpawnedOrUnSpawnedMessage",
+  "category": "0xdabdec47",
+  "vtable": "0x2793130",
+  "ctor": "0x2598e70"
+ },
+ "0x608997b9": {
+  "name": "ClientPlayerDeletedMessage",
+  "category": "0x24fe118f",
+  "vtable": "0x27932e0",
+  "ctor": "0x2599e60"
+ },
+ "0x608caa9a": {
+  "name": "ServerSoldierOnInitMessage",
+  "category": "0xdc84f4ea",
+  "vtable": "0x27b6994",
+  "ctor": "0x25a1030"
+ },
+ "0x608d315d": {
+  "name": "UIHudResetWinningTeamMessage",
+  "category": "0x005973b9",
+  "vtable": "0x280cb44",
+  "ctor": "0x2679030"
+ },
+ "0x60e4187d": {
+  "name": "SoldierToComponentsOnIncapableMessage",
+  "category": "0x2e844b68",
+  "vtable": "0x27fb4e0",
+  "ctor": "0x2643700"
+ },
+ "0x6127f274": {
+  "name": "UIHudShowEnemiesMessage",
+  "category": "0x005973b9",
+  "vtable": "0x280cb24",
+  "ctor": "0x2678f00"
+ },
+ "0x620dfa56": {
+  "name": "UISquadStatusChangedMessage",
+  "category": "0x005973b9",
+  "vtable": "0x27f5d20",
+  "ctor": "0x2639030"
+ },
+ "0x6247360c": {
+  "name": "UIHudOutputStaticMessage",
+  "category": "0x005973b9",
+  "vtable": "0x27f5c30",
+  "ctor": "0x2638790"
+ },
+ "0x6254d55f": {
+  "name": "UIRoundTrackMessage",
+  "category": "0x005973b9",
+  "vtable": "0x280cbec",
+  "ctor": "0x26796c0"
+ },
+ "0x62ab071b": {
+  "name": "ServerRestartTimerMessage",
+  "category": "0xc6e40ba0",
+  "vtable": "0x278af04",
+  "ctor": "0x257b620"
+ },
+ "0x631d32a4": {
+  "name": "VeniceClientMetricsBootMessage",
+  "category": "0xebc23f79",
+  "vtable": "0x280c0d4",
+  "ctor": "0x2673c70"
+ },
+ "0x639f8408": {
+  "name": "WaypointTriggerActivatedMessage",
+  "category": "0xaf24899e",
+  "vtable": "0x280ca5c",
+  "ctor": "0x2678790"
+ },
+ "0x63ca10bf": {
+  "name": "HUDCustomizationEnterWeaponsScreenMessage",
+  "category": "0x528a6ea1",
+  "vtable": "0x280cf7c",
+  "ctor": "0x267b870"
+ },
+ "0x63d1b55c": {
+  "name": "AIMustStayOutShootingFromCoverMessage",
+  "category": "0x0059722d",
+  "vtable": "0x27b694c",
+  "ctor": "0x25a0d80"
+ },
+ "0x63f4c95b": {
+  "name": "UIPopupShowMessage",
+  "category": "0x005973b9",
+  "vtable": "0x27fffa8",
+  "ctor": "0x265c9e0"
+ },
+ "0x64092dea": {
+  "name": "UINetworkRewardNationPrideTokensMessage",
+  "category": "0x89062f07",
+  "vtable": "0x278b6e0",
+  "ctor": "0x2583c10"
+ },
+ "0x64880730": {
+  "name": "VeniceNetworkAllWeaponKillsMessage",
+  "category": "0x802ae469",
+  "vtable": "0x280d53c",
+  "ctor": "0x26880b0"
+ },
+ "0x64a560c3": {
+  "name": "ClientPlayerUpdateCameraComponentMessage",
+  "category": "0x24fe118f",
+  "vtable": "0x2793280",
+  "ctor": "0x2599ad0"
+ },
+ "0x64e4e684": {
+  "name": "ClientWantFullscreenMessage",
+  "category": "0xa23a0e7c",
+  "vtable": "0x27930e0",
+  "ctor": "0x2598b50"
+ },
+ "0x653e2ebe": {
+  "name": "ServerGameManagerGetGameDataMessage",
+  "category": "0x07a2b9fd",
+  "vtable": "0x2807034",
+  "ctor": "0x266ed90"
+ },
+ "0x6542d49f": {
+  "name": "ServerGameplayPreviousWeatherStateMessage",
+  "category": "0x50a2f3ea",
+  "vtable": "0x27b683c",
+  "ctor": "0x25a03f0"
+ },
+ "0x6543a5d5": {
+  "name": "ServerGameplayRefillClassAbilityMessage",
+  "category": "0x50a2f3ea",
+  "vtable": "0x280ca44",
+  "ctor": "0x26786a0"
+ },
+ "0x658c8b0f": {
+  "name": "UIClearLocalPlatoonPatchMessage",
+  "category": "0x005973b9",
+  "vtable": "0x280cc14",
+  "ctor": "0x2679850"
+ },
+ "0x6637fca1": {
+  "name": "UISetPlatoonPatchTypeMessage",
+  "category": "0x005973b9",
+  "vtable": "0x280cc34",
+  "ctor": "0x2679960"
+ },
+ "0x66efa9aa": {
+  "name": "ServerControllableUnspawnDoneMessage",
+  "category": "0x1f5984c1",
+  "vtable": "0x27b66d4",
+  "ctor": "0x259f590"
+ },
+ "0x66f05e99": {
+  "name": "UIGoToMainMenuMessage",
+  "category": "0x005973b9",
+  "vtable": "0x27f5e50",
+  "ctor": "0x2639bb0"
+ },
+ "0x67baf3ab": {
+  "name": "ClientControllableToComponentsPlayerEnteredMessage",
+  "category": "0x197c291a",
+  "vtable": "0x27ea178",
+  "ctor": "0x2626700"
+ },
+ "0x68afe2b5": {
+  "name": "CoreEnteredIngameMessage",
+  "category": "0x813e9e68",
+  "vtable": "0x278a960",
+  "ctor": "0x25747a0"
+ },
+ "0x690b5b2e": {
+  "name": "ServerPlayerSpawnAtVehicleMessage",
+  "category": "0xf3c93dd3",
+  "vtable": "0x280c9d4",
+  "ctor": "0x2678190"
+ },
+ "0x69502469": {
+  "name": "ClientStateResponseLoadingScreenDoneMessage",
+  "category": "0xdabbbbab",
+  "vtable": "0x2793250",
+  "ctor": "0x2599900"
+ },
+ "0x69596737": {
+  "name": "ServerPlayerManDownRevivedMessage",
+  "category": "0xf3c93dd3",
+  "vtable": "0x280c9fc",
+  "ctor": "0x2678380"
+ },
+ "0x69babf89": {
+  "name": "ServerPlayerFiredSupportAbilityMessage",
+  "category": "0xf3c93dd3",
+  "vtable": "0x280ca14",
+  "ctor": "0x2678470"
+ },
+ "0x69e0643a": {
+  "name": "ClientPlayerConnectMessage",
+  "category": "0x24fe118f",
+  "vtable": "0x27932d8",
+  "ctor": "0x2599e10"
+ },
+ "0x6a213a80": {
+  "name": "UINetworkHudTooltipMessage",
+  "category": "0x89062f07",
+  "vtable": "0x278b204",
+  "ctor": "0x257f940"
+ },
+ "0x6a31005f": {
+  "name": "ClientLevelFinalizedMessage",
+  "category": "0xdaa58eaa",
+  "vtable": "0x27931e0",
+  "ctor": "0x2599530"
+ },
+ "0x6a78be3b": {
+  "name": "UISetValueMessage",
+  "category": "0x005973b9",
+  "vtable": "0x27ffbb4",
+  "ctor": "0x26530a0"
+ },
+ "0x6acbda5d": {
+  "name": "JuiceServerPlayerTickMessage",
+  "category": "0x0d2ccef5",
+  "vtable": "0x278a9c0",
+  "ctor": "0x2574b00"
+ },
+ "0x6b151811": {
+  "name": "VeniceNetworkSoldierDeleteMessage",
+  "category": "0x802ae469",
+  "vtable": "0x278b774",
+  "ctor": "0x258aa00"
+ },
+ "0x6b2aea5a": {
+  "name": "ServerPlayerNoInteractivityKickMessage",
+  "category": "0xf3c93dd3",
+  "vtable": "0x280c9e4",
+  "ctor": "0x2678290"
+ },
+ "0x6be017a6": {
+  "name": "VeniceNetworkUnlockAchievementsMessage",
+  "category": "0x802ae469",
+  "vtable": "0x280d0f4",
+  "ctor": "0x267d700"
+ },
+ "0x6bf7f5aa": {
+  "name": "ClientConnectionUnloadLevelMessage",
+  "category": "0x8fd32fea",
+  "vtable": "0x2793270",
+  "ctor": "0x2599a20"
+ },
+ "0x6d09be92": {
+  "name": "NetworkMovePlayerMessage",
+  "category": "0xc67d277b",
+  "vtable": "0x278acdc",
+  "ctor": "0x2579060"
+ },
+ "0x6d391702": {
+  "name": "ClientControllableToComponentsPlayerExitMessage",
+  "category": "0x197c291a",
+  "vtable": "0x27ea180",
+  "ctor": "0x2626740"
+ },
+ "0x6d8c386b": {
+  "name": "ClientPlayerSwitchTeamMessage",
+  "category": "0x24fe118f",
+  "vtable": "0x27932c0",
+  "ctor": "0x2599d20"
+ },
+ "0x6df1ec89": {
+  "name": "WaypointTriggerDeactivatedMessage",
+  "category": "0xaf24899e",
+  "vtable": "0x280ca64",
+  "ctor": "0x26787e0"
+ },
+ "0x6e1933e0": {
+  "name": "ServerUnloadLevelMessage",
+  "category": "0xc6e40ba0",
+  "vtable": "0x27b6574",
+  "ctor": "0x259e9a0"
+ },
+ "0x6f5203ae": {
+  "name": "NetworkAIReadinessChangeMessage",
+  "category": "0xc67d277b",
+  "vtable": "0x278b870",
+  "ctor": "0x258afc0"
+ },
+ "0x6f6d7046": {
+  "name": "VeniceClientMetricsQuitSPGameMessage",
+  "category": "0xebc23f79",
+  "vtable": "0x280c0fc",
+  "ctor": "0x2673df0"
+ },
+ "0x6f8b48d5": {
+  "name": "ClientReturnToMenuMessage",
+  "category": "0xa23a0e7c",
+  "vtable": "0x2793070",
+  "ctor": "0x2598780"
+ },
+ "0x6fb4938d": {
+  "name": "PerformanceServerNetworkMessage",
+  "category": "0x697443dd",
+  "vtable": "0x278a950",
+  "ctor": "0x2574700"
+ },
+ "0x6fe09a82": {
+  "name": "UINetworkDoorBreachTimerStartMessage",
+  "category": "0x89062f07",
+  "vtable": "0x278b674",
+  "ctor": "0x2583800"
+ },
+ "0x708d6e93": {
+  "name": "UISetShowTrainingMissionSummaryMessage",
+  "category": "0x005973b9",
+  "vtable": "0x27f5cd8",
+  "ctor": "0x2638d70"
+ },
+ "0x70a8dfad": {
+  "name": "NetworkMetricsSaveGameSavedMessage",
+  "category": "0xc67d277b",
+  "vtable": "0x278aee0",
+  "ctor": "0x257b470"
+ },
+ "0x70ca5b0d": {
+  "name": "SubLevelClientBundleUnloadedMessage",
+  "category": "0x67772b37",
+  "vtable": "0x278a854",
+  "ctor": "0x2573d40"
+ },
+ "0x70e58a03": {
+  "name": "AIClearHumanEnemyBiasMessage",
+  "category": "0x0059722d",
+  "vtable": "0x27b692c",
+  "ctor": "0x25a0c10"
+ },
+ "0x70eef316": {
+  "name": "ServerMetricsSaveGameSavedMessage",
+  "category": "0x12068db7",
+  "vtable": "0x27b65ec",
+  "ctor": "0x259ecd0"
+ },
+ "0x71d53cbc": {
+  "name": "NetworkSelectSpawnGroupMessage",
+  "category": "0xc67d277b",
+  "vtable": "0x278b798",
+  "ctor": "0x258aae0"
+ },
+ "0x723135c7": {
+  "name": "WaypointTriggerUnregisterMessage",
+  "category": "0xaf24899e",
+  "vtable": "0x280ca74",
+  "ctor": "0x2678880"
+ },
+ "0x72fca60f": {
+  "name": "UILevelWarmUpTimerMessage",
+  "category": "0x005973b9",
+  "vtable": "0x27f5c68",
+  "ctor": "0x2638950"
+ },
+ "0x73114207": {
+  "name": "ServerComponentWeaponOnUnspawnMessage",
+  "category": "0x9e26a3cf",
+  "vtable": "0x27b673c",
+  "ctor": "0x259f970"
+ },
+ "0x731ab6fc": {
+  "name": "CoreGameTimerMessage",
+  "category": "0x7c813e9e",
+  "vtable": "0x278a970",
+  "ctor": "0x2574820"
+ },
+ "0x732e1a34": {
+  "name": "VeniceNetworkMedalAndRibbonAwardsStatusMessage",
+  "category": "0x802ae469",
+  "vtable": "0x280d720",
+  "ctor": "0x268cef0"
+ },
+ "0x73f6161f": {
+  "name": "ServerRoundHalfTimeMessage",
+  "category": "0xd93dd7c2",
+  "vtable": "0x27b68bc",
+  "ctor": "0x25a0850"
+ },
+ "0x742f39ad": {
+  "name": "ServerPlayerTickMessage",
+  "category": "0xf3c93dd3",
+  "vtable": "0x27b66b4",
+  "ctor": "0x259f470"
+ },
+ "0x745f73dd": {
+  "name": "ServerSoldierSelfHealMessage",
+  "category": "0xdc84f4ea",
+  "vtable": "0x27b69c4",
+  "ctor": "0x25a1220"
+ },
+ "0x747fb51e": {
+  "name": "VeniceNetworkFriendZoneDebugEnableMessage",
+  "category": "0x802ae469",
+  "vtable": "0x280d298",
+  "ctor": "0x267ea40"
+ },
+ "0x74ad7856": {
+  "name": "CheapFollowWaypointsInterruptedMessage",
+  "category": "0xb9beb47b",
+  "vtable": "0x280ca9c",
+  "ctor": "0x2678a10"
+ },
+ "0x765d7d31": {
+  "name": "ServerGameplayEnterVehicleMessage",
+  "category": "0x50a2f3ea",
+  "vtable": "0x27ffab8",
+  "ctor": "0x26524d0"
+ },
+ "0x76dc4377": {
+  "name": "ClientSoldierOnDamageMessage",
+  "category": "0x366fb6b6",
+  "vtable": "0x2793318",
+  "ctor": "0x259a070"
+ },
+ "0x77220006": {
+  "name": "ServerWeaponPlayerWeaponReloadEndMessage",
+  "category": "0x07038862",
+  "vtable": "0x27b6a64",
+  "ctor": "0x25a1860"
+ },
+ "0x7737023f": {
+  "name": "ServerBlazeServerOnGameEndedMessage",
+  "category": "0xc6e40ba0",
+  "vtable": "0x27b65a4",
+  "ctor": "0x259ead0"
+ },
+ "0x774c21d2": {
+  "name": "VeniceNetworkUnlockGainedMessage",
+  "category": "0x802ae469",
+  "vtable": "0x280d0ac",
+  "ctor": "0x267d250"
+ },
+ "0x77c7ccf8": {
+  "name": "UIPopupHideMessage",
+  "category": "0x005973b9",
+  "vtable": "0x27ffba4",
+  "ctor": "0x2652ff0"
+ },
+ "0x77d0383b": {
+  "name": "ClientStateRequestLoadingScreenDoneMessage",
+  "category": "0xdabbbbab",
+  "vtable": "0x2793248",
+  "ctor": "0x25998a0"
+ },
+ "0x7832d705": {
+  "name": "UINetworkPlayerTutorialInstructionsTextMessage",
+  "category": "0x89062f07",
+  "vtable": "0x278b410",
+  "ctor": "0x2581730"
+ },
+ "0x78b692ea": {
+  "name": "ClientPlayerRequestCameraChangeMessage",
+  "category": "0x24fe118f",
+  "vtable": "0x2793288",
+  "ctor": "0x2599b20"
+ },
+ "0x79f69b62": {
+  "name": "UIMPSportWinStateMessage",
+  "category": "0x005973b9",
+  "vtable": "0x280d6a4",
+  "ctor": "0x2689140"
+ },
+ "0x7aab1773": {
+  "name": "ServerVehicleUnspawnMessage",
+  "category": "0x3e46cdf8",
+  "vtable": "0x27b69ec",
+  "ctor": "0x25a13b0"
+ },
+ "0x7ad482c4": {
+  "name": "HUDCustomizationFocusOnCurrentSoldierMessage",
+  "category": "0x528a6ea1",
+  "vtable": "0x280cfa4",
+  "ctor": "0x267b9c0"
+ },
+ "0x7b62e15a": {
+  "name": "NetworkCameraReplayMessage",
+  "category": "0x767b8242",
+  "vtable": "0x278ad6c",
+  "ctor": "0x2579990"
+ },
+ "0x7bceea78": {
+  "name": "ClientStateRequestIngameMessage",
+  "category": "0xdabbbbab",
+  "vtable": "0x2793220",
+  "ctor": "0x2599720"
+ },
+ "0x7c535ed2": {
+  "name": "StatSupportActionPointsMessage",
+  "category": "0x7c89b9b7",
+  "vtable": "0x27ea324",
+  "ctor": "0x2627270"
+ },
+ "0x7c90ba91": {
+  "name": "NetworkDeathSceneResponseMessage",
+  "category": "0xc67d277b",
+  "vtable": "0x278af94",
+  "ctor": "0x257bcf0"
+ },
+ "0x7c9c8a4e": {
+  "name": "NetworkSpawnVehicleCustomizationMessage",
+  "category": "0xc67d277b",
+  "vtable": "0x278ab74",
+  "ctor": "0x2577e20"
+ },
+ "0x7d4abafc": {
+  "name": "ServerPlayerSpawnOnSelectedSpawnPointMessage",
+  "category": "0xf3c93dd3",
+  "vtable": "0x280c9dc",
+  "ctor": "0x2678240"
+ },
+ "0x7d843182": {
+  "name": "UIInputPressedMessage",
+  "category": "0x005973b9",
+  "vtable": "0x27f5d68",
+  "ctor": "0x2639290"
+ },
+ "0x7e241a57": {
+  "name": "ClientLoadLevelRequestedMessage",
+  "category": "0xa23a0e7c",
+  "vtable": "0x2793090",
+  "ctor": "0x25988a0"
+ },
+ "0x7e267bc0": {
+  "name": "CorePanicMessage",
+  "category": "0x7c813e9e",
+  "vtable": "0x27639f0",
+  "ctor": "0x25473e0"
+ },
+ "0x7ece4d59": {
+  "name": "ClientInputSettingsRefreshMessage",
+  "category": "0xb29d2e0f",
+  "vtable": "0x2793108",
+  "ctor": "0x2598ce0"
+ },
+ "0x7ef51b9f": {
+  "name": "ClientExitToMenuMessage",
+  "category": "0xa23a0e7c",
+  "vtable": "0x2793078",
+  "ctor": "0x25987d0"
+ },
+ "0x7f2ef175": {
+  "name": "UIHudEnableMinimapMessage",
+  "category": "0x005973b9",
+  "vtable": "0x280cb14",
+  "ctor": "0x2678e70"
+ },
+ "0x7f37ea27": {
+  "name": "ServerPlayerChoseSupportAbilityMessage",
+  "category": "0xf3c93dd3",
+  "vtable": "0x280ca0c",
+  "ctor": "0x2678420"
+ },
+ "0x7f4ac03d": {
+  "name": "ClientPlayerClassAbilityUpdatedMessage",
+  "category": "0x24fe118f",
+  "vtable": "0x280ca4c",
+  "ctor": "0x26786f0"
+ },
+ "0x7fc99e7e": {
+  "name": "ServerMapSequencerMaxPlayerCountMessage",
+  "category": "0x8b014e31",
+  "vtable": "0x280ced4",
+  "ctor": "0x267b0f0"
+ },
+ "0x8087e095": {
+  "name": "NetworkPlayerFirstTimeDeploymentMessage",
+  "category": "0xc67d277b",
+  "vtable": "0x27d9df8",
+  "ctor": "0x25df5f0"
+ },
+ "0x809ef7a8": {
+  "name": "ServerVehicleSpawnDoneMessage",
+  "category": "0x3e46cdf8",
+  "vtable": "0x27b69e4",
+  "ctor": "0x25a1360"
+ },
+ "0x80ca73ea": {
+  "name": "HUDCustomizationUnspawnMessage",
+  "category": "0x528a6ea1",
+  "vtable": "0x280cf74",
+  "ctor": "0x267b830"
+ },
+ "0x8104627e": {
+  "name": "ClientSoldierOnJumpMessage",
+  "category": "0x366fb6b6",
+  "vtable": "0x2793300",
+  "ctor": "0x2599fa0"
+ },
+ "0x81aa0ca5": {
+  "name": "NetworkGlobalAIReadinessChangeMessage",
+  "category": "0xc67d277b",
+  "vtable": "0x278b1b0",
+  "ctor": "0x257d9a0"
+ },
+ "0x81b1565a": {
+  "name": "ClientLevelLoadProgressMessage",
+  "category": "0xa23a0e7c",
+  "vtable": "0x27930b0",
+  "ctor": "0x25989b0"
+ },
+ "0x820bc569": {
+  "name": "CoreDebugReadSaveGameDataMessage",
+  "category": "0x7c813e9e",
+  "vtable": "0x278a8ec",
+  "ctor": "0x25741c0"
+ },
+ "0x82423a0f": {
+  "name": "VeniceClientMetricsListenerDestroyedMessage",
+  "category": "0x993a42a7",
+  "vtable": "0x280c0b4",
+  "ctor": "0x2673b40"
+ },
+ "0x82901b4f": {
+  "name": "ServerPlayerChangedVoiceChannelMessage",
+  "category": "0xf3c93dd3",
+  "vtable": "0x280c9b4",
+  "ctor": "0x2678050"
+ },
+ "0x82e829f7": {
+  "name": "ServerControllableToComponentsPlayerEnteredMessage",
+  "category": "0xc43dee46",
+  "vtable": "0x27ea188",
+  "ctor": "0x2626780"
+ },
+ "0x835abc76": {
+  "name": "ClientControllableUnspawnDoneMessage",
+  "category": "0xaa595c9d",
+  "vtable": "0x2793128",
+  "ctor": "0x2598e20"
+ },
+ "0x83ad5f3c": {
+  "name": "UINetworkSkipVideoMessage",
+  "category": "0x89062f07",
+  "vtable": "0x278b35c",
+  "ctor": "0x2580d70"
+ },
+ "0x83bde3a2": {
+  "name": "NetworkDeathInfoMessage",
+  "category": "0xc67d277b",
+  "vtable": "0x278b828",
+  "ctor": "0x258ae30"
+ },
+ "0x83ee48c7": {
+  "name": "ServerPlayerInstantSuicideMessage",
+  "category": "0xf3c93dd3",
+  "vtable": "0x27b668c",
+  "ctor": "0x259f2e0"
+ },
+ "0x83f0f160": {
+  "name": "ServerSoldierChangingWeaponMessage",
+  "category": "0xdc84f4ea",
+  "vtable": "0x27b698c",
+  "ctor": "0x25a0fe0"
+ },
+ "0x83f38408": {
+  "name": "ServerGameManagerReconfigurableGameCreatedMessage",
+  "category": "0x07a2b9fd",
+  "vtable": "0x2807064",
+  "ctor": "0x266ef90"
+ },
+ "0x840d85e2": {
+  "name": "ServerPlayerReleasingLevelMessage",
+  "category": "0xf3c93dd3",
+  "vtable": "0x27b6634",
+  "ctor": "0x259ef60"
+ },
+ "0x8439b65a": {
+  "name": "VeniceNetworkOnAIReloadMessage",
+  "category": "0x802ae469",
+  "vtable": "0x280d65c",
+  "ctor": "0x26887a0"
+ },
+ "0x84f7243a": {
+  "name": "VeniceNetworkVirtualGameStateMessage",
+  "category": "0x802ae469",
+  "vtable": "0x280d250",
+  "ctor": "0x267e710"
+ },
+ "0x854f79ac": {
+  "name": "VeniceNetworkKickFromSquadMessage",
+  "category": "0x802ae469",
+  "vtable": "0x280d01c",
+  "ctor": "0x267cbf0"
+ },
+ "0x857c22e4": {
+  "name": "ServerAdminSetServerNameMessage",
+  "category": "0xd82cf64f",
+  "vtable": "0x27b65c4",
+  "ctor": "0x259eb90"
+ },
+ "0x86172225": {
+  "name": "NetworkBreachAnimsFinishedMessage",
+  "category": "0xc67d277b",
+  "vtable": "0x278b0fc",
+  "ctor": "0x257cf20"
+ },
+ "0x86424e51": {
+  "name": "ServerControllableSpawnDoneMessage",
+  "category": "0x1f5984c1",
+  "vtable": "0x27b66cc",
+  "ctor": "0x259f540"
+ },
+ "0x87a03ebb": {
+  "name": "ServerClientConnectionConnectedMessage",
+  "category": "0xc6e40ba0",
+  "vtable": "0x27b65d4",
+  "ctor": "0x259ec10"
+ },
+ "0x87b21d93": {
+  "name": "UINetworkPlayerKillsTextMessage",
+  "category": "0x89062f07",
+  "vtable": "0x278b2f0",
+  "ctor": "0x2580520"
+ },
+ "0x87e2e5bb": {
+  "name": "UIScreenCountChangeMessage",
+  "category": "0x005973b9",
+  "vtable": "0x27f5be0",
+  "ctor": "0x26384f0"
+ },
+ "0x8896ecad": {
+  "name": "ClientConnectionInitializedMessage",
+  "category": "0x8fd32fea",
+  "vtable": "0x2793258",
+  "ctor": "0x2599940"
+ },
+ "0x895b9eb0": {
+  "name": "UIMPSportRoundStateMessage",
+  "category": "0x005973b9",
+  "vtable": "0x280cc44",
+  "ctor": "0x2679a80"
+ },
+ "0x8a4eb6e6": {
+  "name": "ServerGameplaySwitchbladeSpawnMessage",
+  "category": "0x50a2f3ea",
+  "vtable": "0x27ea060",
+  "ctor": "0x2625b90"
+ },
+ "0x8a777e43": {
+  "name": "SubLevelClientOnStreamedOutBySaveGameMessage",
+  "category": "0x67772b37",
+  "vtable": "0x278a80c",
+  "ctor": "0x2573a50"
+ },
+ "0x8afd4678": {
+  "name": "UINetworkKilledOtherPlayerMessage",
+  "category": "0x89062f07",
+  "vtable": "0x278b990",
+  "ctor": "0x258b6d0"
+ },
+ "0x8b57a7ca": {
+  "name": "UINetworkOwnPlayerKilledMessage",
+  "category": "0x89062f07",
+  "vtable": "0x278b96c",
+  "ctor": "0x258b620"
+ },
+ "0x8ba3f351": {
+  "name": "ClientWeaponPlayerPrimaryLowOnAmmoMessage",
+  "category": "0x2862813e",
+  "vtable": "0x2793348",
+  "ctor": "0x259a230"
+ },
+ "0x8bc1abbc": {
+  "name": "ServerAdministrationQuitMessage",
+  "category": "0xf9c35b8e",
+  "vtable": "0x278a730",
+  "ctor": "0x2572e60"
+ },
+ "0x8c0730d7": {
+  "name": "SubLevelClientLoadBundleMessage",
+  "category": "0x67772b37",
+  "vtable": "0x278a7c4",
+  "ctor": "0x2573680"
+ },
+ "0x8c0ff818": {
+  "name": "UISoldierHitUpdatedMessage",
+  "category": "0x005973b9",
+  "vtable": "0x27f5c80",
+  "ctor": "0x2638a10"
+ },
+ "0x8c212af8": {
+  "name": "PunkBusterExecCmdMessage",
+  "category": "0x018959c2",
+  "vtable": "0x280c17c",
+  "ctor": "0x2674510"
+ },
+ "0x8c22e737": {
+  "name": "ServerGameManagerAddGameBanResponseMessage",
+  "category": "0x07a2b9fd",
+  "vtable": "0x2807044",
+  "ctor": "0x266ee20"
+ },
+ "0x8d77bb8d": {
+  "name": "ServerGameplayDeserterReturnMessage",
+  "category": "0x50a2f3ea",
+  "vtable": "0x27b6824",
+  "ctor": "0x25a0300"
+ },
+ "0x8f68eac2": {
+  "name": "ServerGameplayServerPlayerMenuCancelMessage",
+  "category": "0xf3ea688f",
+  "vtable": "0x27b684c",
+  "ctor": "0x25a0490"
+ },
+ "0x8fdee178": {
+  "name": "ServerWeaponSoldierWeaponActivateMessage",
+  "category": "0x07038862",
+  "vtable": "0x27b6a4c",
+  "ctor": "0x25a1770"
+ },
+ "0x90987e2c": {
+  "name": "HUDCustomizationLeaveCharacterSelectScreenMessage",
+  "category": "0x528a6ea1",
+  "vtable": "0x280cf9c",
+  "ctor": "0x267b980"
+ },
+ "0x90f484d1": {
+  "name": "DebugSpawnGameEntityMessage",
+  "category": "0x0c7175f4",
+  "vtable": "0x278add8",
+  "ctor": "0x2579e00"
+ },
+ "0x9178c980": {
+  "name": "ServerSoldierSoldierDamageMessage",
+  "category": "0xdc84f4ea",
+  "vtable": "0x27b69bc",
+  "ctor": "0x25a11c0"
+ },
+ "0x917a80f7": {
+  "name": "UIClearBrowsingPlatoonMessage",
+  "category": "0x005973b9",
+  "vtable": "0x280cc24",
+  "ctor": "0x26798e0"
+ },
+ "0x917b6992": {
+  "name": "UIComponentLoadCompleteMessage",
+  "category": "0xba05f436",
+  "vtable": "0x27f5d88",
+  "ctor": "0x2639410"
+ },
+ "0x9196b92a": {
+  "name": "VeniceNetworkRemoveOrderMessage",
+  "category": "0x802ae469",
+  "vtable": "0x280d4ac",
+  "ctor": "0x2687df0"
+ },
+ "0x91deb1e8": {
+  "name": "ServerGameplaySetPreRoundLogicMessage",
+  "category": "0x50a2f3ea",
+  "vtable": "0x27b685c",
+  "ctor": "0x25a0520"
+ },
+ "0x929b8152": {
+  "name": "ClientWeaponPlayerWeaponReloadBeginMessage",
+  "category": "0x2862813e",
+  "vtable": "0x2793330",
+  "ctor": "0x259a150"
+ },
+ "0x92cb0d21": {
+  "name": "ClientSoldierChangeCoverStateMessage",
+  "category": "0x366fb6b6",
+  "vtable": "0x2793310",
+  "ctor": "0x259a020"
+ },
+ "0x936d3098": {
+  "name": "ServerVehicleDamageMessage",
+  "category": "0x3e46cdf8",
+  "vtable": "0x27b69fc",
+  "ctor": "0x25a1450"
+ },
+ "0x9399590b": {
+  "name": "NetworkSpawnMessage",
+  "category": "0xc67d277b",
+  "vtable": "0x278b750",
+  "ctor": "0x258a960"
+ },
+ "0x9399ef59": {
+  "name": "VeniceNetworkRequestCoopEorStatsMessage",
+  "category": "0x802ae469",
+  "vtable": "0x280d19c",
+  "ctor": "0x267df50"
+ },
+ "0x93a79a81": {
+  "name": "UINetworkPlayerUnlocksGrantRankUpMessage",
+  "category": "0x89062f07",
+  "vtable": "0x278b4a0",
+  "ctor": "0x2581f50"
+ },
+ "0x941d45e4": {
+  "name": "UIQuitGameAppMessage",
+  "category": "0x005973b9",
+  "vtable": "0x280cc64",
+  "ctor": "0x2679c60"
+ },
+ "0x942685a2": {
+  "name": "ServerPlayerReviveAcceptedMessage",
+  "category": "0xf3c93dd3",
+  "vtable": "0x27b664c",
+  "ctor": "0x259f050"
+ },
+ "0x942d5039": {
+  "name": "UICareerDoubleXPStatusMessage",
+  "category": "0x005973b9",
+  "vtable": "0x27f5de8",
+  "ctor": "0x2639790"
+ },
+ "0x9450a4a6": {
+  "name": "ClientGameplayStrafingRunCreatedMessage",
+  "category": "0x508f1eb6",
+  "vtable": "0x27931c8",
+  "ctor": "0x2599470"
+ },
+ "0x9459b9ad": {
+  "name": "ServerRestartLevelInitiatedMessage",
+  "category": "0xc6e40ba0",
+  "vtable": "0x27b6594",
+  "ctor": "0x259ea60"
+ },
+ "0x945fda7f": {
+  "name": "BlueprintBundleClientBundleLoadedMessage",
+  "category": "0x623ad17e",
+  "vtable": "0x27e6730",
+  "ctor": "0x261ab60"
+ },
+ "0x94a37fc4": {
+  "name": "AISpawnBotMessage",
+  "category": "0x0059722d",
+  "vtable": "0x27b690c",
+  "ctor": "0x25a0ad0"
+ },
+ "0x94a56f58": {
+  "name": "NetworkGameAdministrationPacketMessage",
+  "category": "0xf48e1cfb",
+  "vtable": "0x280d680",
+  "ctor": "0x2688be0"
+ },
+ "0x94bcf4f0": {
+  "name": "ServerWeaponSoldierWeaponReloadMessage",
+  "category": "0x07038862",
+  "vtable": "0x27b6a54",
+  "ctor": "0x25a17c0"
+ },
+ "0x94f923a5": {
+  "name": "NetworkSelectTeamMessage",
+  "category": "0xc67d277b",
+  "vtable": "0x278ac94",
+  "ctor": "0x2578d80"
+ },
+ "0x951af8de": {
+  "name": "VeniceClientMetricsLeaveCriticalHealthMessage",
+  "category": "0xebc23f79",
+  "vtable": "0x280c0cc",
+  "ctor": "0x2673c20"
+ },
+ "0x9647cf9c": {
+  "name": "SpikeInternalNopMessage",
+  "category": "0x39d77a26",
+  "vtable": "0x2766b68",
+  "ctor": "0x25496d0"
+ },
+ "0x972a7a99": {
+  "name": "ClientGameplayResupplyMessage",
+  "category": "0x508f1eb6",
+  "vtable": "0x27931b8",
+  "ctor": "0x25993d0"
+ },
+ "0x97415493": {
+  "name": "UIRestartLevelMessage",
+  "category": "0x005973b9",
+  "vtable": "0x27f5e68",
+  "ctor": "0x2639c70"
+ },
+ "0x9760d690": {
+  "name": "ServerPlayerChangedSquadSpawnerStatusMessage",
+  "category": "0xf3c93dd3",
+  "vtable": "0x280c9bc",
+  "ctor": "0x26780a0"
+ },
+ "0x9868069b": {
+  "name": "ServerCollisionProjectileTimeoutMessage",
+  "category": "0xe01e6898",
+  "vtable": "0x27b6784",
+  "ctor": "0x259fc10"
+ },
+ "0x988d6ea0": {
+  "name": "AIClientBridgeDynamicModelEntityOnUnspawnMessage",
+  "category": "0x8615e9eb",
+  "vtable": "0x278a918",
+  "ctor": "0x25744d0"
+ },
+ "0x98c61eaf": {
+  "name": "SoldierToComponentsInitializedMessage",
+  "category": "0x2e844b68",
+  "vtable": "0x27d0670",
+  "ctor": "0x25c9080"
+ },
+ "0x98cda887": {
+  "name": "CoreWriteSaveGameMessage",
+  "category": "0x7c813e9e",
+  "vtable": "0x278a998",
+  "ctor": "0x2574990"
+ },
+ "0x98f83d5a": {
+  "name": "CoreEraseSaveGameMessage",
+  "category": "0x7c813e9e",
+  "vtable": "0x278a9a8",
+  "ctor": "0x2574a40"
+ },
+ "0x996caf82": {
+  "name": "NetworkPlayerSpawnTypeChangedMessage",
+  "category": "0xc67d277b",
+  "vtable": "0x278b06c",
+  "ctor": "0x257c800"
+ },
+ "0x999fe74c": {
+  "name": "ServerGameManagerGameSettingsUpdateMessage",
+  "category": "0x07a2b9fd",
+  "vtable": "0x2807024",
+  "ctor": "0x266ec80"
+ },
+ "0x99e39b35": {
+  "name": "UIHudChatMessage",
+  "category": "0x005973b9",
+  "vtable": "0x27f5c18",
+  "ctor": "0x26386d0"
+ },
+ "0x9aa72c48": {
+  "name": "ClientConnectedMessage",
+  "category": "0xa23a0e7c",
+  "vtable": "0x27930c8",
+  "ctor": "0x2598a90"
+ },
+ "0x9afd1dcb": {
+  "name": "ServerGameplayVoiceOverFinishedMessage",
+  "category": "0x50a2f3ea",
+  "vtable": "0x27b6804",
+  "ctor": "0x25a01c0"
+ },
+ "0x9b5f0342": {
+  "name": "ServerSoldierKilledMessage",
+  "category": "0xdc84f4ea",
+  "vtable": "0x27b697c",
+  "ctor": "0x25a0f40"
+ },
+ "0x9bf95155": {
+  "name": "UINetworkSquadWipeMessage",
+  "category": "0x89062f07",
+  "vtable": "0x278b59c",
+  "ctor": "0x2582e00"
+ },
+ "0x9c293a34": {
+  "name": "ServerLevelSpawnEntitiesEndMessage",
+  "category": "0xd88635f6",
+  "vtable": "0x27b68cc",
+  "ctor": "0x25a08c0"
+ },
+ "0x9c767b6e": {
+  "name": "ServerGameplaySpawnPointVehicleMessage",
+  "category": "0x50a2f3ea",
+  "vtable": "0x27e9fe4",
+  "ctor": "0x26256d0"
+ },
+ "0x9cc0b6e5": {
+  "name": "UIHudChangeInventoryWeaponMessage",
+  "category": "0x005973b9",
+  "vtable": "0x27f5c10",
+  "ctor": "0x2638690"
+ },
+ "0x9cd28e99": {
+  "name": "UIHudReviveWeaponEquippedChangedMessage",
+  "category": "0x005973b9",
+  "vtable": "0x280cb2c",
+  "ctor": "0x2678f50"
+ },
+ "0x9d3a057b": {
+  "name": "VeniceNetworkEorStatsMessage",
+  "category": "0x802ae469",
+  "vtable": "0x280d5cc",
+  "ctor": "0x26883e0"
+ },
+ "0x9d624af1": {
+  "name": "UINetworkCoopGameMessage",
+  "category": "0x89062f07",
+  "vtable": "0x278b608",
+  "ctor": "0x2583200"
+ },
+ "0x9e4bae4c": {
+  "name": "VeniceClientMetricsListenerCreatedMessage",
+  "category": "0x993a42a7",
+  "vtable": "0x280c0ac",
+  "ctor": "0x2673b00"
+ },
+ "0x9e892a08": {
+  "name": "ReplayExplosionMessage",
+  "category": "0xc44ab196",
+  "vtable": "0x2793278",
+  "ctor": "0x2599a60"
+ },
+ "0x9ede5116": {
+  "name": "UIMPCTFScoreMessage",
+  "category": "0x005973b9",
+  "vtable": "0x280cc54",
+  "ctor": "0x2679b90"
+ },
+ "0x9ee880fb": {
+  "name": "NetworkPlayerViewHitMessage",
+  "category": "0xc67d277b",
+  "vtable": "0x278b144",
+  "ctor": "0x257d1c0"
+ },
+ "0x9f775494": {
+  "name": "ClientPlayerEnterExitVehicleMessage",
+  "category": "0x24fe118f",
+  "vtable": "0x2793290",
+  "ctor": "0x2599b60"
+ },
+ "0x9fad902d": {
+  "name": "NetworkUnSpawnCustomizationMessage",
+  "category": "0xc67d277b",
+  "vtable": "0x278ab50",
+  "ctor": "0x2577ce0"
+ },
+ "0xa0197f22": {
+  "name": "UIUIEventMessage",
+  "category": "0x005973b9",
+  "vtable": "0x27ffb80",
+  "ctor": "0x2652ea0"
+ },
+ "0xa0325b03": {
+  "name": "ClientWeaponPlayerPrimaryOutOfAmmoMessage",
+  "category": "0x2862813e",
+  "vtable": "0x2793340",
+  "ctor": "0x259a1e0"
+ },
+ "0xa0804cb8": {
+  "name": "ClientPlayerEnterEntryMessage",
+  "category": "0x24fe118f",
+  "vtable": "0x2793298",
+  "ctor": "0x2599bb0"
+ },
+ "0xa09ecbaf": {
+  "name": "AISetSensingMessage",
+  "category": "0x0059722d",
+  "vtable": "0x27b696c",
+  "ctor": "0x25a0ea0"
+ },
+ "0xa0a15e5a": {
+  "name": "ServerEntityOnDamageMessage",
+  "category": "0xe70ad9fb",
+  "vtable": "0x27b671c",
+  "ctor": "0x259f830"
+ },
+ "0xa0eeb56a": {
+  "name": "NetworkServerDoneSelectedKitMessage",
+  "category": "0xc67d277b",
+  "vtable": "0x278ac04",
+  "ctor": "0x2578670"
+ },
+ "0xa105cbfa": {
+  "name": "AISetAIAccuracyModifierNewMessage",
+  "category": "0x0059722d",
+  "vtable": "0x27b6944",
+  "ctor": "0x25a0d20"
+ },
+ "0xa18181a7": {
+  "name": "NetworkSwitchbladeShootSpaceMessage",
+  "category": "0xc67d277b",
+  "vtable": "0x278b048",
+  "ctor": "0x257c610"
+ },
+ "0xa2575299": {
+  "name": "ServerGameplayGameModeResetMessage",
+  "category": "0x50a2f3ea",
+  "vtable": "0x27b6854",
+  "ctor": "0x25a04e0"
+ },
+ "0xa27d3072": {
+  "name": "UISetTrainingMissionSummaryTargetsMessage",
+  "category": "0x005973b9",
+  "vtable": "0x27f5ce8",
+  "ctor": "0x2638e00"
+ },
+ "0xa290ca58": {
+  "name": "UIViewPlayerCardMessage",
+  "category": "0x005973b9",
+  "vtable": "0x280cbf4",
+  "ctor": "0x2679710"
+ },
+ "0xa2997240": {
+  "name": "WaypointTriggerStateChangedMessage",
+  "category": "0xaf24899e",
+  "vtable": "0x280ca7c",
+  "ctor": "0x26788d0"
+ },
+ "0xa34cd693": {
+  "name": "PerformanceServerMessage",
+  "category": "0x697443dd",
+  "vtable": "0x278a948",
+  "ctor": "0x25746b0"
+ },
+ "0xa37a778f": {
+  "name": "WaypointArrivalTriggerRegisterMessage",
+  "category": "0x6d9fb82d",
+  "vtable": "0x280ca84",
+  "ctor": "0x2678920"
+ },
+ "0xa3f1a66b": {
+  "name": "UISetTrainingMissionSummaryHeadshotsMessage",
+  "category": "0x005973b9",
+  "vtable": "0x27f5cf0",
+  "ctor": "0x2638e50"
+ },
+ "0xa430a160": {
+  "name": "UINetworkSetPlayerTeamMessage",
+  "category": "0x89062f07",
+  "vtable": "0x278b530",
+  "ctor": "0x2582890"
+ },
+ "0xa475e664": {
+  "name": "UICountDownTimerMessage",
+  "category": "0x005973b9",
+  "vtable": "0x280cbdc",
+  "ctor": "0x2679620"
+ },
+ "0xa4f89387": {
+  "name": "ServerGameManagerPlayerJoiningMessage",
+  "category": "0x07a2b9fd",
+  "vtable": "0x280701c",
+  "ctor": "0x266ec10"
+ },
+ "0xa580ca0d": {
+  "name": "ClientCharacterLocalPlayerDeletedMessage",
+  "category": "0xd265af25",
+  "vtable": "0x2793140",
+  "ctor": "0x2598f10"
+ },
+ "0xa66f3308": {
+  "name": "UIHudDebugPauseMessage",
+  "category": "0x005973b9",
+  "vtable": "0x27f5c20",
+  "ctor": "0x2638710"
+ },
+ "0xa6c45b64": {
+  "name": "ClientPlayerSwitchSquadMessage",
+  "category": "0x24fe118f",
+  "vtable": "0x280c984",
+  "ctor": "0x2677e80"
+ },
+ "0xa70dc344": {
+  "name": "UIUnlocksUpdatedMessage",
+  "category": "0x005973b9",
+  "vtable": "0x27f5e20",
+  "ctor": "0x2639a00"
+ },
+ "0xa7bf2c3e": {
+  "name": "ClientSoundVoiceOverFinishedMessage",
+  "category": "0xdaac4ddf",
+  "vtable": "0x2793168",
+  "ctor": "0x2599080"
+ },
+ "0xa7ebc641": {
+  "name": "UISetTrainingMissionScoreTimeMessage",
+  "category": "0x005973b9",
+  "vtable": "0x27f5cc8",
+  "ctor": "0x2638cd0"
+ },
+ "0xa81fe87f": {
+  "name": "UIGraphExitedMessage",
+  "category": "0x005973b9",
+  "vtable": "0x27f5d60",
+  "ctor": "0x2639250"
+ },
+ "0xa879ec1a": {
+  "name": "UINetworkDoorBreachTimerStopMessage",
+  "category": "0x89062f07",
+  "vtable": "0x278b698",
+  "ctor": "0x2583930"
+ },
+ "0xa88c81f5": {
+  "name": "NetworkPlayerUsedSupportActionMessage",
+  "category": "0xc67d277b",
+  "vtable": "0x278af4c",
+  "ctor": "0x257ba10"
+ },
+ "0xa8d289e2": {
+  "name": "ServerPlayerFiredRadarAbilityMessage",
+  "category": "0xf3c93dd3",
+  "vtable": "0x280ca34",
+  "ctor": "0x2678600"
+ },
+ "0xa8dc4143": {
+  "name": "NetworkDeathSceneRequestMessage",
+  "category": "0xc67d277b",
+  "vtable": "0x278af70",
+  "ctor": "0x257bb40"
+ },
+ "0xa8fb4e53": {
+  "name": "UINetworkSquadWipeInstigatorMessage",
+  "category": "0x89062f07",
+  "vtable": "0x278b5c0",
+  "ctor": "0x2582f30"
+ },
+ "0xa93496a4": {
+  "name": "UINetworkPlayerDeserterTextMessage",
+  "category": "0x89062f07",
+  "vtable": "0x278b260",
+  "ctor": "0x257fe20"
+ },
+ "0xa99d4e32": {
+  "name": "ServerGameplayMAARSRobotSpawnMessage",
+  "category": "0x50a2f3ea",
+  "vtable": "0x27ea074",
+  "ctor": "0x2625cb0"
+ },
+ "0xa9e33cd8": {
+  "name": "StatTokenPointsMessage",
+  "category": "0x7c89b9b7",
+  "vtable": "0x27ea31c",
+  "ctor": "0x2627230"
+ },
+ "0xaa0ff995": {
+  "name": "UIPlaySoundMessage",
+  "category": "0x005973b9",
+  "vtable": "0x27f5c90",
+  "ctor": "0x2638aa0"
+ },
+ "0xaaa6705b": {
+  "name": "UIFailMessageMessage",
+  "category": "0x005973b9",
+  "vtable": "0x27f5e48",
+  "ctor": "0x2639b70"
+ },
+ "0xaadf7c3e": {
+  "name": "UIAddNotificationMessage",
+  "category": "0x005973b9",
+  "vtable": "0x280cbfc",
+  "ctor": "0x2679760"
+ },
+ "0xaaeb6754": {
+  "name": "NetworkSuicideMessage",
+  "category": "0xc67d277b",
+  "vtable": "0x278aebc",
+  "ctor": "0x257b2e0"
+ },
+ "0xab12c7a3": {
+  "name": "ServerLoadGameMessage",
+  "category": "0xc6e40ba0",
+  "vtable": "0x27b6ab4",
+  "ctor": "0x25a2ea0"
+ },
+ "0xabfb887a": {
+  "name": "UIBuddyCamScanningAllowedMessage",
+  "category": "0x005973b9",
+  "vtable": "0x27f5dd0",
+  "ctor": "0x26396d0"
+ },
+ "0xad15fdbc": {
+  "name": "ServerComponentWeaponOnSpawnMessage",
+  "category": "0x9e26a3cf",
+  "vtable": "0x27b6734",
+  "ctor": "0x259f920"
+ },
+ "0xadff435d": {
+  "name": "ClientLevelUnloadedMessage",
+  "category": "0xa23a0e7c",
+  "vtable": "0x27930a0",
+  "ctor": "0x2598930"
+ },
+ "0xae0ea184": {
+  "name": "ServerStaticModelDamagedPartMessage",
+  "category": "0xe3c41b37",
+  "vtable": "0x27b67f4",
+  "ctor": "0x25a00f0"
+ },
+ "0xaea52315": {
+  "name": "NetworkSettingsMessage",
+  "category": "0xc67d277b",
+  "vtable": "0x278adfc",
+  "ctor": "0x257a020"
+ },
+ "0xaecdd92b": {
+  "name": "UINetworkAlphaSetVideoMessage",
+  "category": "0x89062f07",
+  "vtable": "0x278b3a4",
+  "ctor": "0x25810e0"
+ },
+ "0xaef5db60": {
+  "name": "ServerCollisionExplosionUnSpawnMessage",
+  "category": "0xdb60e01e",
+  "vtable": "0x27b67a4",
+  "ctor": "0x259fd70"
+ },
+ "0xaf088758": {
+  "name": "ServerCollisionProjectileFireMessage",
+  "category": "0xdb60e01e",
+  "vtable": "0x27b6774",
+  "ctor": "0x259fb60"
+ },
+ "0xaf8e177d": {
+  "name": "ServerWeaponWeaponComponentActivateMessage",
+  "category": "0x07038862",
+  "vtable": "0x27b6a8c",
+  "ctor": "0x25a19f0"
+ },
+ "0xaff96ecd": {
+  "name": "ServerPlayerUpdateSpawnPointsMessage",
+  "category": "0xf3c93dd3",
+  "vtable": "0x280ca1c",
+  "ctor": "0x26784c0"
+ },
+ "0xb0950ce6": {
+  "name": "UIPlayerSpawnHoverTypeChangedMessage",
+  "category": "0x005973b9",
+  "vtable": "0x27f5db8",
+  "ctor": "0x26395e0"
+ },
+ "0xb0ca956e": {
+  "name": "UIPauseGameMessage",
+  "category": "0x005973b9",
+  "vtable": "0x27f5e58",
+  "ctor": "0x2639bf0"
+ },
+ "0xb0fb6964": {
+  "name": "ServerGameplayMortarStrikeMessage",
+  "category": "0x50a2f3ea",
+  "vtable": "0x27ffab0",
+  "ctor": "0x2652480"
+ },
+ "0xb1075c3d": {
+  "name": "StatEnableMessage",
+  "category": "0x7c89b9b7",
+  "vtable": "0x27b6544",
+  "ctor": "0x259e870"
+ },
+ "0xb10f3b6d": {
+  "name": "UINetworkVoiceOverSubtitleTextMessage",
+  "category": "0x89062f07",
+  "vtable": "0x278b458",
+  "ctor": "0x2581b30"
+ },
+ "0xb1be2bb3": {
+  "name": "JuiceSoldierRagdollDeactivateMessage",
+  "category": "0x0d2ccef5",
+  "vtable": "0x278a9b8",
+  "ctor": "0x2574ac0"
+ },
+ "0xb241ccc0": {
+  "name": "HUDCustomizationSetWaitIn3PTimerMessage",
+  "category": "0x528a6ea1",
+  "vtable": "0x280cfcc",
+  "ctor": "0x267bb20"
+ },
+ "0xb2780ab1": {
+  "name": "HUDCustomizationRefreshCurrentSoldierMeshesMessage",
+  "category": "0x528a6ea1",
+  "vtable": "0x280cfb4",
+  "ctor": "0x267ba50"
+ },
+ "0xb3b8d35c": {
+  "name": "WaypointTriggerRegisterMessage",
+  "category": "0xaf24899e",
+  "vtable": "0x280ca6c",
+  "ctor": "0x2678830"
+ },
+ "0xb3db72c3": {
+  "name": "NetworkSpawnOnSelectedMessage",
+  "category": "0xc67d277b",
+  "vtable": "0x278ab08",
+  "ctor": "0x25779a0"
+ },
+ "0xb3f2e893": {
+  "name": "NetworkUnlockedAllBreachMethodsMessage",
+  "category": "0xc67d277b",
+  "vtable": "0x278b8b8",
+  "ctor": "0x258b180"
+ },
+ "0xb413b004": {
+  "name": "NetworkPlayerNameMessage",
+  "category": "0xc67d277b",
+  "vtable": "0x278adb4",
+  "ctor": "0x2579c50"
+ },
+ "0xb42c12d4": {
+  "name": "UINetworkSetCoopServerLobbyGameTypeMessage",
+  "category": "0x89062f07",
+  "vtable": "0x278b5e4",
+  "ctor": "0x25830a0"
+ },
+ "0xb4538c1e": {
+  "name": "VeniceNetworkReviveInitiatedMessage",
+  "category": "0x802ae469",
+  "vtable": "0x280d584",
+  "ctor": "0x2688270"
+ },
+ "0xb460b85f": {
+  "name": "ServerAdministrationEventsEnabledMessage",
+  "category": "0xf9c35b8e",
+  "vtable": "0x278a738",
+  "ctor": "0x2572ea0"
+ },
+ "0xb47fc640": {
+  "name": "UITriggerPopupHideMessage",
+  "category": "0x005973b9",
+  "vtable": "0x27ffb9c",
+  "ctor": "0x2652fa0"
+ },
+ "0xb4c25335": {
+  "name": "VeniceNetworkSetVoiceChannelMessage",
+  "category": "0x802ae469",
+  "vtable": "0x280d1e4",
+  "ctor": "0x267e240"
+ },
+ "0xb4f367cf": {
+  "name": "NetworkConnectedMessage",
+  "category": "0xc67d277b",
+  "vtable": "0x278b748",
+  "ctor": "0x2584a10"
+ },
+ "0xb580799a": {
+  "name": "UIApplyToPlatoonMessage",
+  "category": "0x005973b9",
+  "vtable": "0x280cf2c",
+  "ctor": "0x267b520"
+ },
+ "0xb5874440": {
+  "name": "UIUpdateSPCountdownBarMessage",
+  "category": "0x005973b9",
+  "vtable": "0x27f5d18",
+  "ctor": "0x2638fe0"
+ },
+ "0xb58961f1": {
+  "name": "HUDCustomizationAttachmentChangedMessage",
+  "category": "0x528a6ea1",
+  "vtable": "0x280cfc4",
+  "ctor": "0x267bae0"
+ },
+ "0xb5f42613": {
+  "name": "ServerGameplayCapturePointPlayerEnteredMessage",
+  "category": "0x50a2f3ea",
+  "vtable": "0x280cac4",
+  "ctor": "0x2678b90"
+ },
+ "0xb605bf07": {
+  "name": "ClientLoadLevelMessage",
+  "category": "0xa23a0e7c",
+  "vtable": "0x2793098",
+  "ctor": "0x25988e0"
+ },
+ "0xb634ba6f": {
+  "name": "NetworkSelectedKitMessage",
+  "category": "0xc67d277b",
+  "vtable": "0x278abe0",
+  "ctor": "0x2578490"
+ },
+ "0xb707e6c7": {
+  "name": "ServerStaticModelSpawnMessage",
+  "category": "0xe3c41b37",
+  "vtable": "0x27b67dc",
+  "ctor": "0x259ff90"
+ },
+ "0xb70b42d1": {
+  "name": "BlueprintBundleClientEntitiesCreatedMessage",
+  "category": "0x623ad17e",
+  "vtable": "0x27e6778",
+  "ctor": "0x261adc0"
+ },
+ "0xb730fd02": {
+  "name": "CoreDemoStatusMessage",
+  "category": "0x7c813e9e",
+  "vtable": "0x2766b60",
+  "ctor": "0x2549690"
+ },
+ "0xb735c3b0": {
+  "name": "NetworkVehicleViewHitMessage",
+  "category": "0xc67d277b",
+  "vtable": "0x278b168",
+  "ctor": "0x257d510"
+ },
+ "0xb74faa4f": {
+  "name": "PerformanceClientMessage",
+  "category": "0x697443dd",
+  "vtable": "0x277bfc4",
+  "ctor": "0x256c640"
+ },
+ "0xb7d187be": {
+  "name": "VeniceServerMetricsManDownMessage",
+  "category": "0x426030a5",
+  "vtable": "0x2806ff4",
+  "ctor": "0x266eab0"
+ },
+ "0xb85845ac": {
+  "name": "VeniceNetworkOrderMessage",
+  "category": "0x802ae469",
+  "vtable": "0x280d518",
+  "ctor": "0x2688010"
+ },
+ "0xb8d1a4f0": {
+  "name": "NetworkFirstPlayerEnteredMessage",
+  "category": "0xc67d277b",
+  "vtable": "0x278ae44",
+  "ctor": "0x257a6f0"
+ },
+ "0xb924b6a9": {
+  "name": "UIDeactivateSPCountdownBarMessage",
+  "category": "0x005973b9",
+  "vtable": "0x27f5d10",
+  "ctor": "0x2638fa0"
+ },
+ "0xb937150f": {
+  "name": "UINetworkRollCreditsMessage",
+  "category": "0x89062f07",
+  "vtable": "0x278b554",
+  "ctor": "0x2582b60"
+ },
+ "0xb9b3c768": {
+  "name": "ServerGameManagerValidateContentRequestMessage",
+  "category": "0x68b9b3c7",
+  "vtable": "0x280704c",
+  "ctor": "0x266ee70"
+ },
+ "0xb9fbec8c": {
+  "name": "UIKillerPlatoonPatchSetMessage",
+  "category": "0x005973b9",
+  "vtable": "0x280cc2c",
+  "ctor": "0x2679920"
+ },
+ "0xba932d87": {
+  "name": "ClientPlayerKilledMessage",
+  "category": "0x24fe118f",
+  "vtable": "0x27932a0",
+  "ctor": "0x2599c00"
+ },
+ "0xbae2af5f": {
+  "name": "UITrackedAwardChangedMessage",
+  "category": "0x005973b9",
+  "vtable": "0x280cb3c",
+  "ctor": "0x2678fe0"
+ },
+ "0xbb0a71a5": {
+  "name": "ClientCollisionExplosionPackDetonatedMessage",
+  "category": "0xc76f63c2",
+  "vtable": "0x2793180",
+  "ctor": "0x2599170"
+ },
+ "0xbb5191da": {
+  "name": "ClientCharacterSpawnedCharacterConnectedToPlayerMessage",
+  "category": "0xd265af25",
+  "vtable": "0x2793150",
+  "ctor": "0x2598fa0"
+ },
+ "0xbb90f4b1": {
+  "name": "ServerInputReactivateInputRestrictionMessage",
+  "category": "0xd8b89dd6",
+  "vtable": "0x27b67c4",
+  "ctor": "0x259feb0"
+ },
+ "0xbc0334e1": {
+  "name": "SoldierToComponentsOnKilledMessage",
+  "category": "0x2e844b68",
+  "vtable": "0x27d0678",
+  "ctor": "0x25c90b0"
+ },
+ "0xbcfb46b4": {
+  "name": "ServerMetricsSaveGameLoadedMessage",
+  "category": "0x12068db7",
+  "vtable": "0x27b65e4",
+  "ctor": "0x259ec90"
+ },
+ "0xbd04ed07": {
+  "name": "NetworkPlayerSetSpawnProgressMessage",
+  "category": "0xc67d277b",
+  "vtable": "0x278b090",
+  "ctor": "0x257c970"
+ },
+ "0xbd3b3a0f": {
+  "name": "ClientVehicleCriticalDamageMessage",
+  "category": "0x22892fa4",
+  "vtable": "0x2793160",
+  "ctor": "0x2599030"
+ },
+ "0xbd4b8796": {
+  "name": "ClientDisconnectedMessage",
+  "category": "0xa23a0e7c",
+  "vtable": "0x27930d0",
+  "ctor": "0x2598ad0"
+ },
+ "0xbdbadcff": {
+  "name": "VeniceClientMetricsStartSPGameMessage",
+  "category": "0xebc23f79",
+  "vtable": "0x280c0dc",
+  "ctor": "0x2673cb0"
+ },
+ "0xbe446002": {
+  "name": "ServerGameplayVehicleSpawnMessage",
+  "category": "0x50a2f3ea",
+  "vtable": "0x27ea014",
+  "ctor": "0x2625850"
+ },
+ "0xbe8b9f3b": {
+  "name": "ServerVehicleEnterMessage",
+  "category": "0x3e46cdf8",
+  "vtable": "0x27b6a14",
+  "ctor": "0x25a1540"
+ },
+ "0xbeba0428": {
+  "name": "UISetMPRoundTimerMessage",
+  "category": "0x005973b9",
+  "vtable": "0x280cefc",
+  "ctor": "0x267b320"
+ },
+ "0xbf3bf771": {
+  "name": "ServerSoldierManDownMessage",
+  "category": "0xdc84f4ea",
+  "vtable": "0x27b69b4",
+  "ctor": "0x25a1170"
+ },
+ "0xbf585a6d": {
+  "name": "ClientStartMultiplayerMessage",
+  "category": "0xa23a0e7c",
+  "vtable": "0x2793384",
+  "ctor": "0x259b2b0"
+ },
+ "0xc05112ba": {
+  "name": "ServerAdministrationPasswordMessage",
+  "category": "0xf9c35b8e",
+  "vtable": "0x278b740",
+  "ctor": "0x25846a0"
+ },
+ "0xc088313d": {
+  "name": "UINetworkVideoDoneMessage",
+  "category": "0x89062f07",
+  "vtable": "0x278b3c8",
+  "ctor": "0x25812b0"
+ },
+ "0xc13f263f": {
+  "name": "CoreQuittingInitiatedMessage",
+  "category": "0x7c813e9e",
+  "vtable": "0x27639c8",
+  "ctor": "0x25472a0"
+ },
+ "0xc14e8631": {
+  "name": "ClientStateEnteredStaticMessage",
+  "category": "0xdabbbbab",
+  "vtable": "0x27931e8",
+  "ctor": "0x2599560"
+ },
+ "0xc224e121": {
+  "name": "ClientPersistenceAwardGainedMessage",
+  "category": "0x83e5db8b",
+  "vtable": "0x280cebc",
+  "ctor": "0x267af20"
+ },
+ "0xc281b80e": {
+  "name": "NetworkChangeGameSettingMessage",
+  "category": "0xc67d277b",
+  "vtable": "0x278aa9c",
+  "ctor": "0x25773c0"
+ },
+ "0xc287d13b": {
+  "name": "UINetworkHudTextFromServerMessage",
+  "category": "0x89062f07",
+  "vtable": "0x278b924",
+  "ctor": "0x258b440"
+ },
+ "0xc2afbd15": {
+  "name": "ServerPlayerCreatedForConnectionMessage",
+  "category": "0xf3c93dd3",
+  "vtable": "0x27b660c",
+  "ctor": "0x259ede0"
+ },
+ "0xc33c6030": {
+  "name": "NetworkCameraPositionMessage",
+  "category": "0xc67d277b",
+  "vtable": "0x278ad00",
+  "ctor": "0x25792c0"
+ },
+ "0xc44986b6": {
+  "name": "UISetPlayerRespawnCameraMessage",
+  "category": "0x005973b9",
+  "vtable": "0x27f5dc0",
+  "ctor": "0x2639630"
+ },
+ "0xc473fb42": {
+  "name": "VeniceNetworkFocusPointMessage",
+  "category": "0x802ae469",
+  "vtable": "0x280d4f4",
+  "ctor": "0x2687f70"
+ },
+ "0xc528735f": {
+  "name": "UIVKBDInputDoneMessage",
+  "category": "0x005973b9",
+  "vtable": "0x27f5bf0",
+  "ctor": "0x2638570"
+ },
+ "0xc5299569": {
+  "name": "UIStopSoundMessage",
+  "category": "0x005973b9",
+  "vtable": "0x27f5ca0",
+  "ctor": "0x2638b60"
+ },
+ "0xc52de946": {
+  "name": "UISetMPEventTimerMessage",
+  "category": "0x005973b9",
+  "vtable": "0x280cf04",
+  "ctor": "0x267b370"
+ },
+ "0xc5c16a42": {
+  "name": "ServerStoppedMessage",
+  "category": "0xc6e40ba0",
+  "vtable": "0x27b6564",
+  "ctor": "0x259e940"
+ },
+ "0xc5d62fdf": {
+  "name": "UIShowHagMessage",
+  "category": "0x005973b9",
+  "vtable": "0x27f5e40",
+  "ctor": "0x2639b30"
+ },
+ "0xc665dd80": {
+  "name": "SessionPlayerJoinedMessage",
+  "category": "0xa378479b",
+  "vtable": "0x278a988",
+  "ctor": "0x2574900"
+ },
+ "0xc67f1fe3": {
+  "name": "ServerClubMemberCreatedMessage",
+  "category": "0x6b6551d8",
+  "vtable": "0x27b66dc",
+  "ctor": "0x259f5e0"
+ },
+ "0xc6f3e3fa": {
+  "name": "StatClubRecordClosingMessage",
+  "category": "0x7c89b9b7",
+  "vtable": "0x28070a4",
+  "ctor": "0x266f200"
+ },
+ "0xc7809646": {
+  "name": "ServerClientConnectionRemovedMessage",
+  "category": "0xc6e40ba0",
+  "vtable": "0x27b65dc",
+  "ctor": "0x259ec50"
+ },
+ "0xc7864e9f": {
+  "name": "ClientStateRequestFrontendMessage",
+  "category": "0xdabbbbab",
+  "vtable": "0x2793218",
+  "ctor": "0x25996e0"
+ },
+ "0xc7abb9db": {
+  "name": "ServerPlayerKilledMessage",
+  "category": "0xf3c93dd3",
+  "vtable": "0x27b6684",
+  "ctor": "0x259f280"
+ },
+ "0xc817ea06": {
+  "name": "ServerAdministrationLoginMessage",
+  "category": "0xf9c35b8e",
+  "vtable": "0x278a728",
+  "ctor": "0x2572e20"
+ },
+ "0xc8835e11": {
+  "name": "ClientConnectionLoadLevelMessage",
+  "category": "0x8fd32fea",
+  "vtable": "0x2793260",
+  "ctor": "0x2599990"
+ },
+ "0xc893e91f": {
+  "name": "ClientPlayerChangedAllowedToSpawnOnMessage",
+  "category": "0x24fe118f",
+  "vtable": "0x280c99c",
+  "ctor": "0x2677f70"
+ },
+ "0xc935a574": {
+  "name": "ServerPlayerRespawnMessage",
+  "category": "0xf3c93dd3",
+  "vtable": "0x27b661c",
+  "ctor": "0x259ee70"
+ },
+ "0xc93d4807": {
+  "name": "VeniceClientMetricsTimeMessage",
+  "category": "0xebc23f79",
+  "vtable": "0x280c0bc",
+  "ctor": "0x2673b80"
+ },
+ "0xc9a3c319": {
+  "name": "UIScreenLoadedMessage",
+  "category": "0x005973b9",
+  "vtable": "0x27f5d58",
+  "ctor": "0x2639210"
+ },
+ "0xca090eb7": {
+  "name": "UISetShowTrainingMissionScoreMessage",
+  "category": "0x005973b9",
+  "vtable": "0x27f5cc0",
+  "ctor": "0x2638c90"
+ },
+ "0xca8c37ed": {
+  "name": "HUDCustomizationLeaveCharacterSelectScreenPlayAnimationsMessage",
+  "category": "0x528a6ea1",
+  "vtable": "0x280cf94",
+  "ctor": "0x267b940"
+ },
+ "0xcab70d78": {
+  "name": "NetworkOnPlayerSpawnedMessage",
+  "category": "0xc67d277b",
+  "vtable": "0x278b7bc",
+  "ctor": "0x258ab90"
+ },
+ "0xcad89984": {
+  "name": "VeniceNetworkOnPlayerSelectedTeamMessage",
+  "category": "0x802ae469",
+  "vtable": "0x280d2bc",
+  "ctor": "0x267ebf0"
+ },
+ "0xcb277aa4": {
+  "name": "BlueprintBundleClientBundleUnloadedMessage",
+  "category": "0x623ad17e",
+  "vtable": "0x27e6754",
+  "ctor": "0x261ac90"
+ },
+ "0xcb47c67a": {
+  "name": "ClientCollisionExplosionPackPlacedMessage",
+  "category": "0xc76f63c2",
+  "vtable": "0x2793178",
+  "ctor": "0x2599120"
+ },
+ "0xcbe442ad": {
+  "name": "SoldierToComponentsOnCustomizeSoldierMessage",
+  "category": "0x2e844b68",
+  "vtable": "0x27d0680",
+  "ctor": "0x25c90e0"
+ },
+ "0xcc048f59": {
+  "name": "ServerPeerLoadLevelMessage",
+  "category": "0x6b6b3a22",
+  "vtable": "0x27b68fc",
+  "ctor": "0x25a0a00"
+ },
+ "0xcc7f3f5d": {
+  "name": "VeniceServerMetricsRankupMessage",
+  "category": "0x426030a5",
+  "vtable": "0x2806fcc",
+  "ctor": "0x266e920"
+ },
+ "0xcd174019": {
+  "name": "ClientStateRequestLoadingIngameBundlesMessage",
+  "category": "0xdabbbbab",
+  "vtable": "0x2793238",
+  "ctor": "0x2599800"
+ },
+ "0xcd643813": {
+  "name": "ServerGameplayUAVDisabledMessage",
+  "category": "0x50a2f3ea",
+  "vtable": "0x27b67bc",
+  "ctor": "0x259fe60"
+ },
+ "0xcdcd179f": {
+  "name": "UINetworkPlayerDisconnectMessage",
+  "category": "0x89062f07",
+  "vtable": "0x278b2cc",
+  "ctor": "0x2580340"
+ },
+ "0xcddddd00": {
+  "name": "UICheckClubUpdateDoubleXPMessage",
+  "category": "0x005973b9",
+  "vtable": "0x27f5df8",
+  "ctor": "0x2639820"
+ },
+ "0xce606d9d": {
+  "name": "ServerPlayerAboutToClearSoldierMessage",
+  "category": "0xf3c93dd3",
+  "vtable": "0x27b669c",
+  "ctor": "0x259f380"
+ },
+ "0xce78a14a": {
+  "name": "ClientGameplaySquadmateSpawnedOnYouMessage",
+  "category": "0x508f1eb6",
+  "vtable": "0x27931a0",
+  "ctor": "0x25992a0"
+ },
+ "0xce96115e": {
+  "name": "ServerControllableToComponentsPlayerExitMessage",
+  "category": "0xc43dee46",
+  "vtable": "0x27ea190",
+  "ctor": "0x26267c0"
+ },
+ "0xcf19f507": {
+  "name": "UISetTrainingMissionSummaryTotalTimeMessage",
+  "category": "0x005973b9",
+  "vtable": "0x27f5cf8",
+  "ctor": "0x2638ea0"
+ },
+ "0xd01279d2": {
+  "name": "JuiceSoldierRagdollActivateMessage",
+  "category": "0x0d2ccef5",
+  "vtable": "0x278a9b0",
+  "ctor": "0x2574a80"
+ },
+ "0xd06d7da5": {
+  "name": "UISetTrainingMissionSummaryTimeMessage",
+  "category": "0x005973b9",
+  "vtable": "0x27f5ce0",
+  "ctor": "0x2638db0"
+ },
+ "0xd0c4d23e": {
+  "name": "UIUpdateDoubleXPMessage",
+  "category": "0x005973b9",
+  "vtable": "0x27f5df0",
+  "ctor": "0x26397e0"
+ },
+ "0xd126bae1": {
+  "name": "UIHudWarningMessage",
+  "category": "0x005973b9",
+  "vtable": "0x27f5c58",
+  "ctor": "0x26388c0"
+ },
+ "0xd12a7757": {
+  "name": "ClientEnteredIngameMessage",
+  "category": "0xa23a0e7c",
+  "vtable": "0x2793088",
+  "ctor": "0x2598860"
+ },
+ "0xd1442360": {
+  "name": "ServerGameManagerUpdatePlayerCapacityMessage",
+  "category": "0x07a2b9fd",
+  "vtable": "0x280706c",
+  "ctor": "0x266efd0"
+ },
+ "0xd204cf07": {
+  "name": "NetworkCreatePlayerMessage",
+  "category": "0xc67d277b",
+  "vtable": "0x278ad90",
+  "ctor": "0x2579a70"
+ },
+ "0xd277269c": {
+  "name": "AIBotKilledMessage",
+  "category": "0x0059722d",
+  "vtable": "0x27b691c",
+  "ctor": "0x25a0b70"
+ },
+ "0xd28a8a26": {
+  "name": "NetworkDoorBreachMethodMessage",
+  "category": "0xc67d277b",
+  "vtable": "0x278b0d8",
+  "ctor": "0x257cd40"
+ },
+ "0xd2aeba86": {
+  "name": "UISetPlayerRespawnResultMessage",
+  "category": "0x005973b9",
+  "vtable": "0x27f5dc8",
+  "ctor": "0x2639680"
+ },
+ "0xd2d4cf08": {
+  "name": "UITrackedAwardUpdatedMessage",
+  "category": "0x005973b9",
+  "vtable": "0x280cb34",
+  "ctor": "0x2678fa0"
+ },
+ "0xd2eabf3f": {
+  "name": "HUDCustomizationEnterCharacterSelectScreenMessage",
+  "category": "0x528a6ea1",
+  "vtable": "0x280cf8c",
+  "ctor": "0x267b8f0"
+ },
+ "0xd3318581": {
+  "name": "ServerLevelUnloadedMessage",
+  "category": "0xc6e40ba0",
+  "vtable": "0x27b657c",
+  "ctor": "0x259e9d0"
+ },
+ "0xd375530e": {
+  "name": "WeaponCadenceSetCadenceMessage",
+  "category": "0x65926c4c",
+  "vtable": "0x280ca94",
+  "ctor": "0x26789c0"
+ },
+ "0xd3a50dc1": {
+  "name": "UINetworkPlayerConnectMessage",
+  "category": "0x89062f07",
+  "vtable": "0x278b2a8",
+  "ctor": "0x2580160"
+ },
+ "0xd3a8c934": {
+  "name": "ServerWeaponPlayerPrimaryFireShotSpawnedMessage",
+  "category": "0x07038862",
+  "vtable": "0x27b6a5c",
+  "ctor": "0x25a1810"
+ },
+ "0xd3d0b113": {
+  "name": "ClientPlayerSetClubIdMessage",
+  "category": "0x24fe118f",
+  "vtable": "0x27932f8",
+  "ctor": "0x2599f50"
+ },
+ "0xd42c25fa": {
+  "name": "SchematicsRemoteEventMessage",
+  "category": "0x2be72c99",
+  "vtable": "0x27b6704",
+  "ctor": "0x259f740"
+ },
+ "0xd43734da": {
+  "name": "UIDiscSwapMessage",
+  "category": "0x005973b9",
+  "vtable": "0x280cf5c",
+  "ctor": "0x267b750"
+ },
+ "0xd43cfe59": {
+  "name": "ServerUnlockSystemSetupMessage",
+  "category": "0x5da10995",
+  "vtable": "0x280d6ac",
+  "ctor": "0x26891e0"
+ },
+ "0xd548c1cc": {
+  "name": "ServerCollisionExplosionPreDamageMessage",
+  "category": "0xdb60e01e",
+  "vtable": "0x27b6794",
+  "ctor": "0x259fcc0"
+ },
+ "0xd54f3f37": {
+  "name": "ClientConnectionLinkLevelMessage",
+  "category": "0x8fd32fea",
+  "vtable": "0x2793268",
+  "ctor": "0x25999e0"
+ },
+ "0xd597a7a9": {
+  "name": "ServerVehicleForceArmamentReturnMessage",
+  "category": "0x3e46cdf8",
+  "vtable": "0x27b69dc",
+  "ctor": "0x25a1310"
+ },
+ "0xd5d515a7": {
+  "name": "HUDCustomizationCacheSoldierResrourcesMessage",
+  "category": "0x528a6ea1",
+  "vtable": "0x280cf6c",
+  "ctor": "0x267b7f0"
+ },
+ "0xd600344c": {
+  "name": "ClientStateRequestUnloadMessage",
+  "category": "0xdabbbbab",
+  "vtable": "0x2793230",
+  "ctor": "0x25997c0"
+ },
+ "0xd6096375": {
+  "name": "UINetworkPlayerDeserterExemptTextMessage",
+  "category": "0x89062f07",
+  "vtable": "0x278b284",
+  "ctor": "0x257fff0"
+ },
+ "0xd613c57e": {
+  "name": "BlueprintBundleClientLoadBundleMessage",
+  "category": "0x623ad17e",
+  "vtable": "0x27e66e8",
+  "ctor": "0x261a810"
+ },
+ "0xd634d4a0": {
+  "name": "TransformSyncReachedClientMessage",
+  "category": "0xd7f5ff2e",
+  "vtable": "0x27d9f20",
+  "ctor": "0x25e06a0"
+ },
+ "0xd63d52ae": {
+  "name": "ClientInputUnchangedInputMessage",
+  "category": "0xdae0c08a",
+  "vtable": "0x2793110",
+  "ctor": "0x2598d30"
+ },
+ "0xd6aba618": {
+  "name": "UIPopupUpdateDescMessage",
+  "category": "0x005973b9",
+  "vtable": "0x27ffbac",
+  "ctor": "0x2653040"
+ },
+ "0xd6bf76b5": {
+  "name": "ServerPlayerReviveRefusedMessage",
+  "category": "0xf3c93dd3",
+  "vtable": "0x27b6654",
+  "ctor": "0x259f0a0"
+ },
+ "0xd6e2e3a6": {
+  "name": "ServerCollisionExplosionPackPlacedMessage",
+  "category": "0xdb60e01e",
+  "vtable": "0x27b67ac",
+  "ctor": "0x259fdc0"
+ },
+ "0xd6e49224": {
+  "name": "UISetTitleCardMessage",
+  "category": "0x005973b9",
+  "vtable": "0x27f5cb8",
+  "ctor": "0x2638c30"
+ },
+ "0xd8520349": {
+  "name": "ClientStateRequestStaticMessage",
+  "category": "0xdabbbbab",
+  "vtable": "0x2793210",
+  "ctor": "0x25996a0"
+ },
+ "0xd8bf0d26": {
+  "name": "ServerPlayerKitReplacedMessage",
+  "category": "0xf3c93dd3",
+  "vtable": "0x27b6664",
+  "ctor": "0x259f140"
+ },
+ "0xd8eedf63": {
+  "name": "UIPlayerVehicleHealthChangeMessage",
+  "category": "0x005973b9",
+  "vtable": "0x27f5c70",
+  "ctor": "0x2638990"
+ },
+ "0xd9b3d10c": {
+  "name": "UINetworkCoopPlayerMessage",
+  "category": "0x89062f07",
+  "vtable": "0x278b9b4",
+  "ctor": "0x258b7f0"
+ },
+ "0xd9d98608": {
+  "name": "CoreUpdateClipboardMessage",
+  "category": "0x7c813e9e",
+  "vtable": "0x27639e0",
+  "ctor": "0x2547340"
+ },
+ "0xda243e5c": {
+  "name": "ServerSoldierFiringMessage",
+  "category": "0xdc84f4ea",
+  "vtable": "0x27b6984",
+  "ctor": "0x25a0f90"
+ },
+ "0xda33954b": {
+  "name": "ServerGameplayTeamTakeLeadMessage",
+  "category": "0x50a2f3ea",
+  "vtable": "0x280cae4",
+  "ctor": "0x2678cd0"
+ },
+ "0xda958418": {
+  "name": "SessionPlayerLeftMessage",
+  "category": "0xa378479b",
+  "vtable": "0x278a978",
+  "ctor": "0x2574860"
+ },
+ "0xdac6ceb7": {
+  "name": "ServerPlayerSwitchTeamMessage",
+  "category": "0xf3c93dd3",
+  "vtable": "0x27b666c",
+  "ctor": "0x259f190"
+ },
+ "0xdbc6f766": {
+  "name": "ServerPlayerChatMessage",
+  "category": "0xf3c93dd3",
+  "vtable": "0x27b66bc",
+  "ctor": "0x259f4c0"
+ },
+ "0xdc18f1f5": {
+  "name": "ClientCharacterSpawnDoneMessage",
+  "category": "0xd265af25",
+  "vtable": "0x2793148",
+  "ctor": "0x2598f50"
+ },
+ "0xdc251960": {
+  "name": "ServerGameplayServerPlayerMenuOkMessage",
+  "category": "0x50a2f3ea",
+  "vtable": "0x27b6844",
+  "ctor": "0x25a0440"
+ },
+ "0xdcaf4fdc": {
+  "name": "ServerLevelStartedMessage",
+  "category": "0xd88635f6",
+  "vtable": "0x27b68d4",
+  "ctor": "0x25a08f0"
+ },
+ "0xdd0241fe": {
+  "name": "ServerEntityPickupOnSpawnMessage",
+  "category": "0xe70ad9fb",
+  "vtable": "0x27b6724",
+  "ctor": "0x259f880"
+ },
+ "0xdd9c121a": {
+  "name": "ServerWeaponPlayerWeaponRemovedMessage",
+  "category": "0x07038862",
+  "vtable": "0x27b6a6c",
+  "ctor": "0x25a18b0"
+ },
+ "0xde0ea04b": {
+  "name": "ServerCollisionExplosionDamageMessage",
+  "category": "0xdb60e01e",
+  "vtable": "0x27b679c",
+  "ctor": "0x259fd10"
+ },
+ "0xde351eca": {
+  "name": "CoreMainThreadInitMessage",
+  "category": "0x7c813e9e",
+  "vtable": "0x27639d8",
+  "ctor": "0x2547310"
+ },
+ "0xde3634f1": {
+  "name": "ServerComponentEntryOnUnspawnMessage",
+  "category": "0x9e26a3cf",
+  "vtable": "0x27b6744",
+  "ctor": "0x259f9c0"
+ },
+ "0xde4ca154": {
+  "name": "ClientPlayerManDownMessage",
+  "category": "0x24fe118f",
+  "vtable": "0x27932b8",
+  "ctor": "0x2599cd0"
+ },
+ "0xde75b306": {
+  "name": "ClientLevelLoadedMessage",
+  "category": "0xa23a0e7c",
+  "vtable": "0x27930b8",
+  "ctor": "0x2598a00"
+ },
+ "0xde88231b": {
+  "name": "ClientGameplayLocalUAVStoppedMessage",
+  "category": "0x508f1eb6",
+  "vtable": "0x27931b0",
+  "ctor": "0x2599350"
+ },
+ "0xde9ab40b": {
+  "name": "VeniceNetworkLeaveSquadMessage",
+  "category": "0x802ae469",
+  "vtable": "0x280d040",
+  "ctor": "0x267cd60"
+ },
+ "0xdf81d5e3": {
+  "name": "NetworkGameAdministrationAddGameBanRequestMessage",
+  "category": "0xf48e1cfb",
+  "vtable": "0x280c114",
+  "ctor": "0x2674000"
+ },
+ "0xdfcad330": {
+  "name": "ClientWeaponPlayerPrimaryWeaponFireMessage",
+  "category": "0x2862813e",
+  "vtable": "0x2793328",
+  "ctor": "0x259a100"
+ },
+ "0xe0696f0c": {
+  "name": "VeniceServerMetricsStartRoundMessage",
+  "category": "0x426030a5",
+  "vtable": "0x2806fe4",
+  "ctor": "0x266ea10"
+ },
+ "0xe093b966": {
+  "name": "NetworkSoldierForceMeInvisibleMessage",
+  "category": "0xc67d277b",
+  "vtable": "0x278b0b4",
+  "ctor": "0x257cbe0"
+ },
+ "0xe0a6ac7b": {
+  "name": "ServerSettingsUpdatedMessage",
+  "category": "0xc6e40ba0",
+  "vtable": "0x27b658c",
+  "ctor": "0x259ea30"
+ },
+ "0xe0bfd57a": {
+  "name": "ServerPlayerDestroyMessage",
+  "category": "0xf3c93dd3",
+  "vtable": "0x27b6614",
+  "ctor": "0x259ee20"
+ },
+ "0xe167e56b": {
+  "name": "UIJoinPlaygroupMessage",
+  "category": "0x005973b9",
+  "vtable": "0x280cf1c",
+  "ctor": "0x267b460"
+ },
+ "0xe1ef2041": {
+  "name": "UINetworkShowDoorBreachTimerMessage",
+  "category": "0x89062f07",
+  "vtable": "0x278b650",
+  "ctor": "0x2583690"
+ },
+ "0xe218121b": {
+  "name": "AIClientBridgeDynamicModelEntityOnSpawnMessage",
+  "category": "0x8615e9eb",
+  "vtable": "0x278a910",
+  "ctor": "0x2574480"
+ },
+ "0xe21cbbb8": {
+  "name": "ServerPlayerSwitchSquadMessage",
+  "category": "0xf3c93dd3",
+  "vtable": "0x280c9ac",
+  "ctor": "0x2678000"
+ },
+ "0xe26ba0df": {
+  "name": "ClientMetricsPopUIScreenMessage",
+  "category": "0xd65bfe6b",
+  "vtable": "0x27930f8",
+  "ctor": "0x2598c40"
+ },
+ "0xe2e27b8f": {
+  "name": "NetworkReplayEventMessage",
+  "category": "0xc67d277b",
+  "vtable": "0x278b000",
+  "ctor": "0x257c290"
+ },
+ "0xe3013455": {
+  "name": "ServerCollisionGrenadeCollisionMessage",
+  "category": "0xdb60e01e",
+  "vtable": "0x27b676c",
+  "ctor": "0x259fb10"
+ },
+ "0xe3132ef8": {
+  "name": "UINetworkHudScoringMessage",
+  "category": "0x89062f07",
+  "vtable": "0x278b4c4",
+  "ctor": "0x2582180"
+ },
+ "0xe356b0d3": {
+  "name": "UIHudShowVoteMenuMessage",
+  "category": "0x005973b9",
+  "vtable": "0x27f5c38",
+  "ctor": "0x26387e0"
+ },
+ "0xe359ff3a": {
+  "name": "ServerSoldierSpawnDoneMessage",
+  "category": "0xdc84f4ea",
+  "vtable": "0x27b699c",
+  "ctor": "0x25a1080"
+ },
+ "0xe3a3cdfc": {
+  "name": "UIUserConnectedMessage",
+  "category": "0x005973b9",
+  "vtable": "0x27f5bc0",
+  "ctor": "0x26383f0"
+ },
+ "0xe3aab0c3": {
+  "name": "UIComponentChangeCameraViewPointMessage",
+  "category": "0xba05f436",
+  "vtable": "0x27f5d98",
+  "ctor": "0x26394b0"
+ },
+ "0xe44f31ae": {
+  "name": "UIShowMinimapMessage",
+  "category": "0x005973b9",
+  "vtable": "0x280cb04",
+  "ctor": "0x2678df0"
+ },
+ "0xe4ba6f1f": {
+  "name": "StatXPMultiplierMessage",
+  "category": "0x7c89b9b7",
+  "vtable": "0x2807094",
+  "ctor": "0x266f160"
+ },
+ "0xe4d79b1e": {
+  "name": "UIExitToMenuReasonMessage",
+  "category": "0x005973b9",
+  "vtable": "0x27f5d38",
+  "ctor": "0x26390f0"
+ },
+ "0xe4f8cff7": {
+  "name": "ClientJoinServerJobMessage",
+  "category": "0xa23a0e7c",
+  "vtable": "0x2793058",
+  "ctor": "0x25986b0"
+ },
+ "0xe53e5371": {
+  "name": "VeniceNetworkNotifyMicStateMessage",
+  "category": "0x802ae469",
+  "vtable": "0x280d208",
+  "ctor": "0x267e3b0"
+ },
+ "0xe551594d": {
+  "name": "ServerMetricsDetonateExplosionMessage",
+  "category": "0x12068db7",
+  "vtable": "0x27b65fc",
+  "ctor": "0x259ed50"
+ },
+ "0xe5cdde3e": {
+  "name": "UIReturnMouseToUIMessage",
+  "category": "0x005973b9",
+  "vtable": "0x27f5c78",
+  "ctor": "0x26389d0"
+ },
+ "0xe74ad5c1": {
+  "name": "AIDirectorStateMessage",
+  "category": "0x2f3e391d",
+  "vtable": "0x27b6964",
+  "ctor": "0x25a0e50"
+ },
+ "0xe7bc5a0e": {
+  "name": "UIFireteamScoreUpdateMessage",
+  "category": "0x005973b9",
+  "vtable": "0x280cb94",
+  "ctor": "0x26792c0"
+ },
+ "0xe831041b": {
+  "name": "NetworkGameplayContinueMessage",
+  "category": "0xa250cd31",
+  "vtable": "0x278ae98",
+  "ctor": "0x257b1b0"
+ },
+ "0xe913e8ac": {
+  "name": "CoreQuitMessage",
+  "category": "0x7c813e9e",
+  "vtable": "0x27639e8",
+  "ctor": "0x25473a0"
+ },
+ "0xe973f00c": {
+  "name": "NetworkSetPlayerViewMessage",
+  "category": "0xc67d277b",
+  "vtable": "0x278b7e0",
+  "ctor": "0x258ac70"
+ },
+ "0xe986b5c3": {
+  "name": "UIShowScoreboardMessage",
+  "category": "0x005973b9",
+  "vtable": "0x280cb0c",
+  "ctor": "0x2678e30"
+ },
+ "0xe9e0a79c": {
+  "name": "UIAcceptPlatoonInviteMessage",
+  "category": "0x005973b9",
+  "vtable": "0x280cf3c",
+  "ctor": "0x267b630"
+ },
+ "0xe9f1eaec": {
+  "name": "HUDCustomizationLeaveWeaponsScreenMessage",
+  "category": "0x528a6ea1",
+  "vtable": "0x280cf84",
+  "ctor": "0x267b8b0"
+ },
+ "0xeb65178a": {
+  "name": "VeniceClientMetricsRestartSPMissionMessage",
+  "category": "0xebc23f79",
+  "vtable": "0x280c0f4",
+  "ctor": "0x2673db0"
+ },
+ "0xeb7062d2": {
+  "name": "ServerVehicleLockableMessage",
+  "category": "0x3e46cdf8",
+  "vtable": "0x27b6a24",
+  "ctor": "0x25a15e0"
+ },
+ "0xebd20e13": {
+  "name": "ClientPlayerChangedVoiceChannelMessage",
+  "category": "0x24fe118f",
+  "vtable": "0x280c9a4",
+  "ctor": "0x2677fb0"
+ },
+ "0xecc68abe": {
+  "name": "NetworkSlowMotionRewardMessage",
+  "category": "0xc67d277b",
+  "vtable": "0x278b120",
+  "ctor": "0x257d050"
+ },
+ "0xed84ee18": {
+  "name": "ReplayUpdateStatusMessage",
+  "category": "0xc44ab196",
+  "vtable": "0x278a9c8",
+  "ctor": "0x2574b80"
+ },
+ "0xee4ad272": {
+  "name": "UIInputStatusChangedMessage",
+  "category": "0x005973b9",
+  "vtable": "0x27f5c60",
+  "ctor": "0x2638900"
+ },
+ "0xef0bee2e": {
+  "name": "ClientMetricsPushUIScreenMessage",
+  "category": "0xd65bfe6b",
+  "vtable": "0x27930f0",
+  "ctor": "0x2598bf0"
+ },
+ "0xf063c03c": {
+  "name": "CoreExitIngameMessage",
+  "category": "0x7c813e9e",
+  "vtable": "0x278a968",
+  "ctor": "0x25747e0"
+ },
+ "0xf17e59b0": {
+  "name": "VeniceNetworkBuddyIsFriendStatusMessage",
+  "category": "0x802ae469",
+  "vtable": "0x280d614",
+  "ctor": "0x26885e0"
+ },
+ "0xf1b02f33": {
+  "name": "UIViewClubCardMessage",
+  "category": "0x005973b9",
+  "vtable": "0x280cc04",
+  "ctor": "0x26797c0"
+ },
+ "0xf274fc0f": {
+  "name": "ServerTokenBroadcastMessage",
+  "category": "0xd919d27b",
+  "vtable": "0x27b66fc",
+  "ctor": "0x259f700"
+ },
+ "0xf2aa6342": {
+  "name": "ServerSubLevelOnStreamedInMessage",
+  "category": "0xc306e952",
+  "vtable": "0x27b68e4",
+  "ctor": "0x25a0950"
+ },
+ "0xf2aee127": {
+  "name": "CoreWriteSaveGameDoneMessage",
+  "category": "0x7c813e9e",
+  "vtable": "0x278a9a0",
+  "ctor": "0x2574a00"
+ },
+ "0xf2bf49aa": {
+  "name": "UITransitionEffectStartMessage",
+  "category": "0x005973b9",
+  "vtable": "0x27f5d40",
+  "ctor": "0x2639140"
+ },
+ "0xf306c535": {
+  "name": "SpikeInternalMessageWrapperMessage",
+  "category": "0x39d77a26",
+  "vtable": "0x276626c",
+  "ctor": "0x62d320"
+ },
+ "0xf330a4dc": {
+  "name": "UINetworkMenuResponseMessage",
+  "category": "0x89062f07",
+  "vtable": "0x278b4e8",
+  "ctor": "0x2582470"
+ },
+ "0xf3ab9164": {
+  "name": "ClientPlayerNewSquadOrderMessage",
+  "category": "0x24fe118f",
+  "vtable": "0x280c98c",
+  "ctor": "0x2677ed0"
+ },
+ "0xf40666ee": {
+  "name": "VehicleToComponentsStartDisabledDamagedMessage",
+  "category": "0xa2cd33fa",
+  "vtable": "0x27e1e00",
+  "ctor": "0x25f7ac0"
+ },
+ "0xf4501856": {
+  "name": "UIHudUpdateCrosshairMessage",
+  "category": "0x005973b9",
+  "vtable": "0x27f5c50",
+  "ctor": "0x2638890"
+ },
+ "0xf4ad7466": {
+  "name": "UIControlpointChangedTeamMessage",
+  "category": "0x005973b9",
+  "vtable": "0x280cb5c",
+  "ctor": "0x26790f0"
+ },
+ "0xf551679a": {
+  "name": "VeniceNetworkReviveResponseMessage",
+  "category": "0x802ae469",
+  "vtable": "0x280d154",
+  "ctor": "0x267dcc0"
+ },
+ "0xf573fe19": {
+  "name": "UINetworkPlayVideoMessage",
+  "category": "0x89062f07",
+  "vtable": "0x278b314",
+  "ctor": "0x2580800"
+ },
+ "0xf5e82dc0": {
+  "name": "ClientStateEnteredIngameMessage",
+  "category": "0xdabbbbab",
+  "vtable": "0x27931f8",
+  "ctor": "0x25995e0"
+ },
+ "0xf5ff7957": {
+  "name": "ServerGameplaySetPostRoundLogicMessage",
+  "category": "0x50a2f3ea",
+  "vtable": "0x27b6864",
+  "ctor": "0x25a0560"
+ },
+ "0xf602c64c": {
+  "name": "OnlineFlowGoToScreenMessage",
+  "category": "0x07dbca18",
+  "vtable": "0x280cef4",
+  "ctor": "0x267b290"
+ },
+ "0xf6470c0f": {
+  "name": "ServerVehicleEnterRestrictionMessage",
+  "category": "0x3e46cdf8",
+  "vtable": "0x27b69f4",
+  "ctor": "0x25a1400"
+ },
+ "0xf693d7d6": {
+  "name": "UISetTrainingMissionScoreTargetsMessage",
+  "category": "0x005973b9",
+  "vtable": "0x27f5cd0",
+  "ctor": "0x2638d20"
+ },
+ "0xf6997ef5": {
+  "name": "ServerWeaponWeaponComponentReloadMessage",
+  "category": "0x07038862",
+  "vtable": "0x27b6a84",
+  "ctor": "0x25a19a0"
+ },
+ "0xf6a73ace": {
+  "name": "VeniceNetworkSpottingMessage",
+  "category": "0x802ae469",
+  "vtable": "0x280d4d0",
+  "ctor": "0x2687ed0"
+ },
+ "0xf6dbeaa6": {
+  "name": "UIServerBrowserRefreshDoneMessage",
+  "category": "0x005973b9",
+  "vtable": "0x280cf14",
+  "ctor": "0x267b420"
+ },
+ "0xf731fed7": {
+  "name": "ProfileOptionsSettingsLoadedMessage",
+  "category": "0x43fba85e",
+  "vtable": "0x278a930",
+  "ctor": "0x25745f0"
+ },
+ "0xf7531939": {
+  "name": "NetworkPlayerSelectedUnlockAssetsMessage",
+  "category": "0xc67d277b",
+  "vtable": "0x27d9ff8",
+  "ctor": "0x25e5e30"
+ },
+ "0xf7ba5f60": {
+  "name": "UIRoundWinMessage",
+  "category": "0x005973b9",
+  "vtable": "0x280cbe4",
+  "ctor": "0x2679670"
+ },
+ "0xf7bd0b91": {
+  "name": "ClientInputSettingsUpdateSlotMessage",
+  "category": "0xb29d2e0f",
+  "vtable": "0x2793118",
+  "ctor": "0x2598d80"
+ },
+ "0xf7bd8927": {
+  "name": "UIRequestEndOfRoundMessage",
+  "category": "0x005973b9",
+  "vtable": "0x280cb7c",
+  "ctor": "0x2679200"
+ },
+ "0xf7eb3290": {
+  "name": "ServerLevelCompletedMessage",
+  "category": "0xd88635f6",
+  "vtable": "0x27b68dc",
+  "ctor": "0x25a0920"
+ },
+ "0xf89253cb": {
+  "name": "VeniceNetworkReviveFinishedMessage",
+  "category": "0x802ae469",
+  "vtable": "0x280d130",
+  "ctor": "0x267db10"
+ },
+ "0xf8c35792": {
+  "name": "PerformanceLogMessage",
+  "category": "0x697443dd",
+  "vtable": "0x278ae74",
+  "ctor": "0x257a9a0"
+ },
+ "0xf90da03a": {
+  "name": "ServerCollisionExplosionPackDestroyedMessage",
+  "category": "0xdb60e01e",
+  "vtable": "0x27b67b4",
+  "ctor": "0x259fe10"
+ },
+ "0xf944d18f": {
+  "name": "ClientEnterHudIngameMessage",
+  "category": "0xa23a0e7c",
+  "vtable": "0x2793080",
+  "ctor": "0x2598820"
+ },
+ "0xf99fc939": {
+  "name": "EntryComponentStanceChangedMessage",
+  "category": "0x0487427e",
+  "vtable": "0x27d95f4",
+  "ctor": "0x25da740"
+ },
+ "0xf9ad99d8": {
+  "name": "SoldierToComponentsReviveMessage",
+  "category": "0x2e844b68",
+  "vtable": "0x27fb4d8",
+  "ctor": "0x26436c0"
+ },
+ "0xf9c887a5": {
+  "name": "AILineOfFireAvoidanceMessage",
+  "category": "0x0059722d",
+  "vtable": "0x27b6934",
+  "ctor": "0x25a0c60"
+ },
+ "0xf9ede97f": {
+  "name": "CoreHibernateMessage",
+  "category": "0x7c813e9e",
+  "vtable": "0x27639d0",
+  "ctor": "0x25472e0"
+ },
+ "0xf9efd901": {
+  "name": "UIBundleLoadedMessage",
+  "category": "0x005973b9",
+  "vtable": "0x27f5d50",
+  "ctor": "0x26391c0"
+ },
+ "0xf9f3cafe": {
+  "name": "ServerGameplayInformAirspaceControlStateMessage",
+  "category": "0x50a2f3ea",
+  "vtable": "0x27b6884",
+  "ctor": "0x25a0650"
+ },
+ "0xfa17e34d": {
+  "name": "ServerGameplayCapturePointLostMessage",
+  "category": "0x50a2f3ea",
+  "vtable": "0x280cab4",
+  "ctor": "0x2678af0"
+ },
+ "0xfa50808c": {
+  "name": "ServerEntityBangerEntityOnSpawnMessage",
+  "category": "0xe70ad9fb",
+  "vtable": "0x27b670c",
+  "ctor": "0x259f790"
+ },
+ "0xfa6c1752": {
+  "name": "UIHudToggleMapZoomMessage",
+  "category": "0x005973b9",
+  "vtable": "0x27f5c48",
+  "ctor": "0x2638860"
+ },
+ "0xfac49ed6": {
+  "name": "NetworkOutOfCombatAreaMessage",
+  "category": "0xc67d277b",
+  "vtable": "0x278b024",
+  "ctor": "0x257c4d0"
+ },
+ "0xfb0ab027": {
+  "name": "UIInviteToPlatoonMessage",
+  "category": "0x005973b9",
+  "vtable": "0x280cf24",
+  "ctor": "0x267b4c0"
+ },
+ "0xfb329a96": {
+  "name": "UIVehicleFlightTimeUpdateMessage",
+  "category": "0x21792f81",
+  "vtable": "0x27f5de0",
+  "ctor": "0x2639750"
+ },
+ "0xfb40f920": {
+  "name": "SaveGameSaveMessage",
+  "category": "0x39ad472a",
+  "vtable": "0x27b6554",
+  "ctor": "0x259e8d0"
+ },
+ "0xfbd9b77b": {
+  "name": "ClientPlayerChangedSquadLeaderStatusMessage",
+  "category": "0x24fe118f",
+  "vtable": "0x280c994",
+  "ctor": "0x2677f20"
+ },
+ "0xfc64d065": {
+  "name": "ServerGameplayPlayerMenuOkMessage",
+  "category": "0x50a2f3ea",
+  "vtable": "0x27b680c",
+  "ctor": "0x25a0210"
+ },
+ "0xfcad63b8": {
+  "name": "AISetHumanEnemyBiasMessage",
+  "category": "0x0059722d",
+  "vtable": "0x27b6924",
+  "ctor": "0x25a0bc0"
+ },
+ "0xfcaf858d": {
+  "name": "HUDCustomizationClassSelectedMessage",
+  "category": "0x528a6ea1",
+  "vtable": "0x280cf64",
+  "ctor": "0x267b7a0"
+ },
+ "0xfcb271e8": {
+  "name": "UINetworkPlayerKillsTextMessage",
+  "category": "0x87b21d93",
+  "vtable": "0x278b2f0",
+  "ctor": "0x2580790"
+ },
+ "0xfcb30ee8": {
+  "name": "UINetworkPlayerKillsTextMessage",
+  "category": "0x87b21d93",
+  "vtable": "0x278b2f0",
+  "ctor": "0x25806f0"
+ },
+ "0xfce3b276": {
+  "name": "UIShowGameResultMessage",
+  "category": "0x005973b9",
+  "vtable": "0x280cc5c",
+  "ctor": "0x2679c10"
+ },
+ "0xfd138d3c": {
+  "name": "VeniceServerMetricsLifeCounterMessage",
+  "category": "0x426030a5",
+  "vtable": "0x2806fdc",
+  "ctor": "0x266e9c0"
+ },
+ "0xfd14f1e8": {
+  "name": "NetworkSettingsMessage",
+  "category": "0xaea52315",
+  "vtable": "0x278adfc",
+  "ctor": "0x257a510"
+ },
+ "0xfd158ee8": {
+  "name": "NetworkSettingsMessage",
+  "category": "0xaea52315",
+  "vtable": "0x278adfc",
+  "ctor": "0x257a470"
+ },
+ "0xfda01023": {
+  "name": "UITriggerPopupShowMessage",
+  "category": "0x005973b9",
+  "vtable": "0x27ffb94",
+  "ctor": "0x2652f60"
+ },
+ "0xfdf0ed73": {
+  "name": "UIComponentDeferActionMessage",
+  "category": "0xba05f436",
+  "vtable": "0x27f5da8",
+  "ctor": "0x2639550"
+ },
+ "0xfe289bfe": {
+  "name": "VeniceCommonMetricsTriggerMessage",
+  "category": "0x14865e4d",
+  "vtable": "0x280ceec",
+  "ctor": "0x267b240"
+ },
+ "0xfe588a71": {
+  "name": "NetworkGameAdministrationAddGameBanResponseMessage",
+  "category": "0xf48e1cfb",
+  "vtable": "0x280c138",
+  "ctor": "0x26741f0"
+ },
+ "0xfe6627f1": {
+  "name": "UIControllerConnectedMessage",
+  "category": "0x005973b9",
+  "vtable": "0x27f5bd0",
+  "ctor": "0x2638470"
+ },
+ "0xfeefeeaf": {
+  "name": "NetworkSpawnAutoSelectResponseMessage",
+  "category": "0xc67d277b",
+  "vtable": "0x278abbc",
+  "ctor": "0x2578280"
+ }
+}

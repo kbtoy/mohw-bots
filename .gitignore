@@ -1,0 +1,27 @@
+# Build output and release zips (tools/package.py writes dist/)
+build/
+dist/
+
+# Python
+tools/.venv/
+__pycache__/
+*.pyc
+
+# The game's files never go in: the LAN pack's executables, EBX pulled out of the game's bundles, and the SDK generated
+# from lanmohw.exe's type info (tools/fb2_typeinfo_dump.py remakes it). See README.md for where each comes from.
+re/lanpack/
+re/ebx/
+re/sdk/
+*.image.bin
+
+# fun-bots is a separate clone (https://github.com/Joe91/fun-bots), read for reference only
+refs/
+
+# Game-side files that might get copied here while testing
+*.log
+*.dmp
+mohw-bots-state.ini
+mohw-bots-nav/
+*.nav
+*.nav.bak
+*.bak
