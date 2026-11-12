@@ -1209,13 +1209,39 @@ three flags now land 1.0-3.1 m from nodes walked in that round (`MP_21_SectorCon
 play (MP_19's TDM routes cover too little of the map to compare).
 
 `ServerCapturePointEntity` (0x104 bytes, vtable `0x281B450`, ctor `0xE450D0` (creationInfo, data) ret 8, dtor `0xE442E0`) has no
-position: its prefab's `GeometryTriggerEntityData` (one per team) tell it who is inside. `+0xA8` owner team (`setTeam` `0xE3A590`,
+position (how it learns who is inside isn't known yet; see "The pre-round" below). `+0xA8` owner team (`setTeam` `0xE3A590`,
 ghost bit 1), `+0xAC` the team whose flag is up, `+0xC0` / `+0xC4` capture progress and flag height (ghost bit 2, sent / 100), `+0x94`
 a vector cleared on reset. The capture radius is 5 m, 20 s to take, `SeesawCapturing`. `objectives.cpp` hooks the ctor and dtor to
 keep a list, reads the owners every 0.5 s, and learns which entity is which flag the first time an entity's progress moves while
 soldiers stand at exactly one unlinked flag (the last pair links itself). Until then a flag's owner is what all unlinked entities say
 if they agree (all neutral at the start), else unknown. Log lines: `objectives: Sector Control flags A (...)`, `flag B is capture
 point ...`, `flag B taken by team 2`, a per-minute owner summary, and in every mode `N capture point entities in <level>`.
+
+**The pre-round (2026.11.11.1, not played yet).** First Sector Control play with flags (2026-11-11, MP_21 then MP_18,
+both after an in-place change): in 15 minutes no capture point moved (no owner, progress or flag height change, so no flag
+linked), your own capture did nothing, and the bots mostly stayed at their base. Every mode's sub-level starts its round
+from `pf_preround_simple` → `pf_preround_wrapper` → `PreRoundEntityData` (`RoundStartPlayerCount` 8, `RoundStartCountdown`
+10, on every map and mode; no level data sends its skip input, hash 180587226, nor runs the console command `release`).
+Its `StartRound` is what starts Sector Control (`sectorcontrol`: `OnStartRound` to `sectorcontrol_scoring`'s ticket
+counters and `sectorcontrol_server`'s state machine), Combat Mission's and Team Deathmatch's state machines and round
+timers, and Hot Spot's site chooser. `ServerPreRoundEntity` (0xBC, vtable `0x2822F28`, ctor `0xEDED10`) has its message
+listener at +0x90 (`0xEDEF20`): `ServerPlayerEnteredLevelMessage` adds the player to a list (+0x94), `ReleasingLevel` takes
+it out, and on those and on `ServerPlayerChangedSoldierMessage` it checks `0xECE720` (listed players with a soldier,
+`player+0x42C`) >= +0xA4 and `0xECE780` (each team, `player+0x38C`, has +0xA4 / 2), then starts the countdown (+0xB8
+bit 0, events `0x2CBFEA2D`). The countdown's end sends `StatEnableMessage` and `ServerGameplaySetPreRoundLogicMessage`
+(`0xECE810`); the latter **never appears in any session's log**, so offline no round has ever started. The reason: a
+player enters the level in `ServerPlayer::update` (`0xB445B0` → `0xB2EF90`) only once +0x504 (`0xB2F490`, level loaded,
+`ServerPlayerLevelLoadedMessage`) and +0x505 (`0xB2F4E0`, extents told) are set, and both come from the player's
+`ServerConnection` (`0xAF5F40`, `0xAF5A70`). Bots have none, so each level logs one `EnteredLevel` (you) and twenty
+`ReleasingLevel`. `objectives.cpp` now hooks the listener and sets +0xA4 to 1 before it runs (logged `pre-round: the level
+wants 8 players ...`), so the countdown starts when you first spawn (`pre-round: enough players; the round starts in 10 s`),
+with the countdown's input restriction (no moving or firing for 10 s) on everyone. Not done: making bots enter the level
+(calling `0xB2F490` / `0xB2F4E0` for them would also run the player extents' level-ready code on players with no connection).
+Whether `ServerCapturePointEntity` itself waits for the round is not known (its message listener `0xE36D10` is a bare
+`ret 4`; `SetPreRoundLogic`'s only listener is `ServerRoundOverEntity`, `0xEDD340`), so the capture points now log their
+progress and flag height as they change (`objectives: flag A capture 40/100, flag at 60/100 ...`) and their starting
+values in the `N capture point entities` line. The control point prefab's two `GeometryTriggerEntityData` are `RunOnce`
+first-entry triggers for the HUD and voice lines, not what the capture counts.
 
 **The brain** has a fourth goal, objective (`brain::SetObjectives`): with no target, a bot heads for a flag its team doesn't hold (or an
 own flag with an enemy within 15 m; a few guard their own), roamers 75% of the time, flankers 60%, hunters 45%, nearer flags likelier.

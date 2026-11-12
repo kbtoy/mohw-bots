@@ -2,8 +2,7 @@
 // Game-mode objectives the bots play: Sector Control's three flags.
 //
 // Where the flags are comes from the game's level data (objectives.inc, made by tools/objectives.py --sc-flags): the
-// game's capture point entities (ServerCapturePointEntity) carry no position - their prefab's triggers decide who is
-// inside. Who holds each comes from those entities (+0xA8 owner team), which a hook on their constructor and
+// game's capture point entities (ServerCapturePointEntity) carry no position. Who holds each comes from those entities (+0xA8 owner team), which a hook on their constructor and
 // destructor keeps a list of. Which entity is which flag is learned in play: the first time an entity's capture
 // progress moves, the one flag with soldiers standing at it is the one being taken. Until then a flag's owner counts as
 // unknown (all neutral at the start, which is what the entities say anyway).
@@ -15,7 +14,9 @@
 
 namespace objectives {
 
-void Install();  // hooks the capture point constructor and destructor (every mode; logs what each level has)
+// Hooks the capture point constructor and destructor (every mode; logs what each level has), and the pre-round's
+// message listener so a round starts with you alone: the level data wants 8 players and bots never count.
+void Install();
 
 // The level changed: key as nav's ("MP_03_SectorControl"). Picks up that map's flags when the mode has them.
 void OnLevel(const std::string& key);

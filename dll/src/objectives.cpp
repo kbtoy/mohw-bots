@@ -40,6 +40,48 @@ CRITICAL_SECTION g_lock;
 bool g_installed = false;
 std::vector<void*> g_live;  // under g_lock: every capture point entity alive now
 
+// ServerPreRoundEntity (0xBC bytes, vtable 0x2822F28; README "Game modes", "The pre-round"). Every mode's round starts
+// from it (pf_preround_wrapper's StartRound: Sector Control's tickets and server logic, the round timers). Its message
+// listener at +0x90 (vtable 0x2822EDC slot 0, 0xEDEF20, thiscall(msg) ret 4) keeps a list of the players that entered
+// the level (ServerPlayerEnteredLevelMessage in, ServerPlayerReleasingLevelMessage out) and, on those and on every
+// ServerPlayerChangedSoldierMessage, starts the countdown once RoundStartPlayerCount of them have a soldier and each team
+// has half that. The data asks for 8. Bots never enter the level (ServerPlayer +0x504 / +0x505 come from a client
+// connection loading it), so offline only you are on the list and the round never started. Offsets from the listener.
+constexpr int kPr_StartCount = 0x14;  // entity +0xA4, from PreRoundEntityData.RoundStartPlayerCount
+constexpr int kPr_Countdown = 0x1C;   // entity +0xAC, RoundStartCountdown (s)
+constexpr int kPr_State = 0x28;       // entity +0xB8: bit 0 the countdown has started
+constexpr uint32_t kPreRoundStartPlayers = 1;
+using PreRoundListenFn = void(__thiscall*)(void* self, void* msg);
+PreRoundListenFn g_preRoundListen = nullptr;
+void* g_preRoundSeen = nullptr;  // server thread: the listener last seen (one pre-round per level)
+uint8_t g_preRoundState = 0;
+
+void __fastcall PreRoundListenDetour(void* self, void* /*edx*/, void* msg)
+{
+    if (self != g_preRoundSeen)
+    {
+        g_preRoundSeen = self;
+        g_preRoundState = 0;
+    }
+    uint32_t need = 0;
+    void* count = const_cast<void*>(eng::At(self, kPr_StartCount));
+    if (eng::ReadU32(count, &need) && need > kPreRoundStartPlayers && eng::WriteBytes(count, &kPreRoundStartPlayers, 4))
+        Log("pre-round: the level wants %u players with a soldier to start the round; bots never count, so it now starts "
+            "with %u (you, once spawned)", need, kPreRoundStartPlayers);
+    g_preRoundListen(self, msg);
+    uint8_t state = 0;
+    if (eng::ReadByte(eng::At(self, kPr_State), &state))
+    {
+        if ((state & 1) && !(g_preRoundState & 1))
+        {
+            float countdown = 0.0f;
+            eng::ReadFloat(eng::At(self, kPr_Countdown), &countdown);
+            Log("pre-round: enough players; the round starts in %.0f s", countdown);
+        }
+        g_preRoundState = state;
+    }
+}
+
 struct Sample
 {
     uint32_t owner = 0;
@@ -54,6 +96,8 @@ struct Tracked
     int flag = -1;  // index into g_flags once learned
     Sample last;
     bool sampled = false;
+    Sample logged;          // what the last capture line said
+    float logTimer = 0.0f;  // seconds until another capture line may go out
 };
 
 struct Flag
@@ -180,6 +224,25 @@ void SampleAll(const std::vector<brain::Actor>& actors)
             else
                 Log("objectives: capture point %p now %s's (was %s's)", t.entity, TeamName(now.owner), TeamName(t.last.owner));
         }
+        // A capture under way: progress or the flag moving, at most every 2 s per point (2026-11-11: no capture was ever
+        // seen, yours included, so show what the entities do).
+        t.logTimer -= 0.5f;
+        if (t.sampled && t.logTimer <= 0.0f &&
+            (std::fabs(now.progress - t.logged.progress) >= 5.0f || std::fabs(now.height - t.logged.height) >= 5.0f ||
+             now.flagTeam != t.logged.flagTeam))
+        {
+            char name[32];
+            if (t.flag >= 0)
+                std::snprintf(name, sizeof(name), "flag %c", g_flags[t.flag].letter);
+            else
+                std::snprintf(name, sizeof(name), "capture point %p", t.entity);
+            Log("objectives: %s capture %.0f/100, flag at %.0f/100 (%s's flag up, owner %s)", name, now.progress, now.height,
+                TeamName(now.flagTeam), TeamName(now.owner));
+            t.logged = now;
+            t.logTimer = 2.0f;
+        }
+        if (!t.sampled)
+            t.logged = now;
         // Learn which flag this is: the one flag (not yet linked) with soldiers at it while its progress moves.
         if (moved && t.flag < 0 && g_flagMode)
         {
@@ -265,6 +328,13 @@ void Install()
     }
     g_installed = g_ctor && g_dtor;
     Log("objectives: capture point hooks %s", g_installed ? "in place" : "FAILED (bots won't play Sector Control's flags)");
+
+    // The pre-round listener: mov eax, [esp+4]; cmp dword ptr [eax+4], 0xF3C93DD3 (4 + 7 position-independent bytes).
+    void* listen = reinterpret_cast<void*>(eng::Address("PreRound_listen"));
+    if (listen)
+        g_preRoundListen = reinterpret_cast<PreRoundListenFn>(InlineHook(listen, 11, reinterpret_cast<const void*>(&PreRoundListenDetour)));
+    Log("objectives: pre-round hook %s", g_preRoundListen ? "in place (a round starts once you have spawned)"
+                                                          : "FAILED (rounds never start: no Sector Control tickets or flags)");
 }
 
 void OnLevel(const std::string& key)
@@ -325,7 +395,19 @@ void Tick(const std::vector<brain::Actor>& actors, float dt)
     if (g_countTimer >= 20.0f && g_tracked.size() != g_reportedCount)
     {
         g_reportedCount = g_tracked.size();
-        Log("objectives: %u capture point entities in %s", static_cast<unsigned>(g_tracked.size()), g_key.c_str());
+        char text[256] = "";
+        for (const Tracked& t : g_tracked)
+        {
+            char one[96];
+            if (t.sampled)
+                std::snprintf(one, sizeof(one), "%s%p owner %s, %s's flag up, capture %.0f, flag at %.0f", text[0] ? "; " : "",
+                              t.entity, TeamName(t.last.owner), TeamName(t.last.flagTeam), t.last.progress, t.last.height);
+            else
+                std::snprintf(one, sizeof(one), "%s%p unreadable", text[0] ? "; " : "", t.entity);
+            std::strncat(text, one, sizeof(text) - std::strlen(text) - 1);
+        }
+        Log("objectives: %u capture point entities in %s%s%s", static_cast<unsigned>(g_tracked.size()), g_key.c_str(),
+            text[0] ? ": " : "", text);
     }
     g_summaryTimer += 0.5f;
     if (g_flagMode && g_summaryTimer >= 60.0f)

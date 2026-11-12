@@ -104,6 +104,10 @@ That resets the map you're on. To reset another one, name it: nav.reset somalia
 WHAT TO LOOK OUT FOR
 --------------------
 - Crashes or freezes. Pressing Tab while dead used to close the game; that's fixed in this build.
+- Rounds now really start (new). Offline, the game waited forever for 8 players before starting a round, and bots don't
+  count, so Sector Control's flags couldn't be taken. Now, when you first spawn, a 10-second countdown runs (nobody can
+  move or shoot during it) and then the round starts. In Sector Control, try taking a flag yourself, and watch whether
+  the bots go for the flags.
 - When the next map loads without the game closing, your points should start again from 0. They used to carry over from the
   last round (fixed in this build).
 - Bodies that go limp but keep moving around, or bots that vanish when they die instead of falling. A recent fix should
