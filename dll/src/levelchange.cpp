@@ -49,6 +49,7 @@ volatile LONG g_fallingBack = 0;
 // Your game's side (its own thread).
 volatile LONG g_clientBaselineTaken = 0;
 void* volatile g_clientBaseline = nullptr;
+char g_clientBaselineName[128] = "";  // its level's name then ("" if it had none)
 bool g_clientLevelGone = false;
 volatile LONG g_clientArrived = 0;
 volatile LONG g_clientReadable = 0;  // your game's level name has been read at least once (the offsets work)
@@ -198,6 +199,20 @@ bool Request(const modes::Entry& target, bool sameLevel, int nextMapAfter)
     InterlockedExchange(&g_lastServerTick, static_cast<LONG>(g_requestedAt));
     InterlockedExchange(&g_clientBaselineTaken, 0);
     InterlockedExchange(&g_clientArrived, 0);
+    // Your game's level now, as the baseline (ClientTick took it on its first input poll after the request, and on the
+    // deploy screen nothing polls: 2026-11-12, MP_19 -> MP_21, its first look was at MP_21 itself, so your game never
+    // "arrived" and the game restarted after 90 s).
+    {
+        void* level = nullptr;
+        char name[128];
+        if (ClientLevel(&level, name, sizeof(name)))
+        {
+            g_clientBaseline = level;
+            g_clientLevelGone = level == nullptr;
+            std::snprintf(g_clientBaselineName, sizeof(g_clientBaselineName), "%s", name);
+            InterlockedExchange(&g_clientBaselineTaken, 1);
+        }
+    }
     InterlockedExchange(&g_pending, kLeaving);
     Log("level change: %s asked for%s; the bots leave first (their players hold this level's soldier and kit data) and "
         "stand still until it's in",
@@ -292,12 +307,15 @@ void ClientTick()
     {
         g_clientBaseline = level;
         g_clientLevelGone = level == nullptr;
+        std::snprintf(g_clientBaselineName, sizeof(g_clientBaselineName), "%s", name);
         InterlockedExchange(&g_clientBaselineTaken, 1);
         return;
     }
     g_clientLevelGone |= level == nullptr;
     const std::string want = LevelPath(g_target.map);
-    if (level && (level != g_clientBaseline || g_clientLevelGone) && _stricmp(name, want.c_str()) == 0)
+    // A different map than the baseline's: its name is enough (a new level can sit at the old one's address).
+    const bool otherMap = _stricmp(g_clientBaselineName, want.c_str()) != 0;
+    if (level && (level != g_clientBaseline || g_clientLevelGone || otherMap) && _stricmp(name, want.c_str()) == 0)
     {
         Log("level change: your game has %s (%p)", name, level);
         InterlockedExchange(&g_clientArrived, 1);

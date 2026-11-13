@@ -205,13 +205,6 @@ FUNCS = [
     ("CapturePoint_ctor", 0xE450D0, 8),
     # its destructor (0xE45330, the deleting one, calls it first): push ebx/ebp/esi; mov esi, ecx; push edi (6 bytes)
     ("CapturePoint_dtor", 0xE442E0, 8),
-    # ServerPreRoundEntity's message listener (+0x90, vtable 0x2822EDC slot 0), thiscall(msg) ret 4: mov eax, [esp+4];
-    # cmp dword ptr [eax+4], 0xF3C93DD3 (11 position-independent bytes, objectives hook). Counts the players that entered
-    # the level against RoundStartPlayerCount (listener +0x14) and starts the countdown (listener +0x28 bit 0).
-    ("PreRound_listen", 0xEDEF20, 12),
-    # ServerPreRoundEntity ctor(creationInfo, PreRoundEntityData) ret 8 (vtable 0x2822F28): mov eax, [esp+8]; push esi;
-    # push edi; xor edi, edi (5 position-independent bytes taken, objectives hook: lists the pre-rounds that exist)
-    ("PreRound_ctor", 0xEDED10, 8),
     # ServerCapturePointEntity's capture step, thiscall(float dt, {player** begin, end}* inside, counts*, int attacker) ret
     # 0x10: push ebx; mov ebx, [esp+0x14]; push esi; push edi. counts: [0] soldiers inside not of the controlling team
     # (+0xA8), [1] of it, then per-squad counts (+8.., +0x20..; bonus for squads of 2+). Rate from 0xE3A230; > 0 raises the

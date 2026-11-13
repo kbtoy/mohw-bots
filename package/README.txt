@@ -106,8 +106,10 @@ WHAT TO LOOK OUT FOR
 - Crashes or freezes. Pressing Tab while dead used to close the game; that's fixed in this build.
 - Sector Control: flags should now be taken, by you and the bots (new; nothing in this LAN build ran the capture, so the
   bots' DLL does). Standing on a flag lowers the other team's flag, then raises yours: alone, about 20 seconds for a
-  free flag and 40 for one the other team holds, quicker with more of your team; it stops while both teams are on it. Please say whether the flag moves, whether the
-  round's tickets and spawns change with it, and whether the bots move on to other flags once theirs is taken.
+  free flag and 40 for one the other team holds, quicker with more of your team; it stops while both teams are on it.
+  A flag left half raised sinks back and ends up nobody's. Please say whether the round's tickets and spawns change
+  with the flags, and whether the bots move on to other flags once theirs is taken. At the start the flags show at the
+  top of their poles although the game has them at the bottom; that's known.
 - Bots never spawn in the enemy's starting base, even if their team takes the flag there (new).
 - Bots on a flag stand and watch the ways in, moving to another spot now and then, and spread over the flags instead of
   crowding the one at their spawn.

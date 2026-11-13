@@ -410,21 +410,10 @@ int wmain(int argc, wchar_t** argv)
                       cpCtor[8] == 0xDB && cpDtor[0] == 0xE9 && dtorInfo.AllocationBase == dll && cpDtor[5] == 0x90 &&
                       cpDtor[6] == 0x8D && cpDtor[7] == 0xBE,
                   "Objectives: capture point constructor (0xE450D0) and destructor (0xE442E0) jump into the DLL, the rest intact");
-            // The pre-round listener: 11 bytes taken (mov eax, [esp+4]; cmp dword ptr [eax+4], imm32), push esi next.
-            const auto* preRound = reinterpret_cast<const uint8_t*>(0xEDEF20);
-            MEMORY_BASIC_INFORMATION preRoundInfo = {};
-            VirtualQuery(preRound + 5 + *reinterpret_cast<const int32_t*>(preRound + 1), &preRoundInfo, sizeof(preRoundInfo));
-            bool padded = true;
-            for (int i = 5; i < 11; ++i)
-                padded = padded && preRound[i] == 0x90;
-            Check(preRound[0] == 0xE9 && preRoundInfo.AllocationBase == dll && padded && preRound[11] == 0x56,
-                  "Objectives: pre-round listener (0xEDEF20) jumps into the DLL, the rest intact");
-            // Its constructor: 5 bytes taken (mov eax, [esp+8]; push esi), push edi next.
-            const auto* preCtor = reinterpret_cast<const uint8_t*>(0xEDED10);
-            MEMORY_BASIC_INFORMATION preCtorInfo = {};
-            VirtualQuery(preCtor + 5 + *reinterpret_cast<const int32_t*>(preCtor + 1), &preCtorInfo, sizeof(preCtorInfo));
-            Check(preCtor[0] == 0xE9 && preCtorInfo.AllocationBase == dll && preCtor[5] == 0x57 && preCtor[6] == 0x33,
-                  "Objectives: pre-round constructor (0xEDED10) jumps into the DLL, the rest intact");
+            // The pre-round is the game's own again (2026.11.11.1-11.12.2 hooked it; rounds always started): untouched.
+            Check(std::memcmp(reinterpret_cast<const void*>(0xEDEF20), "\x8B\x44\x24\x04\x81\x78\x04", 7) == 0 &&
+                      std::memcmp(reinterpret_cast<const void*>(0xEDED10), "\x8B\x44\x24\x08\x56\x57", 6) == 0,
+                  "Objectives: the pre-round's listener (0xEDEF20) and constructor (0xEDED10) are left alone");
         }
         // Awards: the routine itself runs (score is awarded); only its stats loop is guarded.
         const auto* awards = reinterpret_cast<const uint8_t*>(0x169BBCE);

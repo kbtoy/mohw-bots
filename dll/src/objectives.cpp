@@ -40,109 +40,6 @@ CRITICAL_SECTION g_lock;
 bool g_installed = false;
 std::vector<void*> g_live;  // under g_lock: every capture point entity alive now
 
-// ServerPreRoundEntity (0xBC bytes, vtable 0x2822F28; README "Game modes", "The pre-round"). Every mode's round starts
-// from it (pf_preround_wrapper's StartRound: Sector Control's tickets and server logic, the round timers). Its message
-// listener at +0x90 (vtable 0x2822EDC slot 0, 0xEDEF20, thiscall(msg) ret 4) keeps a list of the players that entered
-// the level (ServerPlayerEnteredLevelMessage in, ServerPlayerReleasingLevelMessage out) and, on those and on every
-// ServerPlayerChangedSoldierMessage, starts the countdown once RoundStartPlayerCount of them have a soldier and each team
-// has half that. The data asks for 8. Bots never enter the level (ServerPlayer +0x504 / +0x505 come from a client
-// connection loading it), so offline only you are on the list and the round never started. Offsets from the listener.
-constexpr int kPr_StartCount = 0x14;  // entity +0xA4, from PreRoundEntityData.RoundStartPlayerCount
-constexpr int kPr_Countdown = 0x1C;   // entity +0xAC, RoundStartCountdown (s)
-constexpr int kPr_State = 0x28;       // entity +0xB8: bit 0 the countdown has started
-constexpr uint32_t kPreRoundStartPlayers = 1;
-using PreRoundListenFn = void(__thiscall*)(void* self, void* msg);
-PreRoundListenFn g_preRoundListen = nullptr;
-void* g_preRoundSeen = nullptr;  // server thread: the listener last seen (one pre-round per level)
-uint8_t g_preRoundState = 0;
-
-void __fastcall PreRoundListenDetour(void* self, void* /*edx*/, void* msg)
-{
-    if (self != g_preRoundSeen)
-    {
-        g_preRoundSeen = self;
-        g_preRoundState = 0;
-    }
-    uint32_t need = 0;
-    void* count = const_cast<void*>(eng::At(self, kPr_StartCount));
-    if (eng::ReadU32(count, &need) && need > kPreRoundStartPlayers && eng::WriteBytes(count, &kPreRoundStartPlayers, 4))
-        Log("pre-round: the level wants %u players with a soldier to start the round; bots never count, so it now starts "
-            "with %u (you, once spawned)", need, kPreRoundStartPlayers);
-    g_preRoundListen(self, msg);
-    uint8_t state = 0;
-    if (eng::ReadByte(eng::At(self, kPr_State), &state))
-    {
-        if ((state & 1) && !(g_preRoundState & 1))
-        {
-            float countdown = 0.0f;
-            eng::ReadFloat(eng::At(self, kPr_Countdown), &countdown);
-            Log("pre-round: enough players; the round starts in %.0f s", countdown);
-        }
-        g_preRoundState = state;
-    }
-}
-
-// 2026.11.11.1 lowered the count and nothing changed: no "pre-round:" line at all, so the listener never ran. Whether a
-// ServerPreRoundEntity exists at all is the next question: its constructor (0xEDED10, thiscall(creationInfo, data) ret 8)
-// is hooked to list them, and Tick logs each one's state as it changes (and lowers the count there too).
-constexpr uintptr_t kPreRoundVtable = 0x02822F28;
-constexpr int kPre_ListBegin = 0x94, kPre_ListEnd = 0x98, kPre_StartCount = 0xA4, kPre_Countdown = 0xAC, kPre_State = 0xB8;
-using PreRoundCtorFn = void*(__thiscall*)(void* self, void* creationInfo, void* data);
-PreRoundCtorFn g_preRoundCtor = nullptr;
-struct PreRound
-{
-    void* entity = nullptr;
-    ULONGLONG createdAt = 0;
-    bool logged = false;
-    uint32_t count = 0, listed = 0;
-    uint8_t state = 0;
-};
-std::vector<PreRound> g_preRounds;  // under g_lock
-
-void* __fastcall PreRoundCtorDetour(void* self, void* /*edx*/, void* creationInfo, void* data)
-{
-    void* result = g_preRoundCtor(self, creationInfo, data);
-    PreRound p;
-    p.entity = self;
-    p.createdAt = GetTickCount64();
-    EnterCriticalSection(&g_lock);
-    g_preRounds.push_back(p);
-    LeaveCriticalSection(&g_lock);
-    Log("pre-round: entity %p created (data %p)", self, data);
-    return result;
-}
-
-void WatchPreRounds()
-{
-    EnterCriticalSection(&g_lock);
-    for (PreRound& p : g_preRounds)
-    {
-        void* vtable = nullptr;
-        if (!eng::ReadPtr(p.entity, &vtable) || reinterpret_cast<uintptr_t>(vtable) != kPreRoundVtable)
-            continue;
-        uint32_t count = 0, begin = 0, end = 0;
-        uint8_t state = 0;
-        float countdown = 0.0f;
-        if (!eng::ReadU32(eng::At(p.entity, kPre_StartCount), &count) || !eng::ReadU32(eng::At(p.entity, kPre_ListBegin), &begin) ||
-            !eng::ReadU32(eng::At(p.entity, kPre_ListEnd), &end) || !eng::ReadByte(eng::At(p.entity, kPre_State), &state))
-            continue;
-        eng::ReadFloat(eng::At(p.entity, kPre_Countdown), &countdown);
-        const uint32_t listed = end >= begin ? (end - begin) / 4 : 0;
-        if (!p.logged || count != p.count || listed != p.listed || state != p.state)
-        {
-            Log("pre-round: entity %p wants %u player(s), has %u entered, state 0x%02X (bit 0 = counting down), countdown %.0f s",
-                p.entity, count, listed, state, countdown);
-            p.logged = true;
-            p.count = count;
-            p.listed = listed;
-            p.state = state;
-        }
-        if (count > kPreRoundStartPlayers)
-            eng::WriteBytes(const_cast<void*>(eng::At(p.entity, kPre_StartCount)), &kPreRoundStartPlayers, 4);
-    }
-    LeaveCriticalSection(&g_lock);
-}
-
 struct Sample
 {
     uint32_t owner = 0;
@@ -371,6 +268,10 @@ void DriveCaptures(const std::vector<brain::Actor>& actors, float dt)
             counts.attackers = byTeam[attacker];
             counts.holders = byTeam[3 - attacker];
         }
+        // Nobody attacking: a flag going back down on its own ends with nobody in control, not the other team (2026-11-12:
+        // A, left at 92/100, sank and went to team 2, who had never been near it).
+        if (counts.attackers == 0)
+            attacker = 0;
         PlayerList list;
         list.begin = inside;
         list.end = inside + n;
@@ -552,18 +453,6 @@ void Install()
     }
     g_installed = g_ctor && g_dtor;
     Log("objectives: capture point hooks %s", g_installed ? "in place" : "FAILED (bots won't play Sector Control's flags)");
-
-    // The pre-round listener: mov eax, [esp+4]; cmp dword ptr [eax+4], 0xF3C93DD3 (4 + 7 position-independent bytes).
-    void* listen = reinterpret_cast<void*>(eng::Address("PreRound_listen"));
-    if (listen)
-        g_preRoundListen = reinterpret_cast<PreRoundListenFn>(InlineHook(listen, 11, reinterpret_cast<const void*>(&PreRoundListenDetour)));
-    Log("objectives: pre-round hook %s", g_preRoundListen ? "in place (a round starts once you have spawned)"
-                                                          : "FAILED (rounds never start: no Sector Control tickets or flags)");
-    // Its constructor: mov eax, [esp+8]; push esi (4 + 1 position-independent bytes).
-    void* preCtor = reinterpret_cast<void*>(eng::Address("PreRound_ctor"));
-    if (preCtor)
-        g_preRoundCtor = reinterpret_cast<PreRoundCtorFn>(InlineHook(preCtor, 5, reinterpret_cast<const void*>(&PreRoundCtorDetour)));
-    Log("objectives: pre-round constructor hook %s", g_preRoundCtor ? "in place" : "FAILED");
 }
 
 void OnLevel(const std::string& key)
@@ -577,13 +466,6 @@ void OnLevel(const std::string& key)
     g_rawLines = 0;
     for (FlagCrowd& c : g_crowd)
         c = FlagCrowd();
-    // The last level's pre-round is gone; keep one made in the last 60 s (this level's, if it came first).
-    EnterCriticalSection(&g_lock);
-    const ULONGLONG now = GetTickCount64();
-    g_preRounds.erase(std::remove_if(g_preRounds.begin(), g_preRounds.end(),
-                                     [now](const PreRound& p) { return now - p.createdAt > 60000; }),
-                      g_preRounds.end());
-    LeaveCriticalSection(&g_lock);
     g_flagMode = false;
     g_reportedCount = 0;
     g_countTimer = 0.0f;
@@ -651,7 +533,6 @@ void Tick(const std::vector<brain::Actor>& actors, float dt)
     DriveCaptures(actors, 0.5f);
     SampleAll(actors);
     Publish();
-    WatchPreRounds();
 
     // What the level has, once it settles (any mode: the next modes' objectives start from this).
     g_countTimer += 0.5f;

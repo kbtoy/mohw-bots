@@ -1084,6 +1084,13 @@ squad changes, chat (`ServerPlayerChatMessage`: +0x28 player, +0x2C text), level
   end of MP_21 Sector Control, 0/0/2900 on Hot Spot's first rows, your game's scoreboard too). `StartLoad` now calls
   `scoreboard::NewLevel` once the load is asked for: it forgets every row's points, clears the sub-round flag and sets the points
   of the records left (yours; the bots' went with their players) to 0. Log: `scoreboard: new level - points start from 0`.
+  **Your game's arrival (2026.11.12.3).** 2026-11-12 19:54, MP_19 TDM → MP_21 SC: the server had the level after 7.7 s and you
+  were playing it, but `level change: your game has ...` never came, the bots stayed out, and after 90 s the game restarted.
+  `ClientTick` (on your game's input polls) took its baseline on its first poll after the request; you sat on the deploy
+  screen, which doesn't poll, so its first look was at MP_21 itself (`your game's level reads "MOHW/Levels/MP/MP_21/MP_21"`,
+  first logged at 19:55:06), and that level never differed from the baseline. The baseline (level and its name) is now taken
+  when the change is asked for, on the server thread, and a level with the target's name counts as arrived whenever the
+  baseline was another map (only Restart Round still needs the level to change or vanish).
 - **Round end, kicks and the hang at the end of a session** (2026.11.09.4). Offline MOHW never moves on from a round by itself:
   after `ServerRoundOverMessage` (the 10-minute timer or the kill target) the results screen stays up (every such session in the
   log ended with you quitting within a minute). Every "next round" the log shows came after the server **kicked you**: a team
@@ -1217,7 +1224,18 @@ soldiers stand at exactly one unlinked flag (the last pair links itself). Until 
 if they agree (all neutral at the start), else unknown. Log lines: `objectives: Sector Control flags A (...)`, `flag B is capture
 point ...`, `flag B taken by team 2`, a per-minute owner summary, and in every mode `N capture point entities in <level>`.
 
-**Who captures (2026.11.12.2, not played yet).** 2026.11.12.1's logging (MP_18 SC from launch): the pre-round exists
+**Played 2026-11-12 19:54 (2026.11.12.2, MP_21): captures work.** At 19:57:01 bots of both teams reached their base flags
+(A up to 4 of team 1, C up to 6 of team 2): control at once, the flags 2 → 100 in 10 s (faster with more inside), then
+`flag C captured by team 2`, `flag A captured by team 1` and the game's own `ServerGameplayCapturePointCapturedMessage`;
+B went to team 1 at 19:58:06. Two faults: a flag left on its way up sank back (`ReturnMultiplier`, -8/100 a step) and at
+the bottom went to the *other* team (A, left at 92/100, to team 2, who had never been there), because the attacker passed
+with nobody inside was the controller's opponent; since 2026.11.12.3 it is 0 then, so it ends with nobody in control. And
+the 2026.11.12.2 pre-round watch read the old level's freed pre-round entity 5 times during the in-place change
+(`ENGINE FAULT in ReadPtr`, guarded): the pre-round hooks and logging are gone in 2026.11.12.3 (the image test checks
+both functions are untouched). Seen in play: the flags stand at the top of their poles at the start, although the server
+has them at the bottom (`StartAtBottom`, +0xC4 = 0); not looked into yet.
+
+**Who captures (2026.11.12.2).** 2026.11.12.1's logging (MP_18 SC from launch): the pre-round exists
 (`entity ... created`) but reads `wants 0 player(s), has 0 entered, state 0x10`. It never listens (bit 2 of +0xB8 is its
 "registered for player messages" flag, cleared by `0xED1E50`), and it doesn't need to: the interface's empty
 `RoundStartPlayerCount` reaches it as 0, and its first update (`0xED1F10`, timer +0xB4 from `0xED61A0`) runs `0xECE890`,

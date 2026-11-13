@@ -16,8 +16,7 @@
 
 namespace objectives {
 
-// Hooks the capture point constructor and destructor (every mode; logs what each level has), and the pre-round's
-// message listener so a round starts with you alone: the level data wants 8 players and bots never count.
+// Hooks the capture point constructor and destructor (every mode; logs what each level has).
 void Install();
 
 // The level changed: key as nav's ("MP_03_SectorControl"). Picks up that map's flags when the mode has them.
