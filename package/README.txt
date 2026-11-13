@@ -104,10 +104,10 @@ That resets the map you're on. To reset another one, name it: nav.reset somalia
 WHAT TO LOOK OUT FOR
 --------------------
 - Crashes or freezes. Pressing Tab while dead used to close the game; that's fixed in this build.
-- Rounds now really start (new). Offline, the game waited forever for 8 players before starting a round, and bots don't
-  count, so Sector Control's flags couldn't be taken. Now, when you first spawn, a 10-second countdown runs (nobody can
-  move or shoot during it) and then the round starts. In Sector Control, try taking a flag yourself, and watch whether
-  the bots go for the flags.
+- Sector Control: the flags can't be taken yet, by you or the bots (being worked on). Please stand on a flag for half
+  a minute anyway and say which one and roughly when: the log now records what the flag does while you're on it.
+- Bots on a flag now stand and watch the ways in, moving to another spot now and then, instead of running in circles
+  (new). They also spread over the flags instead of all crowding the one at their spawn.
 - When the next map loads without the game closing, your points should start again from 0. They used to carry over from the
   last round (fixed in this build).
 - Bodies that go limp but keep moving around, or bots that vanish when they die instead of falling. A recent fix should
@@ -142,6 +142,7 @@ KNOWN ISSUES
   with no routes and learn as people walk around. Add any of them to [launch] Map to try them (MP_13, MP_16, MP_19, MP_21,
   MP_18, MP_20).
 - In Combat Mission, Hot Spot and Home Run the bots don't play the objectives (see GAME MODES).
+- Sector Control's flags never change hands offline yet, for anyone.
 
 
 SETTINGS

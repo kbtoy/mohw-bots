@@ -627,16 +627,56 @@ void ObjectiveSpot(State& s, const Objective& o, float out[3])
     out[0] = o.pos[0] - std::sin(yaw) * dist;
     out[1] = o.pos[1];
     out[2] = o.pos[2] + std::cos(yaw) * dist;
+    s.atSpot = false;
+}
+
+// Where a bot standing on a flag looks: down one of the ways in - a learned node 10-35 m out (people walked there), one it
+// can see likelier, and likelier toward the flags its team doesn't hold (where enemies come from); not the way it just
+// watched. With no routes learned yet: a quarter turn either way.
+float WatchYaw(State& s, int objective, int team, const float eye[3])
+{
+    const Objective& ob = g_objectives[objective];
+    float best = WrapTwoPi(s.watchYaw + (Rand(s) < 0.5f ? -1.0f : 1.0f) * Rand(s, 1.0f, 2.0f));
+    float bestScore = -1e9f;
+    for (int i = 0; i < 6; ++i)
+    {
+        float p[3];
+        Rand(s);
+        if (!nav::RandomNode(s.rng, ob.pos, 10.0f, 35.0f, p))
+            continue;
+        const float yaw = YawTo(p[0] - eye[0], p[2] - eye[2]);
+        float score = Rand(s, 0.0f, 0.8f);
+        float toward = -1.0f;
+        for (size_t k = 0; k < g_objectives.size(); ++k)
+            if (static_cast<int>(k) != objective && g_objectives[k].owner != team)
+                toward = std::fmax(toward, std::cos(AngleDiff(yaw, YawTo(g_objectives[k].pos[0] - ob.pos[0],
+                                                                         g_objectives[k].pos[2] - ob.pos[2]))));
+        score += 0.6f * toward;
+        const float to[3] = {p[0], p[1] + 1.2f, p[2]};
+        bool blocked = true;
+        if (eng::RayBlocked(eye, to, kSightFlags, &blocked) && !blocked)
+            score += 1.0f;
+        if (std::fabs(AngleDiff(yaw, s.watchYaw)) < 0.6f)
+            score -= 0.8f;
+        if (score > bestScore)
+        {
+            bestScore = score;
+            best = yaw;
+        }
+    }
+    return best;
 }
 
 // Which objective to head for this time, or -1: a share of each team plays the objectives (roamers most, hunters least),
 // the rest hunt as before. Ones the team doesn't hold weigh most, then its own with an enemy near; nearer ones are
-// likelier. A bot that was on its way to one keeps at it while it's still wanted.
-int PickObjective(State& s, int team, const float feet[3], const std::vector<Actor>& actors)
+// likelier, ones with teammates already at them less likely. A bot that was on its way to one keeps at it while it's
+// still wanted - less often once it has stood on it a minute and it still isn't theirs.
+int PickObjective(State& s, void* self, int team, const float feet[3], const std::vector<Actor>& actors)
 {
     if (g_objectives.empty())
         return -1;
-    if (s.goalKind == kGoalObjective && ObjectiveWanted(s.objective, team, actors) && Rand(s) < 0.85f)
+    const bool stale = s.heldObjective == s.objective && s.heldFor >= 60.0f;
+    if (s.goalKind == kGoalObjective && ObjectiveWanted(s.objective, team, actors) && Rand(s) < (stale ? 0.3f : 0.85f))
         return s.objective;
     static const float kOdds[3] = {0.45f, 0.6f, 0.75f};
     if (Rand(s) >= kOdds[s.style])
@@ -650,6 +690,13 @@ int PickObjective(State& s, int team, const float feet[3], const std::vector<Act
         const bool ours = o.owner == team;
         float w = !ours ? 1.0f : EnemyNear(team, o.pos, 15.0f, actors) ? 1.5f : 0.15f;  // a few stay to guard their own
         w /= 1.0f + Distance2D(feet, o.pos) / 60.0f;
+        int mates = 0;
+        for (const Actor& a : actors)
+            if (a.team == team && a.player != self && Distance2D(a.pos, o.pos) < 12.0f)
+                ++mates;
+        w /= 1.0f + 0.3f * static_cast<float>(mates);
+        if (stale && i == s.heldObjective)
+            w *= 0.2f;
         weights[i] = w;
         total += w;
     }
@@ -667,7 +714,7 @@ void PickGoal(State& s, void* self, int team, const float feet[3], const std::ve
 {
     if (s.style < 0)
         s.style = static_cast<int>(Rand(s) * 3.0f) % 3;  // 0 hunter, 1 flanker, 2 roamer
-    const int objective = PickObjective(s, team, feet, actors);
+    const int objective = PickObjective(s, self, team, feet, actors);
     if (objective >= 0)
     {
         ObjectiveSpot(s, g_objectives[objective], s.goal);
@@ -1326,6 +1373,7 @@ void Update(State& s, const char* name, void* player, void* soldier, void* input
 
         s.goalTimer -= dt;
         bool holding = false;
+        bool still = false;  // standing at its spot on the flag, watching a way in
         if (s.hasGoal && s.goalKind == kGoalObjective && s.goalTimer > 0.0f)
         {
             if (!ObjectiveWanted(s.objective, team, actors))
@@ -1333,8 +1381,36 @@ void Update(State& s, const char* name, void* player, void* soldier, void* input
             else
             {
                 holding = true;
-                if (Distance2D(feet, s.goal) < 1.5f)
-                    ObjectiveSpot(s, g_objectives[s.objective], s.goal);  // there: move about inside it until it's ours
+                const Objective& ob = g_objectives[s.objective];
+                if (s.heldObjective != s.objective)
+                {
+                    s.heldObjective = s.objective;
+                    s.heldFor = 0.0f;
+                }
+                if (ob.owner == team)
+                    s.heldFor = 0.0f;  // theirs (it's defending): never goes stale
+                else if (Distance2D(feet, ob.pos) < ob.radius && std::fabs(feet[1] - ob.pos[1]) < 4.0f)
+                    s.heldFor += dt;
+                // There: stand and watch (it used to pick a new spot every time it reached one, so it ran in circles);
+                // every 8-18 s, half the time, it shifts to another spot inside.
+                if (Distance2D(feet, s.goal) < 1.2f)
+                {
+                    if (!s.atSpot)
+                    {
+                        s.atSpot = true;
+                        s.spotTimer = Rand(s, 8.0f, 18.0f);
+                        s.watchTimer = 0.0f;
+                    }
+                    s.spotTimer -= dt;
+                    if (s.spotTimer <= 0.0f && Rand(s) < 0.5f)
+                        ObjectiveSpot(s, ob, s.goal);
+                    else
+                    {
+                        if (s.spotTimer <= 0.0f)
+                            s.spotTimer = Rand(s, 8.0f, 18.0f);
+                        still = true;
+                    }
+                }
             }
         }
         if (!holding && (!s.hasGoal || s.goalTimer <= 0.0f || Distance2D(feet, s.goal) < 3.0f))
@@ -1445,16 +1521,31 @@ void Update(State& s, const char* name, void* player, void* soldier, void* input
             }
         }
         float moveYaw = swimmingOut ? wantYaw : AvoidObstacles(s, feet, wantYaw, onPath, dt);
-        // Look where it walks - or toward a noise it heard, still walking the same way.
+        still = still && !swimmingOut;
+        // Look where it walks - or toward a noise it heard, still walking the same way. Standing on a flag: down the
+        // way in it's watching, a new one every 2.5-5 s.
         s.lookTimer -= dt;
         if (s.lookTimer > 0.0f)
             TurnToward(s, s.lookYaw, 0.0f, dt);
+        else if (still)
+        {
+            s.watchTimer -= dt;
+            if (s.watchTimer <= 0.0f)
+            {
+                s.watchYaw = WatchYaw(s, s.objective, team, eye);
+                s.watchTimer = Rand(s, 2.5f, 5.0f);
+            }
+            TurnToward(s, s.watchYaw, 0.0f, dt);
+        }
         else
             TurnToward(s, moveYaw, 0.0f, dt);
-        MoveToward(s, moveYaw, 1.0f, o);
-        o.sprint = goalDist > 20.0f && s.detourTimer <= 0.0f && s.lookTimer <= 0.0f && !swimmingOut;
-        bool stuck = CheckStuck(s, name, feet, wantYaw, moveState, pose,
-                                body && Distance2D(feet, body->pos) < 1.5f ? body->pos : nullptr, dt);
+        if (!still)
+            MoveToward(s, moveYaw, 1.0f, o);
+        o.sprint = !still && goalDist > 20.0f && s.detourTimer <= 0.0f && s.lookTimer <= 0.0f && !swimmingOut;
+        if (still)
+            std::memcpy(s.progressPos, feet, sizeof(s.progressPos));  // standing on purpose isn't being stuck
+        bool stuck = !still && CheckStuck(s, name, feet, wantYaw, moveState, pose,
+                                          body && Distance2D(feet, body->pos) < 1.5f ? body->pos : nullptr, dt);
         if (s.changeClass)
         {
             s.changeClass = false;

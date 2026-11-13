@@ -82,6 +82,67 @@ void __fastcall PreRoundListenDetour(void* self, void* /*edx*/, void* msg)
     }
 }
 
+// 2026.11.11.1 lowered the count and nothing changed: no "pre-round:" line at all, so the listener never ran. Whether a
+// ServerPreRoundEntity exists at all is the next question: its constructor (0xEDED10, thiscall(creationInfo, data) ret 8)
+// is hooked to list them, and Tick logs each one's state as it changes (and lowers the count there too).
+constexpr uintptr_t kPreRoundVtable = 0x02822F28;
+constexpr int kPre_ListBegin = 0x94, kPre_ListEnd = 0x98, kPre_StartCount = 0xA4, kPre_Countdown = 0xAC, kPre_State = 0xB8;
+using PreRoundCtorFn = void*(__thiscall*)(void* self, void* creationInfo, void* data);
+PreRoundCtorFn g_preRoundCtor = nullptr;
+struct PreRound
+{
+    void* entity = nullptr;
+    ULONGLONG createdAt = 0;
+    bool logged = false;
+    uint32_t count = 0, listed = 0;
+    uint8_t state = 0;
+};
+std::vector<PreRound> g_preRounds;  // under g_lock
+
+void* __fastcall PreRoundCtorDetour(void* self, void* /*edx*/, void* creationInfo, void* data)
+{
+    void* result = g_preRoundCtor(self, creationInfo, data);
+    PreRound p;
+    p.entity = self;
+    p.createdAt = GetTickCount64();
+    EnterCriticalSection(&g_lock);
+    g_preRounds.push_back(p);
+    LeaveCriticalSection(&g_lock);
+    Log("pre-round: entity %p created (data %p)", self, data);
+    return result;
+}
+
+void WatchPreRounds()
+{
+    EnterCriticalSection(&g_lock);
+    for (PreRound& p : g_preRounds)
+    {
+        void* vtable = nullptr;
+        if (!eng::ReadPtr(p.entity, &vtable) || reinterpret_cast<uintptr_t>(vtable) != kPreRoundVtable)
+            continue;
+        uint32_t count = 0, begin = 0, end = 0;
+        uint8_t state = 0;
+        float countdown = 0.0f;
+        if (!eng::ReadU32(eng::At(p.entity, kPre_StartCount), &count) || !eng::ReadU32(eng::At(p.entity, kPre_ListBegin), &begin) ||
+            !eng::ReadU32(eng::At(p.entity, kPre_ListEnd), &end) || !eng::ReadByte(eng::At(p.entity, kPre_State), &state))
+            continue;
+        eng::ReadFloat(eng::At(p.entity, kPre_Countdown), &countdown);
+        const uint32_t listed = end >= begin ? (end - begin) / 4 : 0;
+        if (!p.logged || count != p.count || listed != p.listed || state != p.state)
+        {
+            Log("pre-round: entity %p wants %u player(s), has %u entered, state 0x%02X (bit 0 = counting down), countdown %.0f s",
+                p.entity, count, listed, state, countdown);
+            p.logged = true;
+            p.count = count;
+            p.listed = listed;
+            p.state = state;
+        }
+        if (count > kPreRoundStartPlayers)
+            eng::WriteBytes(const_cast<void*>(eng::At(p.entity, kPre_StartCount)), &kPreRoundStartPlayers, 4);
+    }
+    LeaveCriticalSection(&g_lock);
+}
+
 struct Sample
 {
     uint32_t owner = 0;
@@ -98,7 +159,14 @@ struct Tracked
     bool sampled = false;
     Sample logged;          // what the last capture line said
     float logTimer = 0.0f;  // seconds until another capture line may go out
+    // The whole entity as last logged (2026-11-12: nothing moved with you standing on a flag, so find out which of
+    // its fields, if any, react; unknown ones included).
+    static constexpr int kRawWords = 0x104 / 4;
+    uint32_t raw[kRawWords] = {};
+    bool rawValid = false;
+    float rawTimer = 0.0f;
 };
+int g_rawLines = 0;  // per level, capped
 
 struct Flag
 {
@@ -243,6 +311,36 @@ void SampleAll(const std::vector<brain::Actor>& actors)
         }
         if (!t.sampled)
             t.logged = now;
+        // Raw: the first read whole, then which words changed (at most every 3 s per point, 400 lines a level).
+        uint32_t raw[Tracked::kRawWords];
+        t.rawTimer -= 0.5f;
+        if (g_rawLines < 400 && eng::ReadBytes(t.entity, raw, sizeof(raw)))
+        {
+            char text[700] = "";
+            int changed = 0;
+            for (int w = 0; w < Tracked::kRawWords; ++w)
+                if (!t.rawValid || raw[w] != t.raw[w])
+                {
+                    if (t.rawValid && t.rawTimer > 0.0f)
+                        break;  // not now; compared again next time
+                    char one[40];
+                    if (t.rawValid)
+                        std::snprintf(one, sizeof(one), " +%02X %08X>%08X", w * 4, t.raw[w], raw[w]);
+                    else
+                        std::snprintf(one, sizeof(one), "%s%08X", w % 8 ? " " : (w ? " | " : ""), raw[w]);
+                    if (std::strlen(text) + std::strlen(one) < sizeof(text) - 1)
+                        std::strcat(text, one);
+                    ++changed;
+                }
+            if (changed && (!t.rawValid || t.rawTimer <= 0.0f))
+            {
+                ++g_rawLines;
+                Log(t.rawValid ? "objectives: capture point %p raw change:%s" : "objectives: capture point %p raw: %s", t.entity, text);
+                std::memcpy(t.raw, raw, sizeof(raw));
+                t.rawValid = true;
+                t.rawTimer = 3.0f;
+            }
+        }
         // Learn which flag this is: the one flag (not yet linked) with soldiers at it while its progress moves.
         if (moved && t.flag < 0 && g_flagMode)
         {
@@ -335,6 +433,11 @@ void Install()
         g_preRoundListen = reinterpret_cast<PreRoundListenFn>(InlineHook(listen, 11, reinterpret_cast<const void*>(&PreRoundListenDetour)));
     Log("objectives: pre-round hook %s", g_preRoundListen ? "in place (a round starts once you have spawned)"
                                                           : "FAILED (rounds never start: no Sector Control tickets or flags)");
+    // Its constructor: mov eax, [esp+8]; push esi (4 + 1 position-independent bytes).
+    void* preCtor = reinterpret_cast<void*>(eng::Address("PreRound_ctor"));
+    if (preCtor)
+        g_preRoundCtor = reinterpret_cast<PreRoundCtorFn>(InlineHook(preCtor, 5, reinterpret_cast<const void*>(&PreRoundCtorDetour)));
+    Log("objectives: pre-round constructor hook %s", g_preRoundCtor ? "in place" : "FAILED");
 }
 
 void OnLevel(const std::string& key)
@@ -345,6 +448,14 @@ void OnLevel(const std::string& key)
     g_flags.clear();
     for (Tracked& t : g_tracked)
         t.flag = -1;
+    g_rawLines = 0;
+    // The last level's pre-round is gone; keep one made in the last 60 s (this level's, if it came first).
+    EnterCriticalSection(&g_lock);
+    const ULONGLONG now = GetTickCount64();
+    g_preRounds.erase(std::remove_if(g_preRounds.begin(), g_preRounds.end(),
+                                     [now](const PreRound& p) { return now - p.createdAt > 60000; }),
+                      g_preRounds.end());
+    LeaveCriticalSection(&g_lock);
     g_flagMode = false;
     g_reportedCount = 0;
     g_countTimer = 0.0f;
@@ -389,6 +500,7 @@ void Tick(const std::vector<brain::Actor>& actors, float dt)
     Sync();
     SampleAll(actors);
     Publish();
+    WatchPreRounds();
 
     // What the level has, once it settles (any mode: the next modes' objectives start from this).
     g_countTimer += 0.5f;

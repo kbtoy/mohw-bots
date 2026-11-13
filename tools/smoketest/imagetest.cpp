@@ -419,6 +419,12 @@ int wmain(int argc, wchar_t** argv)
                 padded = padded && preRound[i] == 0x90;
             Check(preRound[0] == 0xE9 && preRoundInfo.AllocationBase == dll && padded && preRound[11] == 0x56,
                   "Objectives: pre-round listener (0xEDEF20) jumps into the DLL, the rest intact");
+            // Its constructor: 5 bytes taken (mov eax, [esp+8]; push esi), push edi next.
+            const auto* preCtor = reinterpret_cast<const uint8_t*>(0xEDED10);
+            MEMORY_BASIC_INFORMATION preCtorInfo = {};
+            VirtualQuery(preCtor + 5 + *reinterpret_cast<const int32_t*>(preCtor + 1), &preCtorInfo, sizeof(preCtorInfo));
+            Check(preCtor[0] == 0xE9 && preCtorInfo.AllocationBase == dll && preCtor[5] == 0x57 && preCtor[6] == 0x33,
+                  "Objectives: pre-round constructor (0xEDED10) jumps into the DLL, the rest intact");
         }
         // Awards: the routine itself runs (score is awarded); only its stats loop is guarded.
         const auto* awards = reinterpret_cast<const uint8_t*>(0x169BBCE);

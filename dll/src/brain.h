@@ -94,6 +94,15 @@ struct State
     int style = -1;
     int goalKind = 0;  // GoalKind of the current goal
     int objective = -1;  // kGoalObjective: which one (index into the list SetObjectives gave)
+    // Holding a flag (2026-11-12: bots ran in circles on it, and both teams camped the flag at their spawn): it stands at
+    // its spot and watches the ways in, shifting spot now and then; one that has stood on a flag a minute without it
+    // turning theirs is likelier to try another.
+    bool atSpot = false;
+    float spotTimer = 0.0f;   // standing at the spot: seconds until it may shift to another
+    float watchYaw = 0.0f;    // the way in it is watching...
+    float watchTimer = 0.0f;  // ...for this long
+    int heldObjective = -1;   // the objective heldFor counts for
+    float heldFor = 0.0f;     // seconds inside that objective's area
     float probeTimer = 0.0f;
     float detourTimer = 0.0f;
     float detourYaw = 0.0f;

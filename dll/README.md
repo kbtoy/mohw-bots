@@ -1217,7 +1217,18 @@ soldiers stand at exactly one unlinked flag (the last pair links itself). Until 
 if they agree (all neutral at the start), else unknown. Log lines: `objectives: Sector Control flags A (...)`, `flag B is capture
 point ...`, `flag B taken by team 2`, a per-minute owner summary, and in every mode `N capture point entities in <level>`.
 
-**The pre-round (2026.11.11.1, not played yet).** First Sector Control play with flags (2026-11-11, MP_21 then MP_18,
+**Played 2026-11-12 (2026.11.11.1, MP_20 TDM then MP_21 Sector Control in place): no `pre-round:` line at all**, so the
+listener was never called; the three capture points read fine (`owner nobody, nobody's flag up, capture 0, flag at 0`)
+and stayed so with you standing on a flag, and no `ServerGameplaySetPreRoundLogicMessage`. 2026.11.12.1 hooks the
+constructor too (`0xEDED10`; logs `pre-round: entity ... created` and each one's count, list size and state as they change,
+lowering the count there as well) to learn whether a `ServerPreRoundEntity` exists at all, and logs every capture point
+whole once (`capture point ... raw:`, 65 words) and then which words change (`raw change: +C0 00000000>...`, every 3 s at
+most, 400 lines a level), to see which fields react, if any, while someone stands on it. The data, read since: each point
+is `CaptureRadius` 5 m around its own transform, `MinNrToTakeControl` 1, `TimeToGetControl` 20 s, `CapturableType` 3
+(`CTSectorControl`: 0 default, 1 unable to change team, 2 capture enablable), and each control point prefab is moved into
+place by a property connection to its `BlueprintTransform` (field -409930682) from the fullprefab's interface.
+
+**The pre-round (2026.11.11.1).** First Sector Control play with flags (2026-11-11, MP_21 then MP_18,
 both after an in-place change): in 15 minutes no capture point moved (no owner, progress or flag height change, so no flag
 linked), your own capture did nothing, and the bots mostly stayed at their base. Every mode's sub-level starts its round
 from `pf_preround_simple` → `pf_preround_wrapper` → `PreRoundEntityData` (`RoundStartPlayerCount` 8, `RoundStartCountdown`
@@ -1245,7 +1256,15 @@ first-entry triggers for the HUD and voice lines, not what the capture counts.
 
 **The brain** has a fourth goal, objective (`brain::SetObjectives`): with no target, a bot heads for a flag its team doesn't hold (or an
 own flag with an enemy within 15 m; a few guard their own), roamers 75% of the time, flankers 60%, hunters 45%, nearer flags likelier.
-It keeps at it (85% per re-pick) until the flag is its team's, moving between spots within 2.4 m of the point; a fight interrupts it.
+It keeps at it (85% per re-pick) until the flag is its team's; a fight interrupts it. **Since 2026.11.12.1** (2026-11-12:
+on a flag the bots "run in circles and are spastic", and both teams mostly camped the flag at their spawn) it walks to a
+spot within 2.4 m and stands there, watching a way in (`WatchYaw`: of six learned nodes 10-35 m from the flag, the best
+of: one it can see +1, toward a flag its team doesn't hold up to +0.6, not the way it just watched -0.8, plus up to 0.8
+at random; a new one every 2.5-5 s, a noise it hears first), and every 8-18 s, half the time, shifts to another spot.
+Standing there on purpose doesn't count as stuck. A flag's weight is divided by 1 + 0.3 per teammate within 12 m of it,
+so a team spreads over the flags (its spawn crowd no longer pulls everyone to the nearest); once a bot has stood a minute
+on a flag that still isn't its team's, it keeps at it 30% of re-picks instead of 85% and weighs that flag x0.2 (on its
+own flag, defending, that never runs).
 The spread line counts objective goals. Combat Mission, Hot Spot and Home Run objectives (bomb sites are `GameInteractionEntityData`,
 `HoldToInteractTime`, `EIAInteract` 33) aren't played by bots yet.
 
