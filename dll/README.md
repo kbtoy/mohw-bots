@@ -1217,6 +1217,42 @@ soldiers stand at exactly one unlinked flag (the last pair links itself). Until 
 if they agree (all neutral at the start), else unknown. Log lines: `objectives: Sector Control flags A (...)`, `flag B is capture
 point ...`, `flag B taken by team 2`, a per-minute owner summary, and in every mode `N capture point entities in <level>`.
 
+**Who captures (2026.11.12.2, not played yet).** 2026.11.12.1's logging (MP_18 SC from launch): the pre-round exists
+(`entity ... created`) but reads `wants 0 player(s), has 0 entered, state 0x10`. It never listens (bit 2 of +0xB8 is its
+"registered for player messages" flag, cleared by `0xED1E50`), and it doesn't need to: the interface's empty
+`RoundStartPlayerCount` reaches it as 0, and its first update (`0xED1F10`, timer +0xB4 from `0xED61A0`) runs `0xECE890`,
+which fires `StartRound` (0xA41E7427) and sends `VeniceServerMetricsStartRoundMessage`, its only sender, 50 ms after the
+entity is made, in every session's log. **So rounds always started; the pre-round paragraphs below were wrong.** The capture
+points: their whole 0x104 bytes changed only at +0x28..+0x40 and +0x6C (set-up) in 7 minutes of bots standing on them. The
+reason: `ServerCapturePointEntity`'s update slot (vtable +0x88, `0xE36A60`) is a bare `ret 4`, its message listener a bare
+`ret 4`, and its capture step `0xE47F30` (and the BF3-style `0xE47300`) are called from nowhere in the exe, any section. In
+this build nothing ever runs a capture. `0xE47F30(float dt, {ServerPlayer** begin, end}* inside, int counts[], int attacker)`
+ret 0x10: `0xE3A230` turns counts into a rate (counts[0] the soldiers inside that aren't the controlling team's (+0xA8),
+counts[1] the controller's, then per-squad counts at +8.. and +0x20.. for the squad bonus via `0xE3A040`; with
+`SeesawCapturing`, attackers ahead by at least `MinNrToTakeControl` give a negative rate, holders ahead a positive one, capped at
+`MaxCaptureMultiplier` and scaled by `AddedMultiplierPerPlayer`; nobody inside: `0xE36B20`, the flag going back at
+`ReturnMultiplier`). Rate > 0: `0xE47940` raises the flag (+0xC4 += rate x dt / `TimeToGetControl`) and at the top fires
+OnCaptured (0x7D1F6304 as a stat event, 0x4BF96304), sets +0xAC = +0xA8, marks the ghost dirty and sends
+`ServerGameplayCapturePointCapturedMessage`. Rate < 0: `0xE47B90` lowers it (`TimeToLoseControl`), sends
+`ServerGameplayCapturePointLostMessage` (+0x2C the attacker) if it was up, and at the bottom `0xE46810` and `setTeam(attacker)`
+(`0xE3A590`). Both send an unnamed progress message (type 0xD34EDB3E, vtable 0x281ADA0: +0x28 entity, +0x2C delta, +0x30 the
+inside list, +0x34 counts), whose only listener is the scoring system (`0xE81C23` → `0xE7F6A0`), which walks the list
+(team at `player+0x38C`) to award capture points. `objectives.cpp` now links each entity to its flag from its data's
+`FlagID` (+0xE0; A 0, B 1, C 2 on every map) and, every 0.5 s in Sector Control, counts the soldiers with a soldier within
+`CaptureRadius` (+0x8C, 5 m flat, 3 m up or down) of each flag and calls `0xE47F30` (`eng::CapturePointUpdate`, SEH-guarded;
+a fault stops it for the session), with nobody in control the bigger team attacking. Logged: `flag A: 2 of team 1 and 0 of
+team 2 inside (nobody in control)`, `flag A: team 1 in control`, `flag A captured by team 1`. A flag counts as a team's
+(for the bots and the spawn rule) once that team is in control and its flag is up (+0xA8 == +0xAC).
+
+**Spawns in Sector Control (2026.11.12.2).** "Bots shouldn't even spawn at the enemy's initial base flag, even if being camped."
+None did in the two rounds logged (by nearest flag: team 1 at A, team 2 at C and its base, four of team 2 near B), but the
+flag spawners change team with their flag, so taking the enemy's base flag would give a team points there. A team's
+starting base is where its first 10 fall-back spawns of the level landed; the enemy's base is within 40 m of their middle or
+25 m of the flag nearest it (if within 60 m). While a bot's team holds that flag its fall-back spawns use its own starting
+spots (`eng::SpawnAt`, one with no enemy within 25 m), and a buddy in the enemy's base isn't spawned on; a game pick that
+still lands there is logged. The points' own positions can't be used: the flag spawners are one prefab placed three times,
+so their data positions are local.
+
 **Played 2026-11-12 (2026.11.11.1, MP_20 TDM then MP_21 Sector Control in place): no `pre-round:` line at all**, so the
 listener was never called; the three capture points read fine (`owner nobody, nobody's flag up, capture 0, flag at 0`)
 and stayed so with you standing on a flag, and no `ServerGameplaySetPreRoundLogicMessage`. 2026.11.12.1 hooks the

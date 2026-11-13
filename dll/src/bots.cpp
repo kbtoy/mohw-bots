@@ -651,6 +651,103 @@ const char* BuddyCombatReason(void* buddy, void* buddySoldier, const float buddy
     return nullptr;
 }
 
+// Sector Control: never in the enemy's starting base (2026-11-12: "bots shouldn't even spawn at the enemy's initial base
+// flag, even if being camped"). A team's starting base is where its first fall-back spawns of the level landed (the
+// initial spawn markers; up to 10, kept whole). The enemy's base: within 40 m of the middle of its spots, or 25 m of the
+// flag nearest that middle (its base flag, if one is within 60 m). The flag spawners change team with their flag, so a team
+// holding the enemy's base flag would get points there: while it does, its fall-back spawns use its own starting spots
+// instead of the game's pick. A buddy standing in the enemy's base isn't spawned on. Other modes: no starting spots, no rule.
+struct StartSpot
+{
+    float t[16];
+};
+std::vector<StartSpot> g_startSpots[3];  // by team
+constexpr size_t kStartSpots = 10;
+constexpr float kEnemyBaseRadius = 40.0f, kEnemyBaseFlagRadius = 25.0f, kBaseFlagReach = 60.0f;
+uint32_t g_startSpotRng = 0x2545F491u;
+
+float FlatDistance(const float a[3], const float b[3])
+{
+    const float dx = a[0] - b[0], dz = a[2] - b[2];
+    return std::sqrt(dx * dx + dz * dz);
+}
+
+void ClearStartSpots()
+{
+    for (auto& spots : g_startSpots)
+        spots.clear();
+}
+
+bool StartCenter(int team, float out[3])
+{
+    if ((team != 1 && team != 2) || g_startSpots[team].size() < 3)
+        return false;
+    out[0] = out[1] = out[2] = 0.0f;
+    for (const StartSpot& s : g_startSpots[team])
+        for (int i = 0; i < 3; ++i)
+            out[i] += s.t[12 + i] / static_cast<float>(g_startSpots[team].size());
+    return true;
+}
+
+// The enemy's base flag (the one nearest its starting spots, if within 60 m), its letter, place and holder.
+bool EnemyBaseFlag(int team, char* letter, float pos[3], int* owner)
+{
+    float center[3];
+    if ((team != 1 && team != 2) || !StartCenter(3 - team, center) || !objectives::NearestFlag(center, letter, pos, owner))
+        return false;
+    return FlatDistance(center, pos) < kBaseFlagReach;
+}
+
+bool InEnemyBase(int team, const float p[3])
+{
+    float center[3], flag[3];
+    if ((team != 1 && team != 2) || !StartCenter(3 - team, center))
+        return false;
+    return FlatDistance(p, center) < kEnemyBaseRadius ||
+           (EnemyBaseFlag(team, nullptr, flag, nullptr) && FlatDistance(p, flag) < kEnemyBaseFlagRadius);
+}
+
+void NoteStartSpot(int team, void* soldier)
+{
+    const float* t = nullptr;
+    if ((team != 1 && team != 2) || g_startSpots[team].size() >= kStartSpots || !soldier ||
+        !eng::GetSoldierTransform(soldier, &t) || !t || InEnemyBase(team, t + 12))
+        return;
+    StartSpot s;
+    std::memcpy(s.t, t, sizeof(s.t));
+    g_startSpots[team].push_back(s);
+    if (g_startSpots[team].size() == kStartSpots)
+    {
+        float center[3];
+        StartCenter(team, center);
+        Log("spawns: team %d's starting base is around (%.0f, %.0f, %.0f); the other team's bots never spawn within %.0f m "
+            "of it or %.0f m of its base flag", team, center[0], center[1], center[2], kEnemyBaseRadius, kEnemyBaseFlagRadius);
+    }
+}
+
+// One of the team's own starting spots, at random, preferring one with no enemy within 25 m.
+bool OwnStartSpot(void* context, int team, float out[16])
+{
+    if ((team != 1 && team != 2) || g_startSpots[team].empty())
+        return false;
+    const auto& spots = g_startSpots[team];
+    for (int attempt = 0; attempt < 8; ++attempt)
+    {
+        g_startSpotRng = g_startSpotRng * 1664525u + 1013904223u;
+        const StartSpot& s = spots[(g_startSpotRng >> 8) % spots.size()];
+        bool safe = true;
+        for (const brain::Actor& a : Actors(context))
+            if ((a.team == 1 || a.team == 2) && a.team != team && Distance(a.pos, s.t + 12) < 25.0f)
+                safe = false;
+        if (safe || attempt == 7)
+        {
+            std::memcpy(out, s.t, sizeof(s.t));
+            return true;
+        }
+    }
+    return false;
+}
+
 // Next to the fireteam buddy (the game's own pairing) when it is alive, out of combat and not swimming: 1.5 m behind
 // it, else beside it, where there is no wall in between, ground underfoot and no water over it. False: fall back.
 bool TrySpawnOnBuddy(void* context, Bot& bot)
@@ -689,6 +786,11 @@ bool TrySpawnOnBuddy(void* context, Bot& bot)
     if (eng::GetCharacterPose(buddySoldier, nullptr, nullptr, &buddyState) && buddyState == eng::kStateSwimming)
     {
         Log("  [%s] buddy %s is swimming; fall-back spawn", bot.name, buddyName);
+        return false;
+    }
+    if (InEnemyBase(bot.team, buddyPos))
+    {
+        Log("  [%s] buddy %s is in the enemy's starting base; fall-back spawn", bot.name, buddyName);
         return false;
     }
     // A bot buddy that's stuck - in a hole it can't climb out of, say (Drumstick on Novi Grad): not there too.
@@ -1096,6 +1198,30 @@ bool SpawnBotOnce(void* context, Bot& bot)
         }
         Log("  [%s] no free spawn point in its own base (team %d points %d); the game's pick instead", bot.name,
             bot.team, g_ownBasePoints[0]);
+    }
+    if (objectives::HasFlags())
+    {
+        char letter = '?';
+        float flag[3];
+        int holder = -1;
+        alignas(16) float spot[16];
+        if (EnemyBaseFlag(bot.team, &letter, flag, &holder) && holder == bot.team && OwnStartSpot(context, bot.team, spot))
+        {
+            const bool ok = eng::SpawnAt(bot.player, spot);
+            Log("  [%s] its team holds the enemy's base flag %c: spawning in its own starting base at (%.1f, %.1f, %.1f): %s",
+                bot.name, letter, spot[12], spot[13], spot[14], ok ? "ok" : "FAILED");
+            if (ok && SoldierOf(bot.player))
+                return true;
+        }
+        const bool ok = eng::ForceRespawn(context, bot.player);
+        if (void* soldier = SoldierOf(bot.player))
+        {
+            const float* t = nullptr;
+            if (eng::GetSoldierTransform(soldier, &t) && t && InEnemyBase(bot.team, t + 12))
+                Log("  [%s] the game's pick put it in the enemy's starting base at (%.1f, %.1f, %.1f)", bot.name, t[12], t[13], t[14]);
+            NoteStartSpot(bot.team, soldier);
+        }
+        return ok;
     }
     return eng::ForceRespawn(context, bot.player);
 }
@@ -1746,6 +1872,7 @@ void UpdateNavLevel(void* context, float dt)
             bot.brain = fresh;
             bot.deadSeconds = 0.0f;
         }
+        ClearStartSpots();
         if (g_bots.empty())
             Log("level: %s -> %s", g_levelKey.c_str(), key.c_str());
         else
@@ -2274,6 +2401,7 @@ void OnServerUpdate(void* server, void* updateInfo)
         g_kicked.clear();
         for (BaseWatch& base : g_bases)
             base = BaseWatch();
+        ClearStartSpots();
         g_pointPositionMisses = 0;
         scoreboard::Reset();
         InterlockedExchange(&g_roundOver, 0);

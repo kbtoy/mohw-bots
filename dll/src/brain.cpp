@@ -694,7 +694,11 @@ int PickObjective(State& s, void* self, int team, const float feet[3], const std
         for (const Actor& a : actors)
             if (a.team == team && a.player != self && Distance2D(a.pos, o.pos) < 12.0f)
                 ++mates;
-        w /= 1.0f + 0.3f * static_cast<float>(mates);
+        // 2026.11.12.1 had 0.3 per teammate, and its play still bunched at the flag by the spawn: three already there and no
+        // enemy near is plenty.
+        w /= 1.0f + 0.5f * static_cast<float>(mates);
+        if (mates >= 3 && !EnemyNear(team, o.pos, 25.0f, actors))
+            w *= 0.3f;
         if (stale && i == s.heldObjective)
             w *= 0.2f;
         weights[i] = w;

@@ -212,6 +212,12 @@ FUNCS = [
     # ServerPreRoundEntity ctor(creationInfo, PreRoundEntityData) ret 8 (vtable 0x2822F28): mov eax, [esp+8]; push esi;
     # push edi; xor edi, edi (5 position-independent bytes taken, objectives hook: lists the pre-rounds that exist)
     ("PreRound_ctor", 0xEDED10, 8),
+    # ServerCapturePointEntity's capture step, thiscall(float dt, {player** begin, end}* inside, counts*, int attacker) ret
+    # 0x10: push ebx; mov ebx, [esp+0x14]; push esi; push edi. counts: [0] soldiers inside not of the controlling team
+    # (+0xA8), [1] of it, then per-squad counts (+8.., +0x20..; bonus for squads of 2+). Rate from 0xE3A230; > 0 raises the
+    # controller's flag (0xE47940: OnCaptured, CapturedMessage at the top), < 0 lowers it (0xE47B90: LostMessage, and at
+    # the bottom setTeam(attacker)). Nothing in this build calls it (the entity's update slot is a bare ret 4): the DLL does.
+    ("CapturePoint_update", 0xE47F30, 8),
     # In-place level change (levelchange.cpp), the way the server's NetworkRequestLoadLevelMessage handler (0xAA8900) does it:
     # a LevelSetup (built inside a NetworkRequestLoadLevelMessage, +0x38, as the client's 0xF62DB0 does: name, GameMode option,
     # difficulty), copied into a ServerLoadLevelMessage (0x48 bytes from the server arena 0x2A59130, base ctor 0x259EB00, vtable

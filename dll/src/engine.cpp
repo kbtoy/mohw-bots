@@ -742,6 +742,13 @@ bool KillSoldier(void* soldier)
     GUARDED("ServerSoldierEntity::kill", reinterpret_cast<KillFn>(fn)(soldier, false, true))
 }
 
+bool CapturePointUpdate(void* capturePoint, float dt, void* inside, void* counts, int attacker)
+{
+    using UpdateFn = void(__thiscall*)(void* cp, float dt, void* inside, void* counts, int attacker);
+    GUARDED("ServerCapturePointEntity: capture step",
+            reinterpret_cast<UpdateFn>(addr::CapturePoint_update)(capturePoint, dt, inside, counts, attacker))
+}
+
 bool Localize(const char* sid, char* out, size_t size)
 {
     using LocalizeFn = void*(__cdecl*)(void* out, const char* sid);

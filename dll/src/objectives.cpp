@@ -168,6 +168,13 @@ struct Tracked
 };
 int g_rawLines = 0;  // per level, capped
 
+// Who holds a flag: the team in control (+0xA8) once its flag is the one up (+0xAC, set at the top of a capture); mid
+// capture (control taken at the bottom, flag still being raised) nobody yet.
+int Held(const Tracked& t)
+{
+    return t.sampled && t.last.owner == t.last.flagTeam ? static_cast<int>(t.last.owner) : 0;
+}
+
 struct Flag
 {
     char letter = '?';
@@ -274,6 +281,117 @@ void Link(int tracked, int flag, const char* how)
     Log("objectives: flag %c is capture point %p (%s)", g_flags[flag].letter, g_tracked[tracked].entity, how);
 }
 
+// Which flag an entity is, from its data: CapturePointEntityData.FlagID (+0xE0; SC_FlagA 0, B 1, C 2, SpawnFlag 3) -
+// the A / B / C control point prefabs say 0 / 1 / 2 on every map, the same prefabs objectives.py reads the places from.
+constexpr int kCp_Data = 0x14;
+constexpr int kData_CaptureRadius = 0x8C, kData_FlagId = 0xE0;
+
+void LinkByFlagId()
+{
+    for (size_t i = 0; i < g_tracked.size(); ++i)
+    {
+        if (g_tracked[i].flag >= 0)
+            continue;
+        void* data = nullptr;
+        uint32_t id = 0;
+        if (!eng::ReadPtr(eng::At(g_tracked[i].entity, kCp_Data), &data) || !data ||
+            !eng::ReadU32(eng::At(data, kData_FlagId), &id) || id > 2)
+            continue;
+        for (size_t f = 0; f < g_flags.size(); ++f)
+            if (g_flags[f].letter == static_cast<char>('A' + id) && g_flags[f].tracked < 0)
+            {
+                char how[48];
+                std::snprintf(how, sizeof(how), "its data's FlagID is %u", id);
+                Link(static_cast<int>(i), static_cast<int>(f), how);
+                break;
+            }
+    }
+}
+
+// The capture itself (2026-11-12: nothing ever moved, for anyone). ServerCapturePointEntity's update slot (+0x88) is a
+// bare ret 4 in this build and nothing calls its capture step (0xE47F30), so this does what the missing caller would:
+// every 0.5 s, for each flag, count the living soldiers within its CaptureRadius (5 m flat, 3 m up or down) by the
+// controlling team (+0xA8): [0] the others (attackers), [1] the controller's; no squad counts (no squad bonus). With
+// nobody in control, the bigger team present attacks and the other counts as holding. The game does the rest: rates
+// (MinNrToTakeControl, MaxCaptureMultiplier, AddedMultiplierPerPlayer, seesaw), the flag lowering then raising, setTeam,
+// OnCaptured, the Captured / Lost messages (tickets, spawns, HUD) and capture points for those inside.
+struct CaptureCounts
+{
+    int32_t attackers = 0, holders = 0;
+    int32_t squads[14] = {};
+};
+struct PlayerList
+{
+    void** begin = nullptr;
+    void** end = nullptr;
+};
+struct FlagCrowd
+{
+    int team1 = -1, team2 = -1;  // last logged, -1 never
+    int lines = 0;
+};
+FlagCrowd g_crowd[3];
+bool g_captureFailed = false;
+
+void DriveCaptures(const std::vector<brain::Actor>& actors, float dt)
+{
+    if (!g_flagMode || g_captureFailed)
+        return;
+    for (Tracked& t : g_tracked)
+    {
+        if (t.flag < 0 || t.flag >= static_cast<int>(g_flags.size()))
+            continue;
+        const Flag& flag = g_flags[t.flag];
+        void* data = nullptr;
+        float radius = 5.0f;
+        uint32_t controller = 0;
+        if (!eng::ReadPtr(eng::At(t.entity, kCp_Data), &data) || !data || !eng::ReadFloat(eng::At(data, kData_CaptureRadius), &radius) ||
+            !eng::ReadU32(eng::At(t.entity, kCp_Owner), &controller) || radius <= 0.0f || radius > 50.0f)
+            continue;
+        void* inside[64];
+        int n = 0, byTeam[3] = {};
+        for (const brain::Actor& a : actors)
+            if ((a.team == 1 || a.team == 2) && a.player && Flat(a.pos, flag.pos) < radius && std::fabs(a.pos[1] - flag.pos[1]) < 3.0f)
+            {
+                ++byTeam[a.team];
+                if (n < 64)
+                    inside[n++] = a.player;
+            }
+        CaptureCounts counts;
+        int attacker = 0;
+        if (controller == 1 || controller == 2)
+        {
+            attacker = 3 - static_cast<int>(controller);
+            counts.attackers = byTeam[attacker];
+            counts.holders = byTeam[controller];
+        }
+        else
+        {
+            attacker = byTeam[1] >= byTeam[2] ? 1 : 2;
+            counts.attackers = byTeam[attacker];
+            counts.holders = byTeam[3 - attacker];
+        }
+        PlayerList list;
+        list.begin = inside;
+        list.end = inside + n;
+        if (!eng::CapturePointUpdate(t.entity, dt, &list, &counts, attacker))
+        {
+            g_captureFailed = true;
+            Log("objectives: the capture step FAILED on flag %c; flags won't capture for the rest of this session", flag.letter);
+            return;
+        }
+        FlagCrowd& crowd = g_crowd[std::min(t.flag, 2)];
+        if ((byTeam[1] != crowd.team1 || byTeam[2] != crowd.team2) && crowd.lines < 200)
+        {
+            ++crowd.lines;
+            crowd.team1 = byTeam[1];
+            crowd.team2 = byTeam[2];
+            Log("objectives: flag %c: %d of team 1 and %d of team 2 inside (%s in control)", flag.letter, byTeam[1], byTeam[2],
+                TeamName(controller));
+        }
+    }
+}
+
 void SampleAll(const std::vector<brain::Actor>& actors)
 {
     for (size_t i = 0; i < g_tracked.size(); ++i)
@@ -288,9 +406,17 @@ void SampleAll(const std::vector<brain::Actor>& actors)
         if (t.sampled && now.owner != t.last.owner)
         {
             if (t.flag >= 0)
-                Log("objectives: flag %c taken by %s (was %s's)", g_flags[t.flag].letter, TeamName(now.owner), TeamName(t.last.owner));
+                Log("objectives: flag %c: %s in control (was %s)", g_flags[t.flag].letter, TeamName(now.owner), TeamName(t.last.owner));
             else
                 Log("objectives: capture point %p now %s's (was %s's)", t.entity, TeamName(now.owner), TeamName(t.last.owner));
+        }
+        if (t.sampled && t.flag >= 0)
+        {
+            Tracked next = t;
+            next.last = now;
+            if (Held(next) != Held(t))
+                Log("objectives: flag %c %s", g_flags[t.flag].letter,
+                    Held(next) ? (Held(next) == 1 ? "captured by team 1" : "captured by team 2") : "lost: nobody holds it");
         }
         // A capture under way: progress or the flag moving, at most every 2 s per point (2026-11-11: no capture was ever
         // seen, yours included, so show what the entities do).
@@ -311,10 +437,10 @@ void SampleAll(const std::vector<brain::Actor>& actors)
         }
         if (!t.sampled)
             t.logged = now;
-        // Raw: the first read whole, then which words changed (at most every 3 s per point, 400 lines a level).
+        // Raw: the first read whole, then which words changed (at most every 3 s per point, 150 lines a level).
         uint32_t raw[Tracked::kRawWords];
         t.rawTimer -= 0.5f;
-        if (g_rawLines < 400 && eng::ReadBytes(t.entity, raw, sizeof(raw)))
+        if (g_rawLines < 150 && eng::ReadBytes(t.entity, raw, sizeof(raw)))
         {
             char text[700] = "";
             int changed = 0;
@@ -404,7 +530,7 @@ void Publish()
             std::memcpy(o.pos, f.pos, sizeof(o.pos));
             o.letter = f.letter;
             o.radius = 4.0f;
-            o.owner = f.tracked >= 0 && g_tracked[f.tracked].sampled ? static_cast<int>(g_tracked[f.tracked].last.owner)
+            o.owner = f.tracked >= 0 && g_tracked[f.tracked].sampled ? Held(g_tracked[f.tracked])
                       : unlinkedOwner >= 0 ? unlinkedOwner : -1;
             list.push_back(o);
         }
@@ -449,6 +575,8 @@ void OnLevel(const std::string& key)
     for (Tracked& t : g_tracked)
         t.flag = -1;
     g_rawLines = 0;
+    for (FlagCrowd& c : g_crowd)
+        c = FlagCrowd();
     // The last level's pre-round is gone; keep one made in the last 60 s (this level's, if it came first).
     EnterCriticalSection(&g_lock);
     const ULONGLONG now = GetTickCount64();
@@ -489,6 +617,26 @@ void OnLevel(const std::string& key)
     Publish();
 }
 
+bool HasFlags() { return g_flagMode && !g_flags.empty(); }
+
+bool NearestFlag(const float p[3], char* letter, float pos[3], int* owner)
+{
+    if (!g_flagMode || g_flags.empty())
+        return false;
+    size_t best = 0;
+    for (size_t f = 1; f < g_flags.size(); ++f)
+        if (Flat(p, g_flags[f].pos) < Flat(p, g_flags[best].pos))
+            best = f;
+    const Flag& f = g_flags[best];
+    if (letter)
+        *letter = f.letter;
+    if (pos)
+        std::memcpy(pos, f.pos, sizeof(f.pos));
+    if (owner)
+        *owner = f.tracked >= 0 ? Held(g_tracked[f.tracked]) : -1;
+    return true;
+}
+
 void Tick(const std::vector<brain::Actor>& actors, float dt)
 {
     if (!g_installed)
@@ -498,6 +646,9 @@ void Tick(const std::vector<brain::Actor>& actors, float dt)
         return;
     g_sampleTimer = 0.5f;
     Sync();
+    if (g_flagMode)
+        LinkByFlagId();
+    DriveCaptures(actors, 0.5f);
     SampleAll(actors);
     Publish();
     WatchPreRounds();

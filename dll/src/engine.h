@@ -270,6 +270,10 @@ bool GetSoldierHealth(void* soldier, float* outHealth);
 // NetworkSuicideMessage handler (0xB42590) calls ServerSoldierEntity::kill(0, 1) (vtable +0x17C, 0xB5E790) - a hit of
 // its whole health through its damage handler, marked a suicide. False (nothing done) if it isn't one. Server thread.
 bool KillSoldier(void* soldier);
+// One step of a ServerCapturePointEntity's capture (0xE47F30; gen_signatures.py CapturePoint_update): `inside` is
+// {ServerPlayer** begin, end} (scoring awards them capture points), `counts` int[16] (attackers, holders, then squads).
+// Server thread.
+bool CapturePointUpdate(void* capturePoint, float dt, void* inside, void* counts, int attacker);
 
 // --- Client side: main thread only (the XInput poll runs there) ----------------------------------------------
 // The game's text for a string id ("ID_M_LEVEL_NAME_MP_05" -> the map's name), as UTF-8; the id itself if it has none.
