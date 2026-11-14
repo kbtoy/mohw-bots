@@ -21,7 +21,13 @@ const char* const kModes[] = {"TeamDeathMatch", "SectorControl", "CombatMission"
 using GetDataFn = bool(__thiscall*)(void* comp, uint32_t key, void* out);
 GetDataFn g_getData = nullptr;
 const char* volatile g_mode = nullptr;  // one of kModes, or null before a level
-const char* g_logged = nullptr;          // UI thread: the mode last logged as answered
+
+// UI thread. 2026.11.13.3 answered "SectorControl" on MP_18 and the Sector Control HUD still didn't show, so every key
+// asked of this component is logged (the first 60 distinct ones, with whether the game handled it), and every game
+// mode answer (which key, which component), to see whether the HUD's own key ever arrives.
+uint32_t g_seenKeys[60];
+int g_seenCount = 0;
+int g_modeLogs = 0;
 
 bool __fastcall GetDataDetour(void* comp, void* /*edx*/, uint32_t key, void* out)
 {
@@ -30,16 +36,26 @@ bool __fastcall GetDataDetour(void* comp, void* /*edx*/, uint32_t key, void* out
         const char* mode = g_mode;
         if (mode && out && eng::UiSetString(out, mode))
         {
-            if (mode != g_logged)
+            if (g_modeLogs < 40)
             {
-                g_logged = mode;
-                Log("ui: your game's HUD asked for the game mode; answered \"%s\"", mode);
+                ++g_modeLogs;
+                Log("ui: game mode asked by key %08X (%s) of %p; answered \"%s\"", key,
+                    key == kHudGameModeKey ? "the HUD graph's" : "the game's own", comp, mode);
             }
             return true;
         }
         key = kCodeGameModeKey;  // no level known yet: the game's own answer
     }
-    return g_getData(comp, key, out);
+    const bool handled = g_getData(comp, key, out);
+    bool seen = false;
+    for (int i = 0; i < g_seenCount && !seen; ++i)
+        seen = g_seenKeys[i] == key;
+    if (!seen && g_seenCount < 60)
+    {
+        g_seenKeys[g_seenCount++] = key;
+        Log("ui: settings data key %08X asked of %p: %s", key, comp, handled ? "answered by the game" : "NOT handled");
+    }
+    return handled;
 }
 
 }  // namespace
