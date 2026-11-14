@@ -211,6 +211,10 @@ FUNCS = [
     # controller's flag (0xE47940: OnCaptured, CapturedMessage at the top), < 0 lowers it (0xE47B90: LostMessage, and at
     # the bottom setTeam(attacker)). Nothing in this build calls it (the entity's update slot is a bare ret 4): the DLL does.
     ("CapturePoint_update", 0xE47F30, 8),
+    # its setTeamNation(int team, int nation) ret 8: cmp dword ptr [esp+4], 1; lea eax, [ecx+0xDC] (+0xE0 for team 2);
+    # sets it and marks ghost bit 0x80, which your game turns into that team's big flag (FlagTemplates[nation],
+    # 0xDD65B0 slots 1 / 2). Called from nowhere in this build, so every team's nation stays -1 and every flag grey.
+    ("CapturePoint_setTeamNation", 0xE36AA0, 8),
     # In-place level change (levelchange.cpp), the way the server's NetworkRequestLoadLevelMessage handler (0xAA8900) does it:
     # a LevelSetup (built inside a NetworkRequestLoadLevelMessage, +0x38, as the client's 0xF62DB0 does: name, GameMode option,
     # difficulty), copied into a ServerLoadLevelMessage (0x48 bytes from the server arena 0x2A59130, base ctor 0x259EB00, vtable

@@ -108,8 +108,9 @@ WHAT TO LOOK OUT FOR
   bots' DLL does). Standing on a flag lowers the other team's flag, then raises yours: alone, about 20 seconds for a
   free flag and 40 for one the other team holds, quicker with more of your team; it stops while both teams are on it.
   A flag left half raised sinks back and ends up nobody's. Please say whether the round's tickets and spawns change
-  with the flags, and whether the bots move on to other flags once theirs is taken. The flags used to show at the top of
-  their poles at the start; a few seconds after you first spawn they should now drop to the bottom (new).
+  with the flags, and whether the bots move on to other flags once theirs is taken. On each pole the small blue / red
+  banner is the capture moving; the big flag at the top is grey while nobody holds the point and shows the holding
+  team's national flag once it's taken (new; choose them in mohw-bots.ini, [sectorcontrol]).
 - Bots never spawn in the enemy's starting base, even if their team takes the flag there (new).
 - Bots on a flag stand and watch the ways in, moving to another spot now and then, and spread over the flags instead of
   crowding the one at their spawn.

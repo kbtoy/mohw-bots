@@ -749,6 +749,13 @@ bool CapturePointUpdate(void* capturePoint, float dt, void* inside, void* counts
             reinterpret_cast<UpdateFn>(addr::CapturePoint_update)(capturePoint, dt, inside, counts, attacker))
 }
 
+bool CapturePointSetTeamNation(void* capturePoint, int team, int nation)
+{
+    using SetFn = void(__thiscall*)(void* cp, int team, int nation);
+    GUARDED("ServerCapturePointEntity: set team nation",
+            reinterpret_cast<SetFn>(addr::CapturePoint_setTeamNation)(capturePoint, team, nation))
+}
+
 bool Localize(const char* sid, char* out, size_t size)
 {
     using LocalizeFn = void*(__cdecl*)(void* out, const char* sid);

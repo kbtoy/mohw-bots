@@ -274,6 +274,8 @@ bool KillSoldier(void* soldier);
 // {ServerPlayer** begin, end} (scoring awards them capture points), `counts` int[16] (attackers, holders, then squads).
 // Server thread.
 bool CapturePointUpdate(void* capturePoint, float dt, void* inside, void* counts, int attacker);
+// A capture point's nation for a team (0xE36AA0: +0xDC team 1, +0xE0 team 2; an index into its FlagTemplates).
+bool CapturePointSetTeamNation(void* capturePoint, int team, int nation);
 
 // --- Client side: main thread only (the XInput poll runs there) ----------------------------------------------
 // The game's text for a string id ("ID_M_LEVEL_NAME_MP_05" -> the map's name), as UTF-8; the id itself if it has none.

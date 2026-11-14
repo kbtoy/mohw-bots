@@ -62,8 +62,6 @@ struct Tracked
     uint32_t raw[kRawWords] = {};
     bool rawValid = false;
     float rawTimer = 0.0f;
-    int nudge = 0;  // see DriveCaptures: 0 not yet, 1 raised a little, 2 done
-    float nudgeTimer = 0.0f;
 };
 int g_rawLines = 0;  // per level, capped
 
@@ -89,7 +87,6 @@ float g_sampleTimer = 0.0f;
 float g_summaryTimer = 0.0f;
 size_t g_reportedCount = 0;
 float g_countTimer = 0.0f;
-float g_humanSeen = 0.0f;  // seconds you have had a soldier since the capture points last changed (DriveCaptures)
 
 void* __fastcall CtorDetour(void* self, void* /*edx*/, void* creationInfo, void* data)
 {
@@ -164,7 +161,6 @@ void Sync()
             t.entity = e;
             g_tracked.push_back(t);
             changed = true;
-            g_humanSeen = 0.0f;  // new flags (a new level, or this one again): your game has to get them first
         }
     if (!changed)
         return;
@@ -234,22 +230,72 @@ struct FlagCrowd
 FlagCrowd g_crowd[3];
 bool g_captureFailed = false;
 
-// Flags drawn at the top of their poles at the start (2026-11-12), though every flag starts at the bottom (StartAtBottom,
-// +0xC4 = 0). Your game's ClientCapturePointEntity (ctor 0xDDA810) starts its shown height (+0xC8) at the bottom too, and
-// its update (0xDD2390) eases it toward the server's and writes it to the flag (property 0xD16667B4, through +0x80) only
-// when it changes - so a flag nobody has touched is never placed and stays where its prefab has it, at the top. (A
-// non-Sector-Control flag is placed when spawned, 0xDD6410, which returns at once for CapturableType 3.) So once you have
-// been spawned 3 s (your game has the flags by then), each flag at rest with nobody on it is raised 1/100 for a second
-// and put back, its capture step skipped meanwhile: your game sees two changes and draws it at the bottom.
-constexpr float kNudgeHeight = 1.0f;  // of 100
-bool g_nudgeLogged = false;
+// The big flag at the top of a pole is FlagTemplates[nation] (README "The flags"): your game spawns three per pole at
+// start (0xDD65B0: slot 0 grey for nobody, slots 1 / 2 the teams' flags at the nations the server sends, ghost bit 0x80)
+// and shows the holder's; the small blue / red banner (FriendlyColorFlag / EnemyColorFlag) is the capture moving. Nothing
+// in this build gives the teams a nation (setTeamNation 0xE36AA0 is called from nowhere; the server's +0xDC / +0xE0 stay
+// -1, which your game clamps to template 0), so every flag was grey (2026-11-13: "a white flag at the top of every
+// pole"). Each team's comes from [sectorcontrol] Team1Flag / Team2Flag.
+constexpr int kCp_Nation1 = 0xDC, kCp_Nation2 = 0xE0;
+int g_nation[3] = {0, 1, 4};
+bool g_nationLogged = false;
+
+int NationIndex(const wchar_t* name, int fallback)
+{
+    // FlagTemplates of the shared sectorcontrol_controlpoint prefabs (the same on every map): 0 grey, 1 / 3 / 8 US, 2 Korea,
+    // 4 Russia, 5 Germany, 6 Australia, 7 Canada, 9 Poland, 10 Norway, 11 UK, 12 Sweden.
+    static const struct
+    {
+        const wchar_t* name;
+        int index;
+    } kNations[] = {{L"Grey", 0},      {L"US", 1},     {L"Korea", 2},  {L"Russia", 4}, {L"Germany", 5}, {L"Australia", 6},
+                    {L"Canada", 7},    {L"Poland", 9}, {L"Norway", 10}, {L"UK", 11},   {L"Sweden", 12}};
+    for (const auto& n : kNations)
+        if (_wcsicmp(name, n.name) == 0)
+            return n.index;
+    return fallback;
+}
+
+void ReadNations()
+{
+    wchar_t path[MAX_PATH], text[32];
+    swprintf(path, MAX_PATH, L"%smohw-bots.ini", ModuleDir());
+    GetPrivateProfileStringW(L"sectorcontrol", L"Team1Flag", L"US", text, 32, path);
+    g_nation[1] = NationIndex(text, 1);
+    GetPrivateProfileStringW(L"sectorcontrol", L"Team2Flag", L"Russia", text, 32, path);
+    g_nation[2] = NationIndex(text, 4);
+    g_nationLogged = false;
+}
+
+// Every tick: each linked flag's nations as configured (a new entity starts at -1).
+void ApplyNations()
+{
+    if (!g_flagMode || !g_installed)
+        return;
+    for (Tracked& t : g_tracked)
+    {
+        if (t.flag < 0)
+            continue;
+        for (int team = 1; team <= 2; ++team)
+        {
+            uint32_t now = 0;
+            if (!eng::ReadU32(eng::At(t.entity, team == 1 ? kCp_Nation1 : kCp_Nation2), &now) ||
+                static_cast<int>(now) == g_nation[team])
+                continue;
+            if (eng::CapturePointSetTeamNation(t.entity, team, g_nation[team]) && !g_nationLogged)
+            {
+                g_nationLogged = true;
+                Log("objectives: team 1's flags show FlagTemplates[%d], team 2's [%d] ([sectorcontrol] Team1Flag / Team2Flag)",
+                    g_nation[1], g_nation[2]);
+            }
+        }
+    }
+}
 
 void DriveCaptures(const std::vector<brain::Actor>& actors, float dt)
 {
     if (!g_flagMode || g_captureFailed)
         return;
-    if (std::any_of(actors.begin(), actors.end(), [](const brain::Actor& a) { return !a.isBot && (a.team == 1 || a.team == 2); }))
-        g_humanSeen += dt;
     for (Tracked& t : g_tracked)
     {
         if (t.flag < 0 || t.flag >= static_cast<int>(g_flags.size()))
@@ -270,40 +316,6 @@ void DriveCaptures(const std::vector<brain::Actor>& actors, float dt)
                 if (n < 64)
                     inside[n++] = a.player;
             }
-        void* height = const_cast<void*>(eng::At(t.entity, kCp_Height));
-        if (t.nudge == 1)
-        {
-            t.nudgeTimer -= dt;
-            if (n == 0 && t.nudgeTimer > 0.0f)
-                continue;  // leave it raised a moment
-            float now = -1.0f;
-            const float rest = 0.0f;
-            if (n == 0 && eng::ReadFloat(height, &now) && now == kNudgeHeight)
-                eng::WriteBytes(height, &rest, sizeof(rest));
-            t.nudge = 2;
-            if (n == 0)
-                continue;
-        }
-        else if (t.nudge == 0 && g_humanSeen >= 3.0f)
-        {
-            float now = -1.0f;
-            uint32_t flagTeam = 99;
-            t.nudge = 2;
-            if (n == 0 && controller == 0 && eng::ReadFloat(height, &now) && now == 0.0f &&
-                eng::ReadU32(eng::At(t.entity, kCp_FlagTeam), &flagTeam) && flagTeam == 0 &&
-                eng::WriteBytes(height, &kNudgeHeight, sizeof(kNudgeHeight)))
-            {
-                t.nudge = 1;
-                t.nudgeTimer = 1.0f;
-                if (!g_nudgeLogged)
-                {
-                    g_nudgeLogged = true;
-                    Log("objectives: flags at rest raised 1/100 for a second, so your game draws them at the bottom (it places a "
-                        "flag only when its height changes)");
-                }
-                continue;
-            }
-        }
         CaptureCounts counts;
         int attacker = 0;
         if (controller == 1 || controller == 2)
@@ -516,8 +528,6 @@ void OnLevel(const std::string& key)
     g_rawLines = 0;
     for (FlagCrowd& c : g_crowd)
         c = FlagCrowd();
-    g_humanSeen = 0.0f;
-    g_nudgeLogged = false;
     g_flagMode = false;
     g_reportedCount = 0;
     g_countTimer = 0.0f;
@@ -533,6 +543,8 @@ void OnLevel(const std::string& key)
                 g_flags.push_back(f);
             }
         g_flagMode = g_installed && !g_flags.empty();
+        if (g_flagMode)
+            ReadNations();
         if (g_flags.empty())
             Log("objectives: no Sector Control flag positions for %s; bots play it as Team Deathmatch", key.c_str());
         else
@@ -582,6 +594,7 @@ void Tick(const std::vector<brain::Actor>& actors, float dt)
     Sync();
     if (g_flagMode)
         LinkByFlagId();
+    ApplyNations();
     DriveCaptures(actors, 0.5f);
     SampleAll(actors);
     Publish();

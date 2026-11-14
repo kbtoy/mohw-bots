@@ -1233,14 +1233,30 @@ with nobody inside was the controller's opponent; since 2026.11.12.3 it is 0 the
 the 2026.11.12.2 pre-round watch read the old level's freed pre-round entity 5 times during the in-place change
 (`ENGINE FAULT in ReadPtr`, guarded): the pre-round hooks and logging are gone in 2026.11.12.3 (the image test checks
 both functions are untouched). Seen in play: the flags stand at the top of their poles at the start, although the server
-has them at the bottom (`StartAtBottom`, +0xC4 = 0). **Why (2026.11.13.1):** your game's `ClientCapturePointEntity` (ctor
-`0xDDA810`) starts its shown height (+0xC8) from `StartAtBottom` too (0, else 1) and its target (+0xD4, the server's / 100) at
-0; its update (`0xDD2390`) eases the one toward the other and writes it to the flag only when it changes (output property
-0xD16667B4 through +0x80, `0x577FB0`), so a flag nobody has touched is never placed and keeps its prefab's place, the top. (A
-flag of another kind is placed when `0xDD6410` spawns it from `FlagTemplates`, which returns at once for `CapturableType` 3.)
-`DriveCaptures` now raises each flag at rest with nobody on it to 1/100 for a second once you have had a soldier 3 s since
-its capture points appeared (your game has them then), skipping its capture step meanwhile, then sets it back to 0: two
-changes your game follows down to the bottom. Logged once a level: `flags at rest raised 1/100 for a second ...`.
+has them at the bottom (`StartAtBottom`, +0xC4 = 0). 2026.11.13.1 took that for an unplaced flag and nudged the height;
+2026-11-13's play said what it is: **"a white flag at the top of every pole, and a smaller colored flag that moves."**
+
+**The flags (2026.11.13.2).** A Sector Control pole carries two kinds. The big one at the top is from `FlagTemplates` (13 in
+the shared control point prefabs: 0 `flag_full4_grey`, then US, Korea, US, Russia, Germany, Australia, Canada, US, Poland,
+Norway, UK, Sweden): your game's init (`0xDD6AB0`, `CapturableType` 3 and `IsVisible`) spawns three per pole with
+`0xDD65B0`, slot 0 (+0x9C) the grey one for nobody, slots 1 / 2 (+0xA0 / +0xA4) each team's at the nation index +0xBC /
++0xC0 (-1 at first, clamped to template 0), and shows the holder's; ghost bit 0x80 of the server's update (`0xDD8900`:
++0x24 / +0x28, the server's +0xDC / +0xE0) brings new nations and respawns that slot. The small one is the team banner
+(`FriendlyColorFlag` `flag_team_banner_blue`, `EnemyColorFlag` `..._red`, `0xDD6780`, spaced by `FlagSpacing`), which moves
+with the shown height: the capture. The server's `setTeamNation(team, nation)` (`0xE36AA0`, sets +0xDC / +0xE0 and ghost
+bit 0x80) is called from nowhere in this build, so every team's nation stayed -1 and every big flag grey. `objectives.cpp`
+now sets both teams' nations on every linked flag (`eng::CapturePointSetTeamNation`), from `[sectorcontrol] Team1Flag` /
+`Team2Flag` (US / Russia by default). The 2026.11.13.1 nudge is gone. Logged: `team 1's flags show FlagTemplates[1] ...`.
+
+**The HUD (not fixed).** 2026-11-13: no tickets or progress bar in Sector Control, only the minimap's sectors. Your game got
+`UIHudTicketBleedMessage`, `UIControlpointChangedTeamMessage` and `UIHudResetWinningTeamMessage`, but never
+`UIHudShowCaptureProgressMessage`. The HUD graph (`mohw/ui/flow/graph/frontend2/ig_hudgraph`) shows a mode's HUD screen
+(`IGMP_Hud_SectorControl` → `mohw/ui/flow/screen/igmp_hud_sectorcontrol`, `MOHWIGHUDSectorControlModeCompData`) from
+`GET GAME MODE` (`getgamemodegraph`: a comparison on `ui/uicomponents/uisettingscomp` data key 1733092213, one of its
+`CurrentGameMode*` sources), anything else taking the TDM HUD (`[default]`). That session launched as TDM (MP_20) and changed
+to Sector Control in place, so the likeliest reading is that your game's current mode stayed TDM; untested. The capture bar
+is separate: your game's update (`0xDD2390`) sends `UIHudShowCaptureProgressMessage` only while your soldier's capture point
+tracker component (found by `0xDCDE40`, +0x54) names that point.
 
 **Who captures (2026.11.12.2).** 2026.11.12.1's logging (MP_18 SC from launch): the pre-round exists
 (`entity ... created`) but reads `wants 0 player(s), has 0 entered, state 0x10`. It never listens (bit 2 of +0xB8 is its
