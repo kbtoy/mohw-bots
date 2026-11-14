@@ -1254,7 +1254,14 @@ now sets both teams' nations on every linked flag (`eng::CapturePointSetTeamNati
 (`IGMP_Hud_SectorControl` → `mohw/ui/flow/screen/igmp_hud_sectorcontrol`, `MOHWIGHUDSectorControlModeCompData`) from
 `GET GAME MODE` (`getgamemodegraph`: a comparison on `ui/uicomponents/uisettingscomp` data key 1733092213, one of its
 `CurrentGameMode*` sources), anything else taking the TDM HUD (`[default]`). That session launched as TDM (MP_20) and changed
-to Sector Control in place, so the likeliest reading is that your game's current mode stayed TDM; untested. The capture bar
+to Sector Control in place, but launched straight into MP_18 Sector Control (inclusion `GameMode=SectorControl`) the HUD was
+still missing. **Why (2026.11.13.3):** the settings component's data provider (`0xF57090`, vtable `0x2827074` slot +0x28,
+thiscall(key, UIDataValue* out) ret 8, a binary switch on the key; unknown keys return false) answers the raw mode under
+key `0x674CE375` (`0xF55DA0`: the "gamemode" inclusion option of `[0x2ACAB20]`->vfunc +0x44's level setup, +0x180
+key/value pairs; the BF3 rich presence names under `0x41730C12`) but the HUD graph asks for `0x674C5F75`, one byte apart: a
+code / UI data mismatch in this build, so the question always fell through to the TDM HUD. `uimode.cpp` hooks the provider
+and answers both keys with the mode of the level the server has (`UIDataValue::setString`, `0xA787B0`), so in-place
+changes count too. Logged: `ui: your game's HUD asked for the game mode; answered "SectorControl"`. The capture bar
 is separate: your game's update (`0xDD2390`) sends `UIHudShowCaptureProgressMessage` only while your soldier's capture point
 tracker component (found by `0xDCDE40`, +0x54) names that point.
 

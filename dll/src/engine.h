@@ -276,6 +276,8 @@ bool KillSoldier(void* soldier);
 bool CapturePointUpdate(void* capturePoint, float dt, void* inside, void* counts, int attacker);
 // A capture point's nation for a team (0xE36AA0: +0xDC team 1, +0xE0 team 2; an index into its FlagTemplates).
 bool CapturePointSetTeamNation(void* capturePoint, int team, int nation);
+// A UI data value set to a string (0xA787B0, thiscall(const char*): type 6). UI thread.
+bool UiSetString(void* value, const char* text);
 
 // --- Client side: main thread only (the XInput poll runs there) ----------------------------------------------
 // The game's text for a string id ("ID_M_LEVEL_NAME_MP_05" -> the map's name), as UTF-8; the id itself if it has none.

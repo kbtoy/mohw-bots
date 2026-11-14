@@ -410,6 +410,12 @@ int wmain(int argc, wchar_t** argv)
                       cpCtor[8] == 0xDB && cpDtor[0] == 0xE9 && dtorInfo.AllocationBase == dll && cpDtor[5] == 0x90 &&
                       cpDtor[6] == 0x8D && cpDtor[7] == 0xBE,
                   "Objectives: capture point constructor (0xE450D0) and destructor (0xE442E0) jump into the DLL, the rest intact");
+            // The UI settings component's data provider (uimode): 6 bytes taken (sub esp, 0x94), push ebx next.
+            const auto* uiData = reinterpret_cast<const uint8_t*>(0xF57090);
+            MEMORY_BASIC_INFORMATION uiDataInfo = {};
+            VirtualQuery(uiData + 5 + *reinterpret_cast<const int32_t*>(uiData + 1), &uiDataInfo, sizeof(uiDataInfo));
+            Check(uiData[0] == 0xE9 && uiDataInfo.AllocationBase == dll && uiData[5] == 0x90 && uiData[6] == 0x53,
+                  "UI mode: the settings component's data provider (0xF57090) jumps into the DLL, the rest intact");
             // The pre-round is the game's own again (2026.11.11.1-11.12.2 hooked it; rounds always started): untouched.
             Check(std::memcmp(reinterpret_cast<const void*>(0xEDEF20), "\x8B\x44\x24\x04\x81\x78\x04", 7) == 0 &&
                       std::memcmp(reinterpret_cast<const void*>(0xEDED10), "\x8B\x44\x24\x08\x56\x57", 6) == 0,

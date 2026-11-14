@@ -30,6 +30,7 @@ add_library(mohw_bots SHARED
     src/rconsrv.cpp
     src/modes.cpp
     src/objectives.cpp
+    src/uimode.cpp
     src/relaunch.cpp
     src/levelchange.cpp
     src/xinput1_3.def

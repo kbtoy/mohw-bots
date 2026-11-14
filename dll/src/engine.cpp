@@ -756,6 +756,12 @@ bool CapturePointSetTeamNation(void* capturePoint, int team, int nation)
             reinterpret_cast<SetFn>(addr::CapturePoint_setTeamNation)(capturePoint, team, nation))
 }
 
+bool UiSetString(void* value, const char* text)
+{
+    using SetFn = void(__thiscall*)(void* value, const char* text);
+    GUARDED("UIDataValue: set string", reinterpret_cast<SetFn>(addr::UIDataValue_setString)(value, text))
+}
+
 bool Localize(const char* sid, char* out, size_t size)
 {
     using LocalizeFn = void*(__cdecl*)(void* out, const char* sid);

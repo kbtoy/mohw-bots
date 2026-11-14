@@ -30,6 +30,7 @@
 #include "melee.h"
 #include "modes.h"
 #include "objectives.h"
+#include "uimode.h"
 #include "rcon.h"
 #include "scoreboard.h"
 #include "scoring.h"
@@ -1883,6 +1884,7 @@ void UpdateNavLevel(void* context, float dt)
         g_levelKey = key;
     nav::OnLevel(key);
     objectives::OnLevel(key);
+    uimode::OnLevel(key);
 }
 
 // When each living soldier was first seen (tick count), for spawn ages.
@@ -2325,6 +2327,7 @@ void Init()
             g_config.teamSize, g_config.teamSize - 1, g_config.teamSize);
     InstallOwnBaseSpawnHooks();
     objectives::Install();
+    uimode::Install();
     InstallKeepPlayers();
     brain::Init();
     nav::Init();

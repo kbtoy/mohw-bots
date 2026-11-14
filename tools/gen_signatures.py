@@ -215,6 +215,12 @@ FUNCS = [
     # sets it and marks ghost bit 0x80, which your game turns into that team's big flag (FlagTemplates[nation],
     # 0xDD65B0 slots 1 / 2). Called from nowhere in this build, so every team's nation stays -1 and every flag grey.
     ("CapturePoint_setTeamNation", 0xE36AA0, 8),
+    # UISettingsComp's data provider (vtable 0x2827074 slot +0x28), thiscall(uint key, UIDataValue* out) ret 8, a switch
+    # on the key: sub esp, 0x94 (6 position-independent bytes, uimode hook). The level setup's "gamemode" option is its
+    # key 0x674CE375 (0xF55DA0); the HUD graph's GET GAME MODE asks for 0x674C5F75, which it doesn't have.
+    ("UISettings_getData", 0xF57090, 8),
+    # UIDataValue::setString(const char*) (type 6), as the provider's cases call it: push ebp; mov ebp, [esp+8]; push esi
+    ("UIDataValue_setString", 0xA787B0, 8),
     # In-place level change (levelchange.cpp), the way the server's NetworkRequestLoadLevelMessage handler (0xAA8900) does it:
     # a LevelSetup (built inside a NetworkRequestLoadLevelMessage, +0x38, as the client's 0xF62DB0 does: name, GameMode option,
     # difficulty), copied into a ServerLoadLevelMessage (0x48 bytes from the server arena 0x2A59130, base ctor 0x259EB00, vtable
