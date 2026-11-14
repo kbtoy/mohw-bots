@@ -216,8 +216,8 @@ FUNCS = [
     # 0xDD65B0 slots 1 / 2). Called from nowhere in this build, so every team's nation stays -1 and every flag grey.
     ("CapturePoint_setTeamNation", 0xE36AA0, 8),
     # UISettingsComp's data provider (vtable 0x2827074 slot +0x28), thiscall(uint key, UIDataValue* out) ret 8, a switch
-    # on the key: sub esp, 0x94 (6 position-independent bytes, uimode hook). The level setup's "gamemode" option is its
-    # key 0x674CE375 (0xF55DA0); the HUD graph's GET GAME MODE asks for 0x674C5F75, which it doesn't have.
+    # on the key: sub esp, 0x94 (6 position-independent bytes, uimode hook). Key 0x674CE375 is the current game mode
+    # (a level setup's "gamemode" option, 0xF55DA0), which the HUD graph's GET GAME MODE asks for.
     ("UISettings_getData", 0xF57090, 8),
     # UIDataValue::setString(const char*) (type 6), as the provider's cases call it: push ebp; mov ebp, [esp+8]; push esi
     ("UIDataValue_setString", 0xA787B0, 8),

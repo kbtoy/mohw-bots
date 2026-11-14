@@ -111,8 +111,8 @@ WHAT TO LOOK OUT FOR
   with the flags, and whether the bots move on to other flags once theirs is taken. On each pole the small blue / red
   banner is the capture moving; the big flag at the top is grey while nobody holds the point and shows the holding
   team's national flag once it's taken (new; choose them in mohw-bots.ini, [sectorcontrol]).
-- Each mode should now show its own HUD (new): in Sector Control the team tickets and the flags' state; before, every
-  mode showed the Team Deathmatch one. The capture progress bar is still missing.
+- Hardcore hides each mode's own HUD (score, tickets, Sector Control's flags), as in BF3. To keep that part of the HUD
+  in Hardcore, set GameModeHud=1 under [hardcore] in mohw-bots.ini (new). The capture progress bar is still missing.
 - Bots never spawn in the enemy's starting base, even if their team takes the flag there (new).
 - Bots on a flag stand and watch the ways in, moving to another spot now and then, and spread over the flags instead of
   crowding the one at their spawn.

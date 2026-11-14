@@ -103,7 +103,10 @@ void BuildRules()
         AddFlag(mohw, 0x0F, "HudNoHealthAmmo");
         AddFlag(mohw, 0x10, "HudNoPointsTracker");
         AddFlag(mohw, 0x11, "HudNoObituary");
-        AddFlag(mohw, 0x13, "HudNoGameMode");
+        // The mode's own HUD (score, tickets, Sector Control's flags, time). [hardcore] GameModeHud=1 keeps it with the
+        // rest off (2026-11-13: Sector Control in Hardcore had no way to see how the round was going).
+        if (ReadInt(L"GameModeHud", 0) == 0)
+            AddFlag(mohw, 0x13, "HudNoGameMode");
         AddFlag(mohw, 0x14, "HudNoBuddyInfo");
         AddFlag(mohw, 0x15, "HudNoUnlocks");
         AddFlag(mohw, 0x16, "HudNoClassAbility");
