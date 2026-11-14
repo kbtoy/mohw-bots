@@ -62,6 +62,8 @@ struct Tracked
     uint32_t raw[kRawWords] = {};
     bool rawValid = false;
     float rawTimer = 0.0f;
+    int nudge = 0;  // see DriveCaptures: 0 not yet, 1 raised a little, 2 done
+    float nudgeTimer = 0.0f;
 };
 int g_rawLines = 0;  // per level, capped
 
@@ -87,6 +89,7 @@ float g_sampleTimer = 0.0f;
 float g_summaryTimer = 0.0f;
 size_t g_reportedCount = 0;
 float g_countTimer = 0.0f;
+float g_humanSeen = 0.0f;  // seconds you have had a soldier since the capture points last changed (DriveCaptures)
 
 void* __fastcall CtorDetour(void* self, void* /*edx*/, void* creationInfo, void* data)
 {
@@ -161,6 +164,7 @@ void Sync()
             t.entity = e;
             g_tracked.push_back(t);
             changed = true;
+            g_humanSeen = 0.0f;  // new flags (a new level, or this one again): your game has to get them first
         }
     if (!changed)
         return;
@@ -230,10 +234,22 @@ struct FlagCrowd
 FlagCrowd g_crowd[3];
 bool g_captureFailed = false;
 
+// Flags drawn at the top of their poles at the start (2026-11-12), though every flag starts at the bottom (StartAtBottom,
+// +0xC4 = 0). Your game's ClientCapturePointEntity (ctor 0xDDA810) starts its shown height (+0xC8) at the bottom too, and
+// its update (0xDD2390) eases it toward the server's and writes it to the flag (property 0xD16667B4, through +0x80) only
+// when it changes - so a flag nobody has touched is never placed and stays where its prefab has it, at the top. (A
+// non-Sector-Control flag is placed when spawned, 0xDD6410, which returns at once for CapturableType 3.) So once you have
+// been spawned 3 s (your game has the flags by then), each flag at rest with nobody on it is raised 1/100 for a second
+// and put back, its capture step skipped meanwhile: your game sees two changes and draws it at the bottom.
+constexpr float kNudgeHeight = 1.0f;  // of 100
+bool g_nudgeLogged = false;
+
 void DriveCaptures(const std::vector<brain::Actor>& actors, float dt)
 {
     if (!g_flagMode || g_captureFailed)
         return;
+    if (std::any_of(actors.begin(), actors.end(), [](const brain::Actor& a) { return !a.isBot && (a.team == 1 || a.team == 2); }))
+        g_humanSeen += dt;
     for (Tracked& t : g_tracked)
     {
         if (t.flag < 0 || t.flag >= static_cast<int>(g_flags.size()))
@@ -254,6 +270,40 @@ void DriveCaptures(const std::vector<brain::Actor>& actors, float dt)
                 if (n < 64)
                     inside[n++] = a.player;
             }
+        void* height = const_cast<void*>(eng::At(t.entity, kCp_Height));
+        if (t.nudge == 1)
+        {
+            t.nudgeTimer -= dt;
+            if (n == 0 && t.nudgeTimer > 0.0f)
+                continue;  // leave it raised a moment
+            float now = -1.0f;
+            const float rest = 0.0f;
+            if (n == 0 && eng::ReadFloat(height, &now) && now == kNudgeHeight)
+                eng::WriteBytes(height, &rest, sizeof(rest));
+            t.nudge = 2;
+            if (n == 0)
+                continue;
+        }
+        else if (t.nudge == 0 && g_humanSeen >= 3.0f)
+        {
+            float now = -1.0f;
+            uint32_t flagTeam = 99;
+            t.nudge = 2;
+            if (n == 0 && controller == 0 && eng::ReadFloat(height, &now) && now == 0.0f &&
+                eng::ReadU32(eng::At(t.entity, kCp_FlagTeam), &flagTeam) && flagTeam == 0 &&
+                eng::WriteBytes(height, &kNudgeHeight, sizeof(kNudgeHeight)))
+            {
+                t.nudge = 1;
+                t.nudgeTimer = 1.0f;
+                if (!g_nudgeLogged)
+                {
+                    g_nudgeLogged = true;
+                    Log("objectives: flags at rest raised 1/100 for a second, so your game draws them at the bottom (it places a "
+                        "flag only when its height changes)");
+                }
+                continue;
+            }
+        }
         CaptureCounts counts;
         int attacker = 0;
         if (controller == 1 || controller == 2)
@@ -466,6 +516,8 @@ void OnLevel(const std::string& key)
     g_rawLines = 0;
     for (FlagCrowd& c : g_crowd)
         c = FlagCrowd();
+    g_humanSeen = 0.0f;
+    g_nudgeLogged = false;
     g_flagMode = false;
     g_reportedCount = 0;
     g_countTimer = 0.0f;

@@ -1233,7 +1233,14 @@ with nobody inside was the controller's opponent; since 2026.11.12.3 it is 0 the
 the 2026.11.12.2 pre-round watch read the old level's freed pre-round entity 5 times during the in-place change
 (`ENGINE FAULT in ReadPtr`, guarded): the pre-round hooks and logging are gone in 2026.11.12.3 (the image test checks
 both functions are untouched). Seen in play: the flags stand at the top of their poles at the start, although the server
-has them at the bottom (`StartAtBottom`, +0xC4 = 0); not looked into yet.
+has them at the bottom (`StartAtBottom`, +0xC4 = 0). **Why (2026.11.13.1):** your game's `ClientCapturePointEntity` (ctor
+`0xDDA810`) starts its shown height (+0xC8) from `StartAtBottom` too (0, else 1) and its target (+0xD4, the server's / 100) at
+0; its update (`0xDD2390`) eases the one toward the other and writes it to the flag only when it changes (output property
+0xD16667B4 through +0x80, `0x577FB0`), so a flag nobody has touched is never placed and keeps its prefab's place, the top. (A
+flag of another kind is placed when `0xDD6410` spawns it from `FlagTemplates`, which returns at once for `CapturableType` 3.)
+`DriveCaptures` now raises each flag at rest with nobody on it to 1/100 for a second once you have had a soldier 3 s since
+its capture points appeared (your game has them then), skipping its capture step meanwhile, then sets it back to 0: two
+changes your game follows down to the bottom. Logged once a level: `flags at rest raised 1/100 for a second ...`.
 
 **Who captures (2026.11.12.2).** 2026.11.12.1's logging (MP_18 SC from launch): the pre-round exists
 (`entity ... created`) but reads `wants 0 player(s), has 0 entered, state 0x10`. It never listens (bit 2 of +0xB8 is its
